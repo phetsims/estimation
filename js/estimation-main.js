@@ -9,14 +9,19 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var EstimationModel = require( 'ESTIMATION/model/EstimationModel' );
-  var EstimationScreen = require( 'ESTIMATION/view/EstimationScreen' );
+  var ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
+  var ExploreScreen = require( 'ESTIMATION/explore/view/ExploreScreen' );
+  var EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
+  var EstimationGameScreen = require( 'ESTIMATION/game/view/EstimationGameScreen' );
+  var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
   var simTitle = require( 'string!ESTIMATION/estimation.name' );
+  var exploreString = require( 'string!ESTIMATION/explore' );
+  var gameString = require( 'string!ESTIMATION/game' );
 
   var simOptions = {
     credits: {
@@ -38,10 +43,15 @@ define( function( require ) {
   SimLauncher.launch( function() {
 
     //Create and start the sim
-    new Sim( simTitle, [
-      new Screen( simTitle, null,
-        function() {return new EstimationModel();},
-        function( model ) {return new EstimationScreen( model );},
+    new Sim( exploreString, [
+      new Screen( simTitle, new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'green' } ),
+        function() {return new ExploreModel();},
+        function( model ) {return new ExploreScreen( model );},
+        { backgroundColor: 'rgb( 255, 248, 186 )' }
+      ),
+      new Screen( gameString, new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'blue' } ),
+        function() {return new EstimationGameModel();},
+        function( model ) {return new EstimationGameScreen( model );},
         { backgroundColor: 'rgb( 255, 248, 186 )' }
       )
     ], simOptions ).start();
