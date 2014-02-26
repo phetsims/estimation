@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var EstimationModel = require( 'ESTIMATION/model/EstimationModel' );
   var EstimationScreen = require( 'ESTIMATION/view/EstimationScreen' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
@@ -38,9 +39,10 @@ define( function( require ) {
 
     //Create and start the sim
     new Sim( simTitle, [
-      new Screen( tugOfWarString, new Image( TugIcon ),
-        function() {return new TugOfWarModel();},
-        function( model ) {return new TugOfWarView( model );}
+      new Screen( simTitle, null,
+        function() {return new EstimationModel();},
+        function( model ) {return new EstimationScreen( model );},
+        { backgroundColor: 'rgb( 255, 248, 186 )' }
       )
     ], simOptions ).start();
   } );
