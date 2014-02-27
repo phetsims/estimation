@@ -3,12 +3,11 @@
 define( function( require ) {
   'use strict';
 
-  function EstimationModel() {
-  }
+  var Property = require( 'AXON/Property' );
 
-  EstimationModel.prototype = {
-    step: function() {}
-  };
+  function EstimationModel() {
+    this.soundEnabled = new Property( true );
+  }
 
   return EstimationModel;
 } );
