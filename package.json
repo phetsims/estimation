@@ -12,5 +12,5 @@
     "requirejs": "~2.1.8"
   },
   "requirejsNamespace": "ESTIMATION",
-  "simTitleStringKey": "ESTIMATION/build-an-atom.name"
+  "simTitleStringKey": "ESTIMATION/estimation.name"
 }

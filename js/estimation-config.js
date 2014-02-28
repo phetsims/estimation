@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /*
- * RequireJS configuration file for the Estimation' sim. Paths are relative to
+ * RequireJS configuration file for the 'Estimation' sim. Paths are relative to
  * the location of this file.
  *
  * @author John Blanco
