@@ -1,0 +1,4 @@
+For this simulation, PropertySet is not used, and instead each model
+component that has multiple properties just has a set of externally
+visible properties.  This was done because PropertySet seemed to confuse the
+IDE, and didn't add a lot of value.
