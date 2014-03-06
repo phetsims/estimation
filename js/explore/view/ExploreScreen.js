@@ -12,6 +12,7 @@ define( function( require ) {
   var cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
   var continuousIconImage = require( 'image!ESTIMATION/continuous-icon.png' );
   var cylindersIconImage = require( 'image!ESTIMATION/cylinders-icon.png' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
@@ -19,9 +20,11 @@ define( function( require ) {
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var linesIconImage = require( 'image!ESTIMATION/lines-icon.png' );
+  var MyHSlider = require( 'ESTIMATION/common/MyHSlider' );
   var newObjectString = require( 'string!ESTIMATION/newObject' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
   var PushButton = require( 'SUN/PushButton' );
   var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var RectanglePushButton = require( 'SUN/RectanglePushButton' );
@@ -100,6 +103,28 @@ define( function( require ) {
 
     this.addChild( rangeSelectionPanel );
 
+    // Add the slider that will control the fine-grained estimate value.
+    var slider = new MyHSlider( model.offsetIntoRangeProperty, { min: 0, max: 1 },
+      {
+        trackFill: 'black',
+        trackSize: new Dimension2( 400, 4 )
+      } );
+    for ( var i = 0; i <= 1; i += 0.1 ) {
+      slider.addMajorTick( i );
+    }
+    this.addChild( slider );
+
+    // Add the readout that will display the current estimate quantity.
+    var readout = new Rectangle( 0, 0, 60, 40, 5, 5, { fill: 'blue' } );
+    this.addChild( readout );
+    var readoutText = new Text( 'x', { font: new PhetFont( 20 ), fill: 'white' } );
+    model.estimateProperty.link( function( value ) {
+      readoutText.text = value;
+      readoutText.centerX = readout.width / 2;
+      readoutText.centerY = readout.height / 2;
+    } );
+    readout.addChild( readoutText );
+
     // Add the general control buttons.
     var resetAllButton = new ResetAllButton( function() { thisScreen.reset(); }, { scale: 0.75 } );
     this.addChild( resetAllButton );
@@ -119,6 +144,10 @@ define( function( require ) {
     discreteOrContinuousControlPanel.bottom = this.layoutBounds.height - 100;
     rangeSelectionPanel.centerX = this.layoutBounds.width / 2;
     rangeSelectionPanel.bottom = this.layoutBounds.height - EDGE_INSET;
+    slider.centerX = rangeSelectionPanel.centerX;
+    slider.bottom = rangeSelectionPanel.top - 20;
+    readout.centerX = this.layoutBounds.width / 2;
+    readout.bottom = slider.top - 20;
   }
 
   return inherit( ScreenView, ExploreScreen, {
