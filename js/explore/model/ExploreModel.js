@@ -17,7 +17,7 @@ define( function( require ) {
 
     // Externally visible properties.
     this.soundEnabledProperty = new Property( true ); // TODO: Is there really any sound for the 'Explore' screen?
-    this.estimationModeProperty = new Property( 'cubes' ); // Valid values are 'lines', 'rectangles', 'cubes', and 'cylinders'.
+    this.estimationModeProperty = new Property( 'lines' ); // Valid values are 'lines', 'rectangles', 'cubes', and 'cylinders'.
     this.estimationRangeProperty = new Property( EstimationConstants.RANGE_1_TO_10 );
     this.offsetIntoRangeProperty = new Property( 0 ); // Amount of offset into the current range
     this.fillTypeProperty = new Property( 'discrete' ); // Valid values are 'discrete' or 'continuous'.
@@ -32,19 +32,25 @@ define( function( require ) {
                                                      ( thisModel.estimationRangeProperty.value.max - thisModel.estimationRangeProperty.value.min ) );
     }
 
-    // Externally visible list of all shapes in the model.  This intended as
-    // the place where the view finds the shapes.
+    // Externally visible list of all shapes in the model.  This is intended
+    // as the place where the view finds the shapes.
     this.shapeList = [];
 
     // Hook up internal property dependencies.
     this.estimationRangeProperty.link( updateEstimate );
     this.offsetIntoRangeProperty.link( updateEstimate );
 
-    // TODO: Work in progress
-    var lineModelShape1 = new ModelShape.line( 1, 'blue' );
+    // TODO: Work in progress - add the lines
+    var lineModelShape1 = new ModelShape.line( 1, EstimationConstants.REFERENCE_OBJECT_COLOR );
     lineModelShape1.positionProperty.value = new Vector2( -2, 1.5 );
-    var lineModelShape2 = new ModelShape.line( 2, 'orange' );
+    var lineModelShape2 = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR );
     lineModelShape2.positionProperty.value = new Vector2( -1, 0.5 );
+
+    this.estimationModeProperty.link( function( estimationMode ) {
+      lineModelShape1.visibleProperty.value = estimationMode === 'lines';
+      lineModelShape2.visibleProperty.value = estimationMode === 'lines';
+    } );
+
     this.shapeList.push( lineModelShape1 );
     this.shapeList.push( lineModelShape2 );
   }

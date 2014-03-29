@@ -17,9 +17,13 @@ define( function( require ) {
   function LineView( lineModelShape, mvt ) {
     if ( lineModelShape.type !== 'line' ) { throw new Error( 'Attempt to create a line view with incorrect model type, type = ' + lineModelShape.type )}
     Node.call( this );
+    var thisNode = this;
     var transformedOrigin = mvt.modelToViewPosition( lineModelShape.positionProperty.value );
     var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModelShape.width, 0 ) ) );
     this.addChild( new Line( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y, { stroke: lineModelShape.color, lineWidth: 3 } ) );
+    lineModelShape.visibleProperty.link( function( visible ) {
+      thisNode.visible = visible;
+    } );
   }
 
   return inherit( Node, LineView );

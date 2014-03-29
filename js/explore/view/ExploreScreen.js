@@ -52,6 +52,7 @@ define( function( require ) {
   function ExploreScreen( model ) {
     ScreenView.call( this );
     var thisScreen = this;
+    this.model = model;
 
     // Create the model-view transform.  The primary units used in the model
     // are meters, so significant zoom is used.  The multipliers for the 2nd
@@ -175,7 +176,7 @@ define( function( require ) {
 
   return inherit( ScreenView, ExploreScreen, {
     reset: function() {
-      console.log( 'Reset not yet implemented' );
+      this.model.reset();
     },
 
     createImageOfGivenWidth: function( imageSource, width ) {

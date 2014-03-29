@@ -6,6 +6,8 @@ define( function( require ) {
   return {
     RANGE_1_TO_10: { min: 1, max: 10 },
     RANGE_10_TO_100: { min: 10, max: 100 },
-    RANGE_100_TO_1000: { min: 100, max: 1000 }
+    RANGE_100_TO_1000: { min: 100, max: 1000 },
+    REFERENCE_OBJECT_COLOR: 'blue',
+    COMPARISON_OBJECT_COLOR: 'rgb( 255, 102, 51 )'
   };
 } );
