@@ -20,6 +20,8 @@ define( function( require ) {
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var linesIconImage = require( 'image!ESTIMATION/lines-icon.png' );
+  var LineView = require( 'ESTIMATION/common/view/LineView' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MyHSlider = require( 'ESTIMATION/common/MyHSlider' );
   var newObjectString = require( 'string!ESTIMATION/newObject' );
   var Panel = require( 'SUN/Panel' );
@@ -34,6 +36,7 @@ define( function( require ) {
   var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
   var EDGE_INSET = 10;
@@ -49,6 +52,15 @@ define( function( require ) {
   function ExploreScreen( model ) {
     ScreenView.call( this );
     var thisScreen = this;
+
+    // Create the model-view transform.  The primary units used in the model
+    // are meters, so significant zoom is used.  The multipliers for the 2nd
+    // parameter can be used to adjust where the model point (0, 0) is located
+    // in the view.
+    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+      Vector2.ZERO,
+      new Vector2( thisScreen.layoutBounds.width * 0.5, thisScreen.layoutBounds.height * 0.5 ),
+      105 );
 
     // Add the various selectors and buttons for choosing which objects to explore.
     var newObjectButton = new RectanglePushButton( new Text( newObjectString, { font: new PhetFont( 20 ) } ),
@@ -142,12 +154,23 @@ define( function( require ) {
     soundToggleButton.right = resetAllButton.left - 10;
     discreteOrContinuousControlPanel.centerX = ( soundToggleButton.centerX + resetAllButton.centerX ) / 2;
     discreteOrContinuousControlPanel.bottom = this.layoutBounds.height - 100;
-    rangeSelectionPanel.centerX = this.layoutBounds.width / 2;
+    rangeSelectionPanel.centerX = mvt.modelToViewX( 0 );
     rangeSelectionPanel.bottom = this.layoutBounds.height - EDGE_INSET;
     slider.centerX = rangeSelectionPanel.centerX;
     slider.bottom = rangeSelectionPanel.top - 20;
-    readout.centerX = this.layoutBounds.width / 2;
+    readout.centerX = mvt.modelToViewX( 0 );
     readout.bottom = slider.top - 20;
+
+    // Map the shapes to the appropriate view class.
+    var viewClasses = {
+      line: LineView
+    };
+
+    // Add the shapes from the model.
+    model.shapeList.forEach( function( modelShape ) {
+      if ( !viewClasses[ modelShape.type ] ) { throw new Error( 'Error: No view type for shape type ' + modelShape.type ) }
+      thisScreen.addChild( new viewClasses[ modelShape.type ]( modelShape, mvt ) );
+    } );
   }
 
   return inherit( ScreenView, ExploreScreen, {
