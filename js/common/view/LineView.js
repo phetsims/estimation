@@ -1,5 +1,10 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
+/**
+ * View representation of a line used within the Estimation simulation.  The
+ * line is defined by a position, width, and color.  Some of these attributes
+ * may change.
+ */
 define( function( require ) {
   'use strict';
 
