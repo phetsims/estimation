@@ -41,18 +41,24 @@ define( function( require ) {
     this.offsetIntoRangeProperty.link( updateEstimate );
 
     // TODO: Work in progress - add the lines
-    var lineModelShape1 = new ModelShape.line( 1, EstimationConstants.REFERENCE_OBJECT_COLOR );
-    lineModelShape1.positionProperty.value = new Vector2( -2, 1.5 );
-    var lineModelShape2 = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR );
-    lineModelShape2.positionProperty.value = new Vector2( -1, 0.5 );
+    var referenceLine = new ModelShape.line( 1, EstimationConstants.REFERENCE_OBJECT_COLOR );
+    referenceLine.positionProperty.value = new Vector2( -2, 1.5 );
+    var compareLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR );
+    compareLine.positionProperty.value = new Vector2( -1, 0.5 );
+    var discreteSizableLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR );
+    discreteSizableLine.positionProperty.value = new Vector2( -1, 0.55 );
+    var continuousSizableLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR );
+    continuousSizableLine.positionProperty.value = new Vector2( -1, 0.55 );
 
     this.estimationModeProperty.link( function( estimationMode ) {
-      lineModelShape1.visibleProperty.value = estimationMode === 'lines';
-      lineModelShape2.visibleProperty.value = estimationMode === 'lines';
+      referenceLine.visibleProperty.value = estimationMode === 'lines';
+      compareLine.visibleProperty.value = estimationMode === 'lines';
     } );
 
-    this.shapeList.push( lineModelShape1 );
-    this.shapeList.push( lineModelShape2 );
+    this.shapeList.push( referenceLine );
+    this.shapeList.push( compareLine );
+    this.shapeList.push( discreteSizableLine );
+    this.shapeList.push( continuousSizableLine );
   }
 
   ExploreModel.prototype = {

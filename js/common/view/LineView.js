@@ -24,7 +24,7 @@ define( function( require ) {
     Node.call( this );
     var thisNode = this;
     var transformedOrigin = mvt.modelToViewPosition( lineModelShape.positionProperty.value );
-    var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModelShape.width, 0 ) ) );
+    var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModelShape.widthProperty.value, 0 ) ) );
     this.addChild( new Line( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y, { stroke: lineModelShape.color, lineWidth: 3 } ) );
     lineModelShape.visibleProperty.link( function( visible ) {
       thisNode.visible = visible;
