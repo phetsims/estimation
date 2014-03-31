@@ -12,6 +12,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -23,9 +25,13 @@ define( function( require ) {
     if ( lineModelShape.type !== 'line' ) { throw new Error( 'Attempt to create a line view with incorrect model type, type = ' + lineModelShape.type )}
     Node.call( this );
     var thisNode = this;
-    var transformedOrigin = mvt.modelToViewPosition( lineModelShape.positionProperty.value );
-    var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModelShape.widthProperty.value, 0 ) ) );
-    this.addChild( new Line( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y, { stroke: lineModelShape.color, lineWidth: 3 } ) );
+    var path = new Path( null, { stroke: lineModelShape.color, lineWidth: 3 } );
+    this.addChild( path );
+    lineModelShape.widthProperty.link( function( width ) {
+      var transformedOrigin = mvt.modelToViewPosition( lineModelShape.positionProperty.value );
+      var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModelShape.widthProperty.value, 0 ) ) );
+      path.setShape( new Shape.lineSegment( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y ) );
+    } );
     lineModelShape.visibleProperty.link( function( visible ) {
       thisNode.visible = visible;
     } );

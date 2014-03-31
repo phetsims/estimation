@@ -93,8 +93,8 @@ define( function( require ) {
     var discreteOrContinuousControlPanel = new Panel( new VBox(
       {
         children: [
-          new InOutRadioButton( model.fillTypeProperty, 'continuous', this.createImageOfGivenWidth( continuousIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-          new InOutRadioButton( model.fillTypeProperty, 'discrete', this.createImageOfGivenWidth( discreteIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
+          new InOutRadioButton( model.comparisonTypeProperty, 'continuous', this.createImageOfGivenWidth( continuousIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
+          new InOutRadioButton( model.comparisonTypeProperty, 'discrete', this.createImageOfGivenWidth( discreteIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
         ],
         spacing: 10
       } ),
