@@ -9,6 +9,9 @@ define( function( require ) {
   var ModelShape = require( 'ESTIMATION/common/model/ModelShape' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // Constants
+  var MAX_NUM_ITEMS = 100; // TODO: should derive from something
+
   /**
    * @constructor
    */
@@ -40,14 +43,15 @@ define( function( require ) {
     this.estimationRangeProperty.link( updateEstimate );
     this.offsetIntoRangeProperty.link( updateEstimate );
 
-    // TODO: Work in progress - add the lines
-    var referenceLine = new ModelShape.line( 0.1, EstimationConstants.REFERENCE_OBJECT_COLOR );
+    // TODO: Figure out how to better modualarize the different nodes.
+    // Add the lines
+    var referenceLine = new ModelShape.line( 0.1, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     referenceLine.positionProperty.value = new Vector2( -2, 1.5 );
-    var compareLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR );
+    var compareLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
     compareLine.positionProperty.value = new Vector2( -1, 0.5 );
-    var discreteSizableLine = new ModelShape.line( 2, 'green' );
+    var discreteSizableLine = new ModelShape.line( 2, 'green', false );
     discreteSizableLine.positionProperty.value = new Vector2( -1, 0.45 );
-    var continuousSizableLine = new ModelShape.line( 2, 'red' );
+    var continuousSizableLine = new ModelShape.line( 2, 'red', false );
     continuousSizableLine.positionProperty.value = new Vector2( -1, 0.45 );
 
     this.estimationModeProperty.link( function( estimationMode ) {
@@ -71,6 +75,80 @@ define( function( require ) {
     this.shapeList.push( compareLine );
     this.shapeList.push( discreteSizableLine );
     this.shapeList.push( continuousSizableLine );
+
+    // Add the rectangles
+    var referenceRect = new ModelShape.rectangle( 0.5, 0.5, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    referenceRect.positionProperty.value = new Vector2( -2.0, 0.5 );
+    var compareRectPosition = new Vector2( -1, 0 );
+    var compareRect = new ModelShape.rectangle( 2.0, 2.0, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
+    compareRect.positionProperty.value = compareRectPosition;
+    var continuousSizableRect = new ModelShape.rectangle( 2, 1, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    continuousSizableRect.positionProperty.value = compareRectPosition;
+    var discreteSizableRects = [];
+    _.times( MAX_NUM_ITEMS, function() {
+      discreteSizableRects.push( new ModelShape.rectangle( 1.0, 1.0, EstimationConstants.REFERENCE_OBJECT_COLOR, true ) );
+    } );
+
+    var numVisibleDiscreteRects = 0;
+
+    function updateRectangleVisibility() {
+      var estimationMode = thisModel.estimationModeProperty.value;
+      var comparisonType = thisModel.comparisonTypeProperty.value;
+      referenceRect.visibleProperty.value = estimationMode === 'rectangles';
+      compareRect.visibleProperty.value = estimationMode === 'rectangles';
+      continuousSizableRect.visibleProperty.value = estimationMode === 'rectangles' && comparisonType === 'continuous';
+      var targetNumVisibleDiscreteRects = estimationMode === 'rectangles' && comparisonType === 'discrete' ? thisModel.estimateProperty.value : 0;
+      var startIndex = Math.min( numVisibleDiscreteRects, targetNumVisibleDiscreteRects );
+      var endIndex = Math.max( numVisibleDiscreteRects, targetNumVisibleDiscreteRects );
+      var visibility = targetNumVisibleDiscreteRects > numVisibleDiscreteRects;
+      for ( var i = startIndex; i < endIndex; i++ ) {
+        discreteSizableRects[ i ].visibleProperty.value = visibility;
+      }
+      numVisibleDiscreteRects = targetNumVisibleDiscreteRects;
+    }
+
+    this.estimationModeProperty.link( function() {
+      updateRectangleVisibility();
+    } );
+
+    this.comparisonTypeProperty.link( function() {
+      updateRectangleVisibility();
+    } );
+
+    this.estimateProperty.link( function( estimateValue ) {
+
+      // Handle the discrete rectangles by changing which ones are visible.
+      if ( thisModel.comparisonTypeProperty.value === 'discrete' ) {
+        updateRectangleVisibility();
+      }
+
+      // Size the continuous rectangle
+      continuousSizableRect.widthProperty.value = referenceRect.widthProperty.value * Math.sqrt( estimateValue );
+      continuousSizableRect.heightProperty.value = referenceRect.heightProperty.value * Math.sqrt( estimateValue );
+    } );
+
+    // Size and position the discrete rectangles TODO: Will need to be linked to reference object size.
+    var rectanglesPerRow = compareRect.widthProperty.value / referenceRect.widthProperty.value;
+    var numRows = discreteSizableRects.length / rectanglesPerRow;
+    var refWidth = referenceRect.widthProperty.value;
+    var refHeight = referenceRect.widthProperty.value;
+    var origin = compareRect.positionProperty.value;
+    for ( var i = 0; i < numRows; i++ ) {
+      for ( var j = 0; j < rectanglesPerRow; j++ ) {
+        var index = i * rectanglesPerRow + j;
+        discreteSizableRects[ index ].widthProperty.value = refWidth;
+        discreteSizableRects[ index ].heightProperty.value = refHeight;
+        discreteSizableRects[ index ].positionProperty.value = new Vector2( origin.x + j * refWidth, origin.y + i * refHeight );
+      }
+    }
+
+
+    this.shapeList.push( referenceRect );
+    this.shapeList.push( compareRect );
+    this.shapeList.push( continuousSizableRect );
+    _.times( discreteSizableRects.length, function( i ) { thisModel.shapeList.push( discreteSizableRects[i ] ) } );
+
+
   }
 
   ExploreModel.prototype = {

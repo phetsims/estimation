@@ -30,6 +30,7 @@ define( function( require ) {
   var PushButton = require( 'SUN/PushButton' );
   var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var RectanglePushButton = require( 'SUN/RectanglePushButton' );
+  var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
@@ -79,7 +80,7 @@ define( function( require ) {
       {
         children: [
           new InOutRadioButton( model.estimationModeProperty, 'lines', this.createImageOfGivenWidth( linesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-          new InOutRadioButton( model.estimationModeProperty, 'squares', this.createImageOfGivenWidth( squaresIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
+          new InOutRadioButton( model.estimationModeProperty, 'rectangles', this.createImageOfGivenWidth( squaresIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
           new InOutRadioButton( model.estimationModeProperty, 'cubes', this.createImageOfGivenWidth( cubesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
           new InOutRadioButton( model.estimationModeProperty, 'cylinders', this.createImageOfGivenWidth( cylindersIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
         ],
@@ -164,7 +165,8 @@ define( function( require ) {
 
     // Map the shapes to the appropriate view class.
     var viewClasses = {
-      line: LineView
+      line: LineView,
+      rectangle: RectangleView
     };
 
     // Add the shapes from the model.

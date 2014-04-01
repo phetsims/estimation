@@ -16,28 +16,30 @@ define( function( require ) {
    * @param initialWidth
    * @param initialHeight
    * @param initialDepth
+   * @param showOutline
    * @constructor
    */
-  var ModelShape = function( type, color, initialWidth, initialHeight, initialDepth ) {
+  var ModelShape = function( type, color, initialWidth, initialHeight, initialDepth, showOutline ) {
 
     // Fixed attributes
     this.type = type; // Valid types are line, rectangle, cube, cylinder, should not be changed.
     this.color = color;
+    this.showOutline = showOutline;
 
     // Changeable attributes
     this.widthProperty = new Property( initialWidth );
     this.heightProperty = new Property( initialHeight );
     this.depthProperty = new Property( initialDepth );
-    this.visibleProperty = new Property( true );
+    this.visibleProperty = new Property( false );
     this.positionProperty = new Property( Vector2.ZERO );
   };
 
-  ModelShape.line = function( initialLength, color ) {
-    return new ModelShape( 'line', color, initialLength, null, null );
+  ModelShape.line = function( initialLength, color, showOutline ) {
+    return new ModelShape( 'line', color, initialLength, null, null, showOutline );
   };
 
-  ModelShape.rectangle = function( initialWidth, initialHeight, color ) {
-    return new ModelShape( 'rectangle', color, initialWidth, initialHeight, null );
+  ModelShape.rectangle = function( initialWidth, initialHeight, color, showOutline ) {
+    return new ModelShape( 'rectangle', color, initialWidth, initialHeight, null, showOutline );
   };
 
   return ModelShape;
