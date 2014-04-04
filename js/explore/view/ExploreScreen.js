@@ -142,8 +142,6 @@ define( function( require ) {
     // Add the general control buttons.
     var resetAllButton = new ResetAllButton( function() { thisScreen.reset(); }, { scale: 0.75 } );
     this.addChild( resetAllButton );
-    var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty );
-    this.addChild( soundToggleButton );
 
     // Layout
     modeControlPanel.top = EDGE_INSET;
@@ -152,9 +150,7 @@ define( function( require ) {
     newObjectButton.left = 100;
     resetAllButton.right = this.layoutBounds.width - EDGE_INSET;
     resetAllButton.bottom = this.layoutBounds.height - EDGE_INSET;
-    soundToggleButton.bottom = resetAllButton.bottom;
-    soundToggleButton.right = resetAllButton.left - 10;
-    discreteOrContinuousControlPanel.centerX = ( soundToggleButton.centerX + resetAllButton.centerX ) / 2;
+    discreteOrContinuousControlPanel.right = ( resetAllButton.right );
     discreteOrContinuousControlPanel.bottom = this.layoutBounds.height - 100;
     rangeSelectionPanel.centerX = mvt.modelToViewX( 0 );
     rangeSelectionPanel.bottom = this.layoutBounds.height - EDGE_INSET;

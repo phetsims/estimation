@@ -19,7 +19,6 @@ define( function( require ) {
     var thisModel = this;
 
     // Externally visible properties.
-    this.soundEnabledProperty = new Property( true ); // TODO: Is there really any sound for the 'Explore' screen?
     this.estimationModeProperty = new Property( 'lines' ); // Valid values are 'lines', 'rectangles', 'cubes', and 'cylinders'.
     this.estimationRangeProperty = new Property( EstimationConstants.RANGE_1_TO_10 );
     this.offsetIntoRangeProperty = new Property( 0 ); // Amount of offset into the current range
