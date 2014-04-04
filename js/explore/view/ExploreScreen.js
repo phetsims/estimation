@@ -103,6 +103,12 @@ define( function( require ) {
 
     this.addChild( discreteOrContinuousControlPanel );
 
+    // The continuous or discrete panel doesn't make sense for one-dimensional
+    // estimates, so hide it in those cases.
+    model.estimationModeProperty.link( function( estimationMode ) {
+      discreteOrContinuousControlPanel.visible = estimationMode === 'rectangles' || estimationMode === 'cylinders';
+    } );
+
     // Create and add the panel for selecting the range.
     var rangeSelectionPanel = new Panel( new HBox(
       {

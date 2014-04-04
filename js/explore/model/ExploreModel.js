@@ -48,9 +48,9 @@ define( function( require ) {
     referenceLine.positionProperty.value = new Vector2( -2, 1.5 );
     var compareLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
     compareLine.positionProperty.value = new Vector2( -1, 0.5 );
-    var discreteSizableLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
+    var discreteSizableLine = new ModelShape.line( 2, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     discreteSizableLine.positionProperty.value = new Vector2( -1, 0.45 );
-    var continuousSizableLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
+    var continuousSizableLine = new ModelShape.line( 2, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     continuousSizableLine.positionProperty.value = new Vector2( -1, 0.45 );
 
     this.estimationModeProperty.link( function( estimationMode ) {
