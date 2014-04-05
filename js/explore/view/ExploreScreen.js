@@ -106,7 +106,7 @@ define( function( require ) {
     // The continuous or discrete panel doesn't make sense for one-dimensional
     // estimates, so hide it in those cases.
     model.estimationModeProperty.link( function( estimationMode ) {
-      discreteOrContinuousControlPanel.visible = estimationMode === 'rectangles' || estimationMode === 'cylinders';
+      discreteOrContinuousControlPanel.visible = estimationMode === 'rectangles' || estimationMode === 'cubes';
     } );
 
     // Create and add the panel for selecting the range.
