@@ -4,9 +4,11 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var Property = require( 'AXON/Property' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var ModelShape = require( 'ESTIMATION/common/model/ModelShape' );
+  var LineModel = require( 'ESTIMATION/common/model/LineModel' );
+  var Property = require( 'AXON/Property' );
+  var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -34,9 +36,12 @@ define( function( require ) {
                                                      ( thisModel.estimationRangeProperty.value.max - thisModel.estimationRangeProperty.value.min ) );
     }
 
-    // Externally visible list of all shapes in the model.  This is intended
+    // Externally visible lists of all shapes in the model.  These are intended
     // as the place where the view finds the shapes.
-    this.shapeList = [];
+    this.lines = [];
+    this.rectangles = [];
+    this.cubes = [];
+    this.cylinders = [];
 
     // Hook up internal property dependencies.
     this.estimationRangeProperty.link( updateEstimate );
@@ -44,14 +49,11 @@ define( function( require ) {
 
     // TODO: Figure out how to better modualarize the different nodes.
     // Add the lines
-    var referenceLine = new ModelShape.line( 0.1, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    var referenceLine = new LineModel( 0.1, new Vector2( -2, 1.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR );
     referenceLine.positionProperty.value = new Vector2( -2, 1.5 );
-    var compareLine = new ModelShape.line( 2, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
-    compareLine.positionProperty.value = new Vector2( -1, 0.5 );
-    var discreteSizableLine = new ModelShape.line( 2, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
-    discreteSizableLine.positionProperty.value = new Vector2( -1, 0.45 );
-    var continuousSizableLine = new ModelShape.line( 2, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
-    continuousSizableLine.positionProperty.value = new Vector2( -1, 0.45 );
+    var compareLine = new LineModel( 2, new Vector2( -1, 0.5 ), EstimationConstants.COMPARISON_OBJECT_COLOR );
+    var discreteSizableLine = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR );
+    var continuousSizableLine = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR );
 
     this.estimationModeProperty.link( function( estimationMode ) {
       referenceLine.visibleProperty.value = estimationMode === 'lines';
@@ -70,22 +72,20 @@ define( function( require ) {
       continuousSizableLine.widthProperty.value = referenceLine.widthProperty.value * estimateValue;
     } );
 
-    this.shapeList.push( referenceLine );
-    this.shapeList.push( compareLine );
-    this.shapeList.push( discreteSizableLine );
-    this.shapeList.push( continuousSizableLine );
+    this.lines.push( referenceLine );
+    this.lines.push( compareLine );
+    this.lines.push( discreteSizableLine );
+    this.lines.push( continuousSizableLine );
 
     // Add the rectangles
-    var referenceRect = new ModelShape.rectangle( 0.5, 0.5, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
-    referenceRect.positionProperty.value = new Vector2( -2.0, 0.5 );
+    var referenceRect = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     var compareRectPosition = new Vector2( -1, 0 );
-    var compareRect = new ModelShape.rectangle( 2.0, 2.0, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
-    compareRect.positionProperty.value = compareRectPosition;
-    var continuousSizableRect = new ModelShape.rectangle( 2, 1, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    var compareRect = new RectangleModel( new Dimension2( 2.0, 2.0 ), compareRectPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
+    var continuousSizableRect = new RectangleModel( new Dimension2( 2, 1 ), compareRectPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     continuousSizableRect.positionProperty.value = compareRectPosition;
     var discreteSizableRects = [];
     _.times( MAX_NUM_ITEMS, function() {
-      discreteSizableRects.push( new ModelShape.rectangle( 1.0, 1.0, EstimationConstants.REFERENCE_OBJECT_COLOR, true ) );
+      discreteSizableRects.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true ) );
     } );
 
     var numVisibleDiscreteRects = 0;
@@ -142,10 +142,10 @@ define( function( require ) {
     }
 
 
-    this.shapeList.push( referenceRect );
-    this.shapeList.push( compareRect );
-    this.shapeList.push( continuousSizableRect );
-    _.times( discreteSizableRects.length, function( i ) { thisModel.shapeList.push( discreteSizableRects[i ] ) } );
+    this.rectangles.push( referenceRect );
+    this.rectangles.push( compareRect );
+    this.rectangles.push( continuousSizableRect );
+    _.times( discreteSizableRects.length, function( i ) { thisModel.rectangles.push( discreteSizableRects[i ] ) } );
 
 
   }

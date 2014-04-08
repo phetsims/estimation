@@ -17,22 +17,21 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {ModelShape} lineModelShape
+   * @param {LineModel} lineModel
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function LineView( lineModelShape, mvt ) {
-    if ( lineModelShape.type !== 'line' ) { throw new Error( 'Attempt to create a line view with incorrect model type, type = ' + lineModelShape.type )}
+  function LineView( lineModel, mvt ) {
     Node.call( this );
     var thisNode = this;
-    var path = new Path( null, { stroke: lineModelShape.color, lineWidth: 3 } );
+    var path = new Path( null, { stroke: lineModel.color, lineWidth: 3 } );
     this.addChild( path );
-    lineModelShape.widthProperty.link( function( width ) {
-      var transformedOrigin = mvt.modelToViewPosition( lineModelShape.positionProperty.value );
-      var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModelShape.widthProperty.value, 0 ) ) );
+    lineModel.widthProperty.link( function( width ) {
+      var transformedOrigin = mvt.modelToViewPosition( lineModel.positionProperty.value );
+      var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ) ) );
       path.setShape( new Shape.lineSegment( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y ) );
     } );
-    lineModelShape.visibleProperty.link( function( visible ) {
+    lineModel.visibleProperty.link( function( visible ) {
       thisNode.visible = visible;
     } );
   }

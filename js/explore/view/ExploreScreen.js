@@ -172,9 +172,11 @@ define( function( require ) {
     };
 
     // Add the shapes from the model.
-    model.shapeList.forEach( function( modelShape ) {
-      if ( !viewClasses[ modelShape.type ] ) { throw new Error( 'Error: No view type for shape type ' + modelShape.type ) }
-      thisScreen.addChild( new viewClasses[ modelShape.type ]( modelShape, mvt ) );
+    model.lines.forEach( function( lineModel ) {
+      thisScreen.addChild( new LineView( lineModel, mvt ) );
+    } );
+    model.rectangles.forEach( function( rectangleModel ) {
+      thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
     } );
   }
 
