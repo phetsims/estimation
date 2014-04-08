@@ -15,9 +15,10 @@ define( function( require ) {
    * @param {Vector2} initialPosition
    * @param {String} color
    * @param {boolean} showOutline
+   * @param {boolean} initiallyVisible
    * @constructor
    */
-  function RectangleModel( initialSize, initialPosition, color, showOutline ) {
+  function RectangleModel( initialSize, initialPosition, color, showOutline, initiallyVisible ) {
 
     // Fixed attributes
     this.color = color;
@@ -26,7 +27,8 @@ define( function( require ) {
     // Dynamic attributes
     this.sizeProperty = new Property( initialSize );
     this.positionProperty = new Property( initialPosition );
-  };
+    this.visibleProperty = new Property( initiallyVisible );
+  }
 
   return RectangleModel;
 } );

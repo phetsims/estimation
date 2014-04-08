@@ -14,9 +14,10 @@ define( function( require ) {
    * @param {Number} initialLength
    * @param {Vector2} initialPosition
    * @param {String} color
+   * @param {boolean} initiallyVisible
    * @constructor
    */
-  function LineModel( initialLength, initialPosition, color ) {
+  function LineModel( initialLength, initialPosition, color, initiallyVisible ) {
 
     // Fixed attributes
     this.color = color;
@@ -24,7 +25,7 @@ define( function( require ) {
     // Dynamic attributes
     this.lengthProperty = new Property( initialLength );
     this.positionProperty = new Property( initialPosition );
-    this.visibleProperty = new Property( false );
+    this.visibleProperty = new Property( initiallyVisible );
   }
 
   return LineModel;

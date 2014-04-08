@@ -49,11 +49,11 @@ define( function( require ) {
 
     // TODO: Figure out how to better modualarize the different nodes.
     // Add the lines
-    var referenceLine = new LineModel( 0.1, new Vector2( -2, 1.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR );
+    var referenceLine = new LineModel( 0.1, new Vector2( -2, 1.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     referenceLine.positionProperty.value = new Vector2( -2, 1.5 );
-    var compareLine = new LineModel( 2, new Vector2( -1, 0.5 ), EstimationConstants.COMPARISON_OBJECT_COLOR );
-    var discreteSizableLine = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR );
-    var continuousSizableLine = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR );
+    var compareLine = new LineModel( 2, new Vector2( -1, 0.5 ), EstimationConstants.COMPARISON_OBJECT_COLOR, false );
+    var discreteSizableLine = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    var continuousSizableLine = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
 
     this.estimationModeProperty.link( function( estimationMode ) {
       referenceLine.visibleProperty.value = estimationMode === 'lines';
@@ -68,8 +68,8 @@ define( function( require ) {
     } );
 
     this.estimateProperty.link( function( estimateValue ) {
-      discreteSizableLine.widthProperty.value = referenceLine.widthProperty.value * estimateValue;
-      continuousSizableLine.widthProperty.value = referenceLine.widthProperty.value * estimateValue;
+      discreteSizableLine.lengthProperty.value = referenceLine.lengthProperty.value * estimateValue;
+      continuousSizableLine.lengthProperty.value = referenceLine.lengthProperty.value * estimateValue;
     } );
 
     this.lines.push( referenceLine );
@@ -78,14 +78,13 @@ define( function( require ) {
     this.lines.push( continuousSizableLine );
 
     // Add the rectangles
-    var referenceRect = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    var referenceRect = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     var compareRectPosition = new Vector2( -1, 0 );
-    var compareRect = new RectangleModel( new Dimension2( 2.0, 2.0 ), compareRectPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false );
-    var continuousSizableRect = new RectangleModel( new Dimension2( 2, 1 ), compareRectPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false );
-    continuousSizableRect.positionProperty.value = compareRectPosition;
+    var compareRect = new RectangleModel( new Dimension2( 2.0, 2.0 ), compareRectPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false, false );
+    var continuousSizableRect = new RectangleModel( new Dimension2( 2, 1 ), compareRectPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     var discreteSizableRects = [];
     _.times( MAX_NUM_ITEMS, function() {
-      discreteSizableRects.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true ) );
+      discreteSizableRects.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
     } );
 
     var numVisibleDiscreteRects = 0;
@@ -122,25 +121,22 @@ define( function( require ) {
       }
 
       // Size the continuous rectangle
-      continuousSizableRect.widthProperty.value = referenceRect.widthProperty.value * Math.sqrt( estimateValue );
-      continuousSizableRect.heightProperty.value = referenceRect.heightProperty.value * Math.sqrt( estimateValue );
+      continuousSizableRect.sizeProperty.value = new Dimension2( referenceRect.sizeProperty.value.width * Math.sqrt( estimateValue ),
+        referenceRect.sizeProperty.value.height * Math.sqrt( estimateValue ) );
     } );
 
     // Size and position the discrete rectangles TODO: Will need to be linked to reference object size.
-    var rectanglesPerRow = compareRect.widthProperty.value / referenceRect.widthProperty.value;
+    var rectanglesPerRow = compareRect.sizeProperty.value.width / referenceRect.sizeProperty.value.width;
     var numRows = discreteSizableRects.length / rectanglesPerRow;
-    var refWidth = referenceRect.widthProperty.value;
-    var refHeight = referenceRect.widthProperty.value;
     var origin = compareRect.positionProperty.value;
     for ( var i = 0; i < numRows; i++ ) {
       for ( var j = 0; j < rectanglesPerRow; j++ ) {
         var index = i * rectanglesPerRow + j;
-        discreteSizableRects[ index ].widthProperty.value = refWidth;
-        discreteSizableRects[ index ].heightProperty.value = refHeight;
-        discreteSizableRects[ index ].positionProperty.value = new Vector2( origin.x + j * refWidth, origin.y + i * refHeight );
+        discreteSizableRects[ index ].sizeProperty.value = referenceRect.sizeProperty.value;
+        discreteSizableRects[ index ].positionProperty.value = new Vector2( origin.x + j * referenceRect.sizeProperty.value.width,
+          origin.y + i * referenceRect.sizeProperty.value.height );
       }
     }
-
 
     this.rectangles.push( referenceRect );
     this.rectangles.push( compareRect );

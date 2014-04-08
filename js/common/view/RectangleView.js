@@ -27,7 +27,6 @@ define( function( require ) {
     var path = new Path( null, { fill: rectangleModel.color, stroke: ( rectangleModel.showOutline ? 'white' : null ) } );
     this.addChild( path );
 
-    // Define function to update position
     function updatePosition() {
       var transformedPosition = mvt.modelToViewPosition( rectangleModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
@@ -35,23 +34,13 @@ define( function( require ) {
       thisNode.bottom = transformedPosition.y;
     }
 
-    // Define function to update shape
-    function updateShape() {
+    // Hook up the update functions
+    rectangleModel.sizeProperty.link( function() {
       path.setShape( new Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( rectangleModel.sizeProperty.value.width ),
-        -mvt.modelToViewDeltaY( rectangleModel.sizeProperty.height.value ) ) );
-    }
-
-    // Hook up the update functions TODO: Maybe the model should be restructured so there is only one attributed (a dimension in this case) that defines the size
-    rectangleModel.widthProperty.link( function() {
-      updateShape();
-    } );
-    rectangleModel.heightProperty.link( function() {
-      updateShape();
+        -mvt.modelToViewDeltaY( rectangleModel.sizeProperty.value.height ) ) );
       updatePosition();
     } );
-    rectangleModel.positionProperty.link( function() {
-      updatePosition();
-    } );
+    rectangleModel.positionProperty.link( updatePosition );
     rectangleModel.visibleProperty.link( function( visible ) {
       thisNode.visible = visible;
     } );
