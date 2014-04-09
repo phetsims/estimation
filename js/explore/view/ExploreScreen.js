@@ -8,6 +8,7 @@ define( function( require ) {
 
   // Imports
   var Color = require( 'SCENERY/util/Color' );
+  var CubeView = require( 'ESTIMATION/common/view/CubeView' );
   var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
@@ -178,6 +179,9 @@ define( function( require ) {
     } );
     model.rectangles.forEach( function( rectangleModel ) {
       thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
+    } );
+    model.cubes.forEach( function( cylinderModel ) {
+      thisScreen.addChild( new CubeView( cylinderModel, mvt ) );
     } );
     model.cylinders.forEach( function( cylinderModel ) {
       thisScreen.addChild( new CylinderView( cylinderModel, mvt ) );

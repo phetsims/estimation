@@ -8,6 +8,7 @@ define( function( require ) {
   var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var LineModel = require( 'ESTIMATION/common/model/LineModel' );
   var Property = require( 'AXON/Property' );
@@ -147,7 +148,12 @@ define( function( require ) {
     _.times( discreteSizableRects.length, function( i ) { thisModel.rectangles.push( discreteSizableRects[i ] ) } );
 
     // Add the cubes
+    var compareCube = new CubeModel( new Dimension3( 1, 1, 1 ), new Vector2( -1, 0.5 ), new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ), false );
+    this.cubes.push( compareCube );
 
+    this.estimationModeProperty.link( function( mode ) {
+      compareCube.visibleProperty.value = mode === 'cubes';
+    } );
 
     // Add the cylinders
     var refCylinderWidth = 1.5;
