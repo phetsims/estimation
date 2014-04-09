@@ -25,8 +25,10 @@ define( function( require ) {
   function CylinderView( cylinderModel, mvt ) {
     Node.call( this );
     var thisNode = this;
-    var path = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
-    this.addChild( path );
+    var side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
+    this.addChild( side );
+    var top = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
+    this.addChild( top );
 
     function updatePosition() {
       var transformedPosition = mvt.modelToViewPosition( cylinderModel.positionProperty.value );
@@ -38,14 +40,16 @@ define( function( require ) {
     // Hook up the update functions
     cylinderModel.sizeProperty.link( function() {
       var ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
-      var ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * CylinderModel.PERSPECTIVE_TILT / ( Math.PI / 2 );
+      var ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
       var cylinderHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
-      var shape = new Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 );
+      top.setShape( new Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
+      var shape = new Shape();
       shape.moveTo( -ellipseWidth / 2, 0 )
-        .lineTo( -ellipseWidth / 2, -cylinderHeight )
-        .lineTo( 0, -(ellipseHeight / 2 ) - cylinderHeight )
-        .lineTo( ellipseWidth / 2, -cylinderHeight );
-      path.setShape( shape );
+        .lineTo( -ellipseWidth / 2, cylinderHeight )
+        .cubicCurveTo( -ellipseWidth * 0.475, cylinderHeight + ellipseHeight * 0.67, ellipseWidth * 0.475, cylinderHeight + ellipseHeight * 0.67, ellipseWidth / 2, cylinderHeight )
+        .lineTo( ellipseWidth / 2, 0 ).
+        close();
+      side.setShape( shape );
       updatePosition();
     } );
     cylinderModel.positionProperty.link( updatePosition );
