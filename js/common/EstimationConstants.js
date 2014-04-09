@@ -11,6 +11,9 @@ define( function( require ) {
     COMPARISON_OBJECT_COLOR: '#ff6633',
 
     // Proportion of depth (z dimension) projected into the 2D representation.
-    DEPTH_PROJECTION_PROPORTION: 0.3
+    DEPTH_PROJECTION_PROPORTION: 0.3,
+
+    // Angle of depth projection for cubes, in radians
+    CUBE_PROJECTION_ANGLE: Math.PI / 4
   };
 } );

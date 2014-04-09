@@ -45,13 +45,18 @@ define( function( require ) {
     // Hook up the update functions
     cubeModel.sizeProperty.link( function() {
       var faceWidth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.width );
+      var projectedDepth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION; // Assumes x & y scales are the same.
+      var projectionVector = Vector2.createPolar( projectedDepth, -EstimationConstants.CUBE_PROJECTION_ANGLE );
       var depth = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.width ) * Math.sin( CubeModel.PERSPECTIVE_TILT );
       var height = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
       visiblePortion.setShape( new Shape()
+        // starts in lower left corner
         .moveTo( 0, 0 )
+        .lineTo( 0, -height )
+        .lineToRelative( projectionVector.x, projectionVector.y )
+        .lineToRelative( faceWidth, 0 )
+        .lineTo( faceWidth, -height )
         .lineTo( faceWidth, 0 )
-        .lineTo( faceWidth, height )
-        .lineTo( 0, height )
         .lineTo( 0, 0 )
       );
 //      var shape = new Shape();
