@@ -179,8 +179,8 @@ define( function( require ) {
     model.rectangles.forEach( function( rectangleModel ) {
       thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
     } );
-    model.cylinders.forEach( function( rectangleModel ) {
-      thisScreen.addChild( new CylinderView( rectangleModel, mvt ) );
+    model.cylinders.forEach( function( cylinderModel ) {
+      thisScreen.addChild( new CylinderView( cylinderModel, mvt ) );
     } );
   }
 

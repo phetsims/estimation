@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -36,8 +37,15 @@ define( function( require ) {
 
     // Hook up the update functions
     cylinderModel.sizeProperty.link( function() {
-      path.setShape( new Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width ),
-        -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height ) ) );
+      var ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
+      var ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * CylinderModel.PERSPECTIVE_TILT / ( Math.PI / 2 );
+      var cylinderHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
+      var shape = new Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 );
+      shape.moveTo( -ellipseWidth / 2, 0 )
+        .lineTo( -ellipseWidth / 2, -cylinderHeight )
+        .lineTo( 0, -(ellipseHeight / 2 ) - cylinderHeight )
+        .lineTo( ellipseWidth / 2, -cylinderHeight );
+      path.setShape( shape );
       updatePosition();
     } );
     cylinderModel.positionProperty.link( updatePosition );
