@@ -17,7 +17,7 @@ define( function( require ) {
    * @param {boolean} showOutline
    * @constructor
    */
-  function CylinderModel( initialSize, initialPosition, color, showOutline ) {
+  function CylinderModel( initialSize, initialPosition, color, showOutline, initiallyVisible ) {
 
     // Fixed attributes
     this.color = color;
@@ -26,6 +26,7 @@ define( function( require ) {
     // Dynamic attributes
     this.sizeProperty = new Property( initialSize );
     this.positionProperty = new Property( initialPosition );
+    this.visibleProperty = new Property( initiallyVisible );
   }
 
   return CylinderModel;

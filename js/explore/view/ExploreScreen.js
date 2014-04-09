@@ -8,6 +8,7 @@ define( function( require ) {
 
   // Imports
   var Color = require( 'SCENERY/util/Color' );
+  var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
   var continuousIconImage = require( 'image!ESTIMATION/continuous-icon.png' );
@@ -106,7 +107,7 @@ define( function( require ) {
     // The continuous or discrete panel doesn't make sense for one-dimensional
     // estimates, so hide it in those cases.
     model.estimationModeProperty.link( function( estimationMode ) {
-      discreteOrContinuousControlPanel.visible = estimationMode === 'rectangles' || estimationMode === 'cubes';
+      discreteOrContinuousControlPanel.visible = !( estimationMode === 'lines' );
     } );
 
     // Create and add the panel for selecting the range.
@@ -177,6 +178,9 @@ define( function( require ) {
     } );
     model.rectangles.forEach( function( rectangleModel ) {
       thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
+    } );
+    model.cylinders.forEach( function( rectangleModel ) {
+      thisScreen.addChild( new CylinderView( rectangleModel, mvt ) );
     } );
   }
 

@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var LineModel = require( 'ESTIMATION/common/model/LineModel' );
@@ -143,12 +144,77 @@ define( function( require ) {
     this.rectangles.push( continuousSizableRect );
     _.times( discreteSizableRects.length, function( i ) { thisModel.rectangles.push( discreteSizableRects[i ] ) } );
 
+    // Add the cylinders
+    var refCylinderWidth = 1.5;
+    var referenceCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 0.25 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    var compareCylinderPosition = new Vector2( 1, 0 );
+    var compareCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 2.0 ), compareCylinderPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false, false );
+    var continuousSizableCylinder = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    var discreteSizableCylinders = [];
+    _.times( MAX_NUM_ITEMS, function() {
+      discreteSizableCylinders.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+    } );
+
+    var numVisibleDiscreteCylinders = 0;
+
+    function updateCylinderVisibility() {
+      var estimationMode = thisModel.estimationModeProperty.value;
+      var comparisonType = thisModel.comparisonTypeProperty.value;
+      referenceCylinder.visibleProperty.value = estimationMode === 'cylinders';
+      compareCylinder.visibleProperty.value = estimationMode === 'cylinders';
+      continuousSizableCylinder.visibleProperty.value = estimationMode === 'cylinders' && comparisonType === 'continuous';
+      var targetNumVisibleDiscreteCylinders = estimationMode === 'cylinders' && comparisonType === 'discrete' ? thisModel.estimateProperty.value : 0;
+      var startIndex = Math.min( numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
+      var endIndex = Math.max( numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
+      var visibility = targetNumVisibleDiscreteCylinders > numVisibleDiscreteCylinders;
+      for ( var i = startIndex; i < endIndex; i++ ) {
+        discreteSizableCylinders[ i ].visibleProperty.value = visibility;
+      }
+      numVisibleDiscreteCylinders = targetNumVisibleDiscreteCylinders;
+    }
+
+    this.estimationModeProperty.link( function() {
+      updateCylinderVisibility();
+    } );
+
+    this.comparisonTypeProperty.link( function() {
+      updateCylinderVisibility();
+    } );
+
+    this.estimateProperty.link( function( estimateValue ) {
+
+      // Handle the discrete cylinders by changing which ones are visible.
+      if ( thisModel.comparisonTypeProperty.value === 'discrete' ) {
+        updateCylinderVisibility();
+      }
+
+      // Size the continuous cylinder
+      continuousSizableCylinder.sizeProperty.value = new Dimension2( referenceCylinder.sizeProperty.value.width,
+        referenceCylinder.sizeProperty.value.height * estimateValue );
+    } );
+
+    // Size and position the discrete cylinders TODO: Will need to be linked to reference object size.
+    var cylindersPerRow = compareCylinder.sizeProperty.value.width / referenceCylinder.sizeProperty.value.width;
+    numRows = discreteSizableCylinders.length / cylindersPerRow;
+    origin = compareCylinder.positionProperty.value;
+    for ( i = 0; i < numRows; i++ ) {
+      for ( j = 0; j < cylindersPerRow; j++ ) {
+        index = i * cylindersPerRow + j;
+        discreteSizableCylinders[ index ].sizeProperty.value = referenceCylinder.sizeProperty.value;
+        discreteSizableCylinders[ index ].positionProperty.value = new Vector2( origin.x + j * referenceCylinder.sizeProperty.value.width,
+          origin.y + i * referenceCylinder.sizeProperty.value.height );
+      }
+    }
+
+    this.cylinders.push( referenceCylinder );
+    this.cylinders.push( compareCylinder );
+    this.cylinders.push( continuousSizableCylinder );
+    _.times( discreteSizableCylinders.length, function( i ) { thisModel.cylinders.push( discreteSizableCylinders[i ] ) } );
 
   }
 
   ExploreModel.prototype = {
     reset: function() {
-      this.soundEnabledProperty.reset();
       this.estimationModeProperty.reset();
       this.estimationRangeProperty.reset();
       this.comparisonTypeProperty.reset();

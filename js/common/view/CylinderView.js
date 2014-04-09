@@ -1,8 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * View representation of a rectangle used within the Estimation simulation.
- * The rectangle is defined by a position, size, and color.  Some of these
+ * View representation of a cylinder used within the Estimation simulation.
+ * The cylinder is defined by a position, size, and color.  Some of these
  * attributes may change.
  */
 define( function( require ) {
@@ -17,34 +17,34 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {ModelShape} rectangleModel
+   * @param {ModelShape} cylinderModel
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function RectangleView( rectangleModel, mvt ) {
+  function CylinderView( cylinderModel, mvt ) {
     Node.call( this );
     var thisNode = this;
-    var path = new Path( null, { fill: rectangleModel.color, stroke: ( rectangleModel.showOutline ? 'white' : null ) } );
+    var path = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
     this.addChild( path );
 
     function updatePosition() {
-      var transformedPosition = mvt.modelToViewPosition( rectangleModel.positionProperty.value );
+      var transformedPosition = mvt.modelToViewPosition( cylinderModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       thisNode.left = transformedPosition.x;
       thisNode.bottom = transformedPosition.y;
     }
 
     // Hook up the update functions
-    rectangleModel.sizeProperty.link( function() {
-      path.setShape( new Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( rectangleModel.sizeProperty.value.width ),
-        -mvt.modelToViewDeltaY( rectangleModel.sizeProperty.value.height ) ) );
+    cylinderModel.sizeProperty.link( function() {
+      path.setShape( new Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width ),
+        -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height ) ) );
       updatePosition();
     } );
-    rectangleModel.positionProperty.link( updatePosition );
-    rectangleModel.visibleProperty.link( function( visible ) {
+    cylinderModel.positionProperty.link( updatePosition );
+    cylinderModel.visibleProperty.link( function( visible ) {
       thisNode.visible = visible;
     } );
   }
 
-  return inherit( Node, RectangleView );
+  return inherit( Node, CylinderView );
 } );
