@@ -51,8 +51,9 @@ define( function( require ) {
       shape.moveTo( -ellipseWidth / 2, 0 )
         .lineTo( -ellipseWidth / 2, cylinderHeight )
         .cubicCurveTo( -ellipseWidth * 0.475, cylinderHeight + ellipseHeight * 0.67, ellipseWidth * 0.475, cylinderHeight + ellipseHeight * 0.67, ellipseWidth / 2, cylinderHeight )
-        .lineTo( ellipseWidth / 2, 0 ).
-        close();
+        .lineTo( ellipseWidth / 2, 0 )
+        .cubicCurveTo( ellipseWidth * 0.475, ellipseHeight * 0.67, -ellipseWidth * 0.475, ellipseHeight * 0.67, -ellipseWidth / 2, 0 )
+        .close();
       side.setShape( shape );
       var sideGradient = new LinearGradient( -ellipseWidth / 2, 0, ellipseWidth / 2, 0 ).
         addColorStop( 0, baseColor.colorUtilsDarker( 0.5 ) ).
