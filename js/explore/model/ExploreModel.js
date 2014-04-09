@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var Color = require( 'SCENERY/util/Color' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
@@ -148,7 +149,7 @@ define( function( require ) {
     var refCylinderWidth = 1.5;
     var referenceCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 0.25 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     var compareCylinderPosition = new Vector2( 1, 0 );
-    var compareCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 2.0 ), compareCylinderPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false, false );
+    var compareCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 2.0 ), compareCylinderPosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
     var continuousSizableCylinder = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     var discreteSizableCylinders = [];
     _.times( MAX_NUM_ITEMS, function() {
@@ -206,10 +207,11 @@ define( function( require ) {
       }
     }
 
+    // TODO: Probably want to separate these so that order doesn't matter.  Right now it does due to layering.
     this.cylinders.push( referenceCylinder );
-    this.cylinders.push( compareCylinder );
     this.cylinders.push( continuousSizableCylinder );
     _.times( discreteSizableCylinders.length, function( i ) { thisModel.cylinders.push( discreteSizableCylinders[i ] ) } );
+    this.cylinders.push( compareCylinder );
 
   }
 

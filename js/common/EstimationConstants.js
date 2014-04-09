@@ -8,6 +8,6 @@ define( function( require ) {
     RANGE_10_TO_100: { min: 10, max: 100 },
     RANGE_100_TO_1000: { min: 100, max: 1000 },
     REFERENCE_OBJECT_COLOR: 'blue',
-    COMPARISON_OBJECT_COLOR: 'rgb( 255, 102, 51 )'
+    COMPARISON_OBJECT_COLOR: '#ff6633'
   };
 } );

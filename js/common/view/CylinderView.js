@@ -9,9 +9,11 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var Color = require( 'SCENERY/util/Color' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
@@ -37,6 +39,8 @@ define( function( require ) {
       thisNode.bottom = transformedPosition.y;
     }
 
+    var baseColor = cylinderModel.color instanceof Color ? cylinderModel.color : new Color( cylinderModel.color );
+
     // Hook up the update functions
     cylinderModel.sizeProperty.link( function() {
       var ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
@@ -50,6 +54,11 @@ define( function( require ) {
         .lineTo( ellipseWidth / 2, 0 ).
         close();
       side.setShape( shape );
+      var sideGradient = new LinearGradient( -ellipseWidth / 2, 0, ellipseWidth / 2, 0 ).
+        addColorStop( 0, baseColor.colorUtilsDarker( 0.5 ) ).
+        addColorStop( 0.5, baseColor.colorUtilsBrighter( 0.5 ) ).
+        addColorStop( 1, baseColor.colorUtilsDarker( 0.5 ) );
+      side.fill = sideGradient;
       updatePosition();
     } );
     cylinderModel.positionProperty.link( updatePosition );
