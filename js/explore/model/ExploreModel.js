@@ -5,6 +5,7 @@ define( function( require ) {
 
   // Imports
   var Color = require( 'SCENERY/util/Color' );
+  var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
@@ -144,6 +145,9 @@ define( function( require ) {
     this.rectangles.push( compareRect );
     this.rectangles.push( continuousSizableRect );
     _.times( discreteSizableRects.length, function( i ) { thisModel.rectangles.push( discreteSizableRects[i ] ) } );
+
+    // Add the cubes
+
 
     // Add the cylinders
     var refCylinderWidth = 1.5;
