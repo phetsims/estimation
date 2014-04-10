@@ -17,6 +17,7 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -28,10 +29,22 @@ define( function( require ) {
   function CubeView( cubeModel, mvt ) {
     Node.call( this );
     var thisNode = this;
-    var dottedLineBack = new Path( null, { stroke: 'black' } );
-    this.addChild( dottedLineBack );
-    var visiblePortion = new Path( null, { fill: cubeModel.color, stroke: ( cubeModel.showOutline ? 'white' : null ) } );
-    this.addChild( visiblePortion );
+
+    var baseColor = cubeModel.color instanceof Color ? cubeModel.color : new Color( cubeModel.color );
+
+    var dottedLineBack = null;
+    if ( baseColor.alpha !== 1 ) {
+      // Only add the dotted lines if the base color is somewhat transparent
+      dottedLineBack = new Path( null, { stroke: '#8b7d6b', lineDash: [ 4, 5 ] } );
+      this.addChild( dottedLineBack );
+    }
+
+    var top = new Path( null, { fill: baseColor.colorUtilsBrighter( 0.3 ), stroke: ( cubeModel.showOutline ? 'white' : null ) } );
+    this.addChild( top );
+    var side = new Path( null, { fill: baseColor.colorUtilsDarker( 0.3 ), stroke: ( cubeModel.showOutline ? 'white' : null ) } );
+    this.addChild( side );
+    var front = new Rectangle( 0, 0, 1, 1, 0, 0, { fill: baseColor, stroke: ( cubeModel.showOutline ? 'white' : null ) } );
+    this.addChild( front );
 
     function updatePosition() {
       var transformedPosition = mvt.modelToViewPosition( cubeModel.positionProperty.value );
@@ -40,33 +53,42 @@ define( function( require ) {
       thisNode.bottom = transformedPosition.y;
     }
 
-    var baseColor = cubeModel.color instanceof Color ? cubeModel.color : new Color( cubeModel.color );
 
     // Hook up the update functions
     cubeModel.sizeProperty.link( function() {
       var faceWidth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.width );
       var projectedDepth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION; // Assumes x & y scales are the same.
       var projectionVector = Vector2.createPolar( projectedDepth, -EstimationConstants.CUBE_PROJECTION_ANGLE );
-      var depth = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.width ) * Math.sin( CubeModel.PERSPECTIVE_TILT );
       var height = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
-      visiblePortion.setShape( new Shape()
-        // starts in lower left corner
+
+      front.setRect( 0, 0, faceWidth, height );
+      side.setShape( new Shape()
+        .moveTo( faceWidth, height )
+        .lineToRelative( projectionVector.x, projectionVector.y )
+        .lineToRelative( 0, -height )
+        .lineToRelative( -projectionVector.x, -projectionVector.y )
+        .close()
+      );
+
+      top.setShape( new Shape()
         .moveTo( 0, 0 )
-        .lineTo( 0, -height )
         .lineToRelative( projectionVector.x, projectionVector.y )
         .lineToRelative( faceWidth, 0 )
-        .lineTo( faceWidth, -height )
-        .lineTo( faceWidth, 0 )
-        .lineTo( 0, 0 )
+        .lineToRelative( -projectionVector.x, -projectionVector.y )
+        .close()
       );
-//      var shape = new Shape();
-//      shape.moveTo( -faceWidth / 2, 0 )
-//        .lineTo( -faceWidth / 2, height )
-//        .cubicCurveTo( -faceWidth * 0.475, height + depth * 0.67, faceWidth * 0.475, height + depth * 0.67, faceWidth / 2, height )
-//        .lineTo( faceWidth / 2, 0 )
-//        .cubicCurveTo( faceWidth * 0.475, depth * 0.67, -faceWidth * 0.475, depth * 0.67, -faceWidth / 2, 0 )
-//        .close();
-//      dottedLineBack.setShape( shape );
+
+      if ( dottedLineBack ) {
+        var origin = new Vector2( projectionVector.x, height + projectionVector.y );
+        dottedLineBack.setShape( new Shape()
+          .moveTo( origin.x, origin.y )
+          .lineToRelative( 0, -height )
+          .moveTo( origin.x, origin.y )
+          .lineToRelative( -projectionVector.x, -projectionVector.y )
+          .moveTo( origin.x, origin.y )
+          .lineToRelative( faceWidth, 0 )
+        )
+      }
       updatePosition();
     } );
     cubeModel.positionProperty.link( updatePosition );

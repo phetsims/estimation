@@ -146,7 +146,7 @@ define( function( require ) {
     _.times( discreteSizableRects.length, function( i ) { thisModel.rectangles.push( discreteSizableRects[i ] ) } );
 
     // Add the cubes
-    var compareCube = new CubeModel( new Dimension3( 1, 1, 1 ), new Vector2( -1, 0.5 ), new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ), false );
+    var compareCube = new CubeModel( new Dimension3( 1, 1, 1 ), new Vector2( -1, 0.5 ), new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false );
     this.cubes.push( compareCube );
 
     this.estimationModeProperty.link( function( mode ) {
