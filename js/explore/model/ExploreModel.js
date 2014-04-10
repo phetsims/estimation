@@ -33,13 +33,6 @@ define( function( require ) {
     // The following property should only be observed outside of this model, never set.
     this.estimateProperty = new Property( 1 ); // Quantity of estimated objects
 
-    // Function for calculating the estimate value based on range and offset into range.
-    function updateEstimate() {
-      thisModel.estimateProperty.value = Math.floor( thisModel.estimationRangeProperty.value.min +
-                                                     thisModel.offsetIntoRangeProperty.value *
-                                                     ( thisModel.estimationRangeProperty.value.max - thisModel.estimationRangeProperty.value.min ) );
-    }
-
     // Externally visible lists of all shapes in the model.  These are intended
     // as the place where the view finds the shapes.
     this.lines = [];
@@ -48,8 +41,13 @@ define( function( require ) {
     this.cylinders = [];
 
     // Hook up internal property dependencies.
-    this.estimationRangeProperty.link( updateEstimate );
-    this.offsetIntoRangeProperty.link( updateEstimate );
+    this.estimationRangeProperty.link( function( range ) {
+      thisModel.offsetIntoRangeProperty.value = 0;
+      thisModel.estimateProperty.value = range.min;
+    } );
+    this.offsetIntoRangeProperty.link( function( offset ) {
+      thisModel.estimateProperty.value = Math.floor( offset * thisModel.estimationRangeProperty.value.max - thisModel.estimationRangeProperty.value.min * ( offset - 1) );
+    } );
 
     // TODO: Figure out how to better modualarize the different nodes.
     // Add the lines
