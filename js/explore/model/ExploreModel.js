@@ -153,13 +153,10 @@ define( function( require ) {
     var compareCubePosition = new Vector2( -1, 0 );
     var compareCube = new CubeModel( new Dimension3( 1, 1, 1 ), compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
     var continuousSizableCube = new CubeModel( new Dimension3( 0.25, 0.25, 0.25 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-    /*
-     var discreteSizableCubes = [];
-     _.times( MAX_NUM_ITEMS, function() {
-     //      discreteSizableCubes.push( new CubeModel( new Dimension2( 0.25, 0.25, 0.25 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
-     } );
-
-     */
+    var discreteSizableCubes = [];
+    _.times( MAX_NUM_ITEMS, function() {
+      discreteSizableCubes.push( new CubeModel( new Dimension3( 0.25, 0.25, 0.25 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+    } );
     var numVisibleDiscreteCubes = 0;
 
     function updateCubeVisibility() {
@@ -173,7 +170,7 @@ define( function( require ) {
       var endIndex = Math.max( numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
       var visibility = targetNumVisibleDiscreteCubes > numVisibleDiscreteCubes;
       for ( var i = startIndex; i < endIndex; i++ ) {
-//        discreteSizableCubes[ i ].visibleProperty.value = visibility;
+        discreteSizableCubes[ i ].visibleProperty.value = visibility;
       }
       numVisibleDiscreteCubes = targetNumVisibleDiscreteCubes;
     }
@@ -207,22 +204,27 @@ define( function( require ) {
     } );
 
     // Size and position the discrete cubes TODO: Will need to be linked to reference object size.
-//    var cubesPerRow = compareCube.sizeProperty.value.width / referenceCube.sizeProperty.value.width;
-//    numRows = discreteSizableCubes.length / cubesPerRow;
-//    origin = compareCube.positionProperty.value;
-//    for ( i = 0; i < numRows; i++ ) {
-//      for ( j = 0; j < cubesPerRow; j++ ) {
-//        index = i * cubesPerRow + j;
-//        discreteSizableCubes[ index ].sizeProperty.value = referenceCube.sizeProperty.value;
-//        discreteSizableCubes[ index ].positionProperty.value = new Vector2( origin.x + j * referenceCube.sizeProperty.value.width,
-//          origin.y + i * referenceCube.sizeProperty.value.height );
-//      }
-//    }
+    var cubesAcross = compareCube.sizeProperty.value.width / referenceCube.sizeProperty.value.width;
+    var cubesFrontToBack = compareCube.sizeProperty.value.depth / referenceCube.sizeProperty.value.depth;
+    var numCubesPlaced = 0;
+    var compareCubeBackCorner = compareCube.positionProperty.value.plus( new Vector2( ( compareCube.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION, 0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE ) );
+    var xDisplacement = new Vector2( referenceCube.sizeProperty.value.width, 0 );
+    var yDisplacement = new Vector2( -referenceCube.sizeProperty.value.depth * EstimationConstants.DEPTH_PROJECTION_PROPORTION, 0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE );
+    var zDisplacement = new Vector2( 0, referenceCube.sizeProperty.value.height );
+    for ( var z = 0; numCubesPlaced < MAX_NUM_ITEMS; z++ ) {
+      for ( var y = 0; y < cubesFrontToBack && numCubesPlaced < MAX_NUM_ITEMS; y++ ) {
+        for ( var x = 0; x < cubesAcross && numCubesPlaced < MAX_NUM_ITEMS; x++ ) {
+          discreteSizableCubes[ numCubesPlaced ].sizeProperty.value = referenceCube.sizeProperty.value;
+          discreteSizableCubes[ numCubesPlaced ].positionProperty.value = compareCubeBackCorner.plus( xDisplacement.times( x ) ).plus( yDisplacement.times( y + 1 ) ).plus( zDisplacement.times( z ) );
+          numCubesPlaced++;
+        }
+      }
+    }
 
     this.cubes.push( referenceCube );
-    this.cubes.push( compareCube );
     this.cubes.push( continuousSizableCube );
-//    _.times( discreteSizableCubes.length, function( i ) { thisModel.cubes.push( discreteSizableCubes[i ] ) } );
+    _.times( discreteSizableCubes.length, function( i ) { thisModel.cubes.push( discreteSizableCubes[i ] ) } );
+    this.cubes.push( compareCube );
 
     //------------------------------------------------------------------------
     // Add the cylinders
