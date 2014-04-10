@@ -49,7 +49,8 @@ define( function( require ) {
       thisModel.estimateProperty.value = Math.floor( offset * thisModel.estimationRangeProperty.value.max - thisModel.estimationRangeProperty.value.min * ( offset - 1) );
     } );
 
-    // TODO: Figure out how to better modualarize the different nodes.
+    // TODO: Figure out how to better modualarize the different modes (line, rects, cubes, cylinders).
+    //------------------------------------------------------------------------
     // Add the lines
     var referenceLine = new LineModel( 0.1, new Vector2( -2, 1.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
     referenceLine.positionProperty.value = new Vector2( -2, 1.5 );
@@ -79,6 +80,7 @@ define( function( require ) {
     this.lines.push( discreteSizableLine );
     this.lines.push( continuousSizableLine );
 
+    //------------------------------------------------------------------------
     // Add the rectangles
     var referenceRect = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     var compareRectPosition = new Vector2( -1, 0 );
@@ -145,14 +147,84 @@ define( function( require ) {
     this.rectangles.push( continuousSizableRect );
     _.times( discreteSizableRects.length, function( i ) { thisModel.rectangles.push( discreteSizableRects[i ] ) } );
 
+    //------------------------------------------------------------------------
     // Add the cubes
-    var compareCube = new CubeModel( new Dimension3( 1, 1, 1 ), new Vector2( -1, 0.5 ), new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false );
-    this.cubes.push( compareCube );
+    var referenceCube = new CubeModel( new Dimension3( 0.25, 0.25, 0.25 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    var compareCubePosition = new Vector2( -1, 0 );
+    var compareCube = new CubeModel( new Dimension3( 1, 1, 1 ), compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
+    var continuousSizableCube = new CubeModel( new Dimension3( 0.25, 0.25, 0.25 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    /*
+     var discreteSizableCubes = [];
+     _.times( MAX_NUM_ITEMS, function() {
+     //      discreteSizableCubes.push( new CubeModel( new Dimension2( 0.25, 0.25, 0.25 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+     } );
 
-    this.estimationModeProperty.link( function( mode ) {
-      compareCube.visibleProperty.value = mode === 'cubes';
+     */
+    var numVisibleDiscreteCubes = 0;
+
+    function updateCubeVisibility() {
+      var estimationMode = thisModel.estimationModeProperty.value;
+      var comparisonType = thisModel.comparisonTypeProperty.value;
+      referenceCube.visibleProperty.value = estimationMode === 'cubes';
+      compareCube.visibleProperty.value = estimationMode === 'cubes';
+      continuousSizableCube.visibleProperty.value = estimationMode === 'cubes' && comparisonType === 'continuous';
+      var targetNumVisibleDiscreteCubes = estimationMode === 'cubes' && comparisonType === 'discrete' ? thisModel.estimateProperty.value : 0;
+      var startIndex = Math.min( numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
+      var endIndex = Math.max( numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
+      var visibility = targetNumVisibleDiscreteCubes > numVisibleDiscreteCubes;
+      for ( var i = startIndex; i < endIndex; i++ ) {
+//        discreteSizableCubes[ i ].visibleProperty.value = visibility;
+      }
+      numVisibleDiscreteCubes = targetNumVisibleDiscreteCubes;
+    }
+
+    this.estimationModeProperty.link( function() {
+      updateCubeVisibility();
     } );
 
+    this.comparisonTypeProperty.link( function() {
+      updateCubeVisibility();
+    } );
+
+    this.estimateProperty.link( function( estimateValue ) {
+      // Handle the discrete cubes by changing which ones are visible.
+      if ( thisModel.comparisonTypeProperty.value === 'discrete' ) {
+        updateCubeVisibility();
+      }
+
+      // Set the size of the continuous cube
+      continuousSizableCube.sizeProperty.value = new Dimension3(
+        referenceCube.sizeProperty.value.width * Math.pow( estimateValue, 1 / 3 ),
+        referenceCube.sizeProperty.value.height * Math.pow( estimateValue, 1 / 3 ),
+        referenceCube.sizeProperty.value.depth * Math.pow( estimateValue, 1 / 3 ) );
+
+      // The following hairy calculation is about figuring out where to
+      // position the continuous cube so that its back corner is in the same
+      // place as that of the comparison cube.
+      continuousSizableCube.positionProperty.value = compareCube.positionProperty.value.plus(
+        new Vector2( ( compareCube.sizeProperty.value.depth - continuousSizableCube.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION,
+          0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE ) );
+    } );
+
+    // Size and position the discrete cubes TODO: Will need to be linked to reference object size.
+//    var cubesPerRow = compareCube.sizeProperty.value.width / referenceCube.sizeProperty.value.width;
+//    numRows = discreteSizableCubes.length / cubesPerRow;
+//    origin = compareCube.positionProperty.value;
+//    for ( i = 0; i < numRows; i++ ) {
+//      for ( j = 0; j < cubesPerRow; j++ ) {
+//        index = i * cubesPerRow + j;
+//        discreteSizableCubes[ index ].sizeProperty.value = referenceCube.sizeProperty.value;
+//        discreteSizableCubes[ index ].positionProperty.value = new Vector2( origin.x + j * referenceCube.sizeProperty.value.width,
+//          origin.y + i * referenceCube.sizeProperty.value.height );
+//      }
+//    }
+
+    this.cubes.push( referenceCube );
+    this.cubes.push( compareCube );
+    this.cubes.push( continuousSizableCube );
+//    _.times( discreteSizableCubes.length, function( i ) { thisModel.cubes.push( discreteSizableCubes[i ] ) } );
+
+    //------------------------------------------------------------------------
     // Add the cylinders
     var refCylinderWidth = 1.5;
     var referenceCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 0.25 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
