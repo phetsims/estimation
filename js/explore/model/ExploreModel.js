@@ -208,14 +208,21 @@ define( function( require ) {
     var cubesFrontToBack = compareCube.sizeProperty.value.depth / referenceCube.sizeProperty.value.depth;
     var numCubesPlaced = 0;
     var compareCubeBackCorner = compareCube.positionProperty.value.plus( new Vector2( ( compareCube.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION, 0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE ) );
-    var xDisplacement = new Vector2( referenceCube.sizeProperty.value.width, 0 );
-    var yDisplacement = new Vector2( -referenceCube.sizeProperty.value.depth * EstimationConstants.DEPTH_PROJECTION_PROPORTION, 0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE );
-    var zDisplacement = new Vector2( 0, referenceCube.sizeProperty.value.height );
+    var xUnitDisplacement = new Vector2( referenceCube.sizeProperty.value.width, 0 );
+    var yUnitDisplacement = new Vector2( -referenceCube.sizeProperty.value.depth * EstimationConstants.DEPTH_PROJECTION_PROPORTION, 0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE );
+    var zUnitDisplacement = new Vector2( 0, referenceCube.sizeProperty.value.height );
+    var xDisplacement = new Vector2( 0, 0 );
+    var yDisplacement = new Vector2( 0, 0 );
+    var zDisplacement = new Vector2( 0, 0 );
     for ( var z = 0; numCubesPlaced < MAX_NUM_ITEMS; z++ ) {
+      zDisplacement.setY( zUnitDisplacement.y * z );
       for ( var y = 0; y < cubesFrontToBack && numCubesPlaced < MAX_NUM_ITEMS; y++ ) {
+        yDisplacement.setXY( yUnitDisplacement.x * ( y + 1), yUnitDisplacement.y * ( y + 1 ) );
         for ( var x = 0; x < cubesAcross && numCubesPlaced < MAX_NUM_ITEMS; x++ ) {
           discreteSizableCubes[ numCubesPlaced ].sizeProperty.value = referenceCube.sizeProperty.value;
-          discreteSizableCubes[ numCubesPlaced ].positionProperty.value = compareCubeBackCorner.plus( xDisplacement.times( x ) ).plus( yDisplacement.times( y + 1 ) ).plus( zDisplacement.times( z ) );
+          xDisplacement.setX( xUnitDisplacement.x * x );
+          discreteSizableCubes[ numCubesPlaced ].positionProperty.value = new Vector2( compareCubeBackCorner.x + xDisplacement.x + yDisplacement.x + zDisplacement.x,
+            compareCubeBackCorner.y + xDisplacement.y + yDisplacement.y + zDisplacement.y );
           numCubesPlaced++;
         }
       }
