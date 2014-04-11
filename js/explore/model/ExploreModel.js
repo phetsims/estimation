@@ -103,10 +103,8 @@ define( function( require ) {
       var startIndex = Math.min( numVisibleDiscreteRects, targetNumVisibleDiscreteRects );
       var endIndex = Math.max( numVisibleDiscreteRects, targetNumVisibleDiscreteRects );
       var visibility = targetNumVisibleDiscreteRects > numVisibleDiscreteRects;
-      for ( var i = startIndex; i < endIndex; i++ ) {
-        if ( i < MAX_NUM_ITEMS ) {
-          discreteSizableRects[ i ].visibleProperty.value = visibility;
-        }
+      for ( var i = startIndex; i < endIndex && i < MAX_NUM_ITEMS; i++ ) {
+        discreteSizableRects[ i ].visibleProperty.value = visibility;
       }
       numVisibleDiscreteRects = targetNumVisibleDiscreteRects;
     }
@@ -171,10 +169,8 @@ define( function( require ) {
       var startIndex = Math.min( numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
       var endIndex = Math.max( numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
       var visibility = targetNumVisibleDiscreteCubes > numVisibleDiscreteCubes;
-      for ( var i = startIndex; i < endIndex; i++ ) {
-        if ( i < MAX_NUM_ITEMS ) {
-          discreteSizableCubes[ i ].visibleProperty.value = visibility;
-        }
+      for ( var i = startIndex; i < endIndex && i < MAX_NUM_ITEMS; i++ ) {
+        discreteSizableCubes[ i ].visibleProperty.value = visibility;
       }
       numVisibleDiscreteCubes = targetNumVisibleDiscreteCubes;
     }
@@ -258,12 +254,8 @@ define( function( require ) {
       var startIndex = Math.min( numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
       var endIndex = Math.max( numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
       var visibility = targetNumVisibleDiscreteCylinders > numVisibleDiscreteCylinders;
-      for ( var i = startIndex; i < endIndex; i++ ) {
-        for ( var i = startIndex; i < endIndex; i++ ) {
-          if ( i < MAX_NUM_ITEMS ) {
-            discreteSizableCylinders[ i ].visibleProperty.value = visibility;
-          }
-        }
+      for ( var i = startIndex; i < endIndex && i < MAX_NUM_ITEMS; i++ ) {
+        discreteSizableCylinders[ i ].visibleProperty.value = visibility;
       }
       numVisibleDiscreteCylinders = targetNumVisibleDiscreteCylinders;
     }
