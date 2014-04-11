@@ -50,16 +50,15 @@ define( function( require ) {
       var shape = new Shape();
       shape.moveTo( -ellipseWidth / 2, 0 )
         .lineTo( -ellipseWidth / 2, cylinderHeight )
-        .cubicCurveTo( -ellipseWidth * 0.475, cylinderHeight + ellipseHeight * 0.67, ellipseWidth * 0.475, cylinderHeight + ellipseHeight * 0.67, ellipseWidth / 2, cylinderHeight )
+        .ellipticalArc( 0, 0, ellipseWidth / 2, ellipseHeight / 2, 0, Math.PI, 0, true )
         .lineTo( ellipseWidth / 2, 0 )
-        .cubicCurveTo( ellipseWidth * 0.475, ellipseHeight * 0.67, -ellipseWidth * 0.475, ellipseHeight * 0.67, -ellipseWidth / 2, 0 )
+        .ellipticalArc( 0, cylinderHeight, ellipseWidth / 2, ellipseHeight / 2, 0, 0, Math.PI, false )
         .close();
       side.setShape( shape );
-      var sideGradient = new LinearGradient( -ellipseWidth / 2, 0, ellipseWidth / 2, 0 ).
+      side.fill = new LinearGradient( -ellipseWidth / 2, 0, ellipseWidth / 2, 0 ).
         addColorStop( 0, baseColor.colorUtilsDarker( 0.5 ) ).
         addColorStop( 0.5, baseColor.colorUtilsBrighter( 0.5 ) ).
         addColorStop( 1, baseColor.colorUtilsDarker( 0.5 ) );
-      side.fill = sideGradient;
       updatePosition();
     } );
     cylinderModel.positionProperty.link( updatePosition );
