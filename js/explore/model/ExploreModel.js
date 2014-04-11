@@ -226,6 +226,10 @@ define( function( require ) {
     _.times( discreteSizableCubes.length, function( i ) { thisModel.cubes.push( discreteSizableCubes[i ] ) } );
     this.cubes.push( compareCube );
 
+    // Special case: put the compare cube as a separate property so that the
+    // view can create a 'back view' for it.
+    this.compareCube = compareCube;
+
     //------------------------------------------------------------------------
     // Add the cylinders
     var refCylinderWidth = 1.5;
