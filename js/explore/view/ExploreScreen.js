@@ -181,10 +181,16 @@ define( function( require ) {
     model.rectangles.forEach( function( rectangleModel ) {
       thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
     } );
-    thisScreen.addChild( new CubeBackView( model.compareCube, mvt ) );
-    model.cubes.forEach( function( cubeModel ) {
-      thisScreen.addChild( new CubeView( cubeModel, mvt ) );
+
+    // Cube mode
+    thisScreen.addChild( new CubeView( model.modes['cubes'].referenceObject, mvt ) );
+    thisScreen.addChild( new CubeBackView( model.modes['cubes'].compareObject, mvt ) );
+    model.modes['cubes'].discreteObjectList.forEach( function( cube ) {
+      thisScreen.addChild( new CubeView( cube, mvt ) );
     } );
+    thisScreen.addChild( new CubeView( model.modes['cubes'].continuousSizableObject, mvt ) );
+    thisScreen.addChild( new CubeView( model.modes['cubes'].compareObject, mvt ) );
+
     model.cylinders.forEach( function( cylinderModel ) {
       thisScreen.addChild( new CylinderView( cylinderModel, mvt ) );
     } );

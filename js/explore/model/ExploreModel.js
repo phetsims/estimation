@@ -19,9 +19,6 @@ define( function( require ) {
   var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
-  var MAX_NUM_ITEMS = 100; // TODO: should derive from something
-
   /**
    * @constructor
    */
@@ -41,7 +38,6 @@ define( function( require ) {
     // as the place where the view finds the shapes.  TODO: consider pushing these into the modes
     this.lines = [];
     this.rectangles = [];
-    this.cubes = [];
     this.cylinders = [];
 
     // Hook up internal property dependencies.
@@ -54,7 +50,7 @@ define( function( require ) {
     } );
 
     // Create the various modes that the user can explore.
-    var modes = {
+    this.modes = {
       lines: new LineExplorationMode( this.estimationModeProperty, this.lines ),
       rectangles: new RectangleExplorationMode( this.estimationModeProperty, this.rectangles ),
       cylinders: new CylinderExplorationMode( this.estimationModeProperty, this.cylinders ),
@@ -67,31 +63,27 @@ define( function( require ) {
       // do this in order to restore it, since ranges are not mutually
       // exclusive.
       if ( oldMode ) {
-        modes[ oldMode ].selectedRange = thisModel.estimationRangeProperty.value;
-        modes[ oldMode ].offsetIntoRange = thisModel.offsetIntoRangeProperty.value;
+        thisModel.modes[ oldMode ].selectedRange = thisModel.estimationRangeProperty.value;
+        thisModel.modes[ oldMode ].offsetIntoRange = thisModel.offsetIntoRangeProperty.value;
       }
 
       // Restore the estimate for this mode.
-      thisModel.estimationRangeProperty.value = modes[ newMode ].selectedRange;
-      thisModel.offsetIntoRangeProperty.value = modes[ newMode ].offsetIntoRange;
+      thisModel.estimationRangeProperty.value = thisModel.modes[ newMode ].selectedRange;
+      thisModel.offsetIntoRangeProperty.value = thisModel.modes[ newMode ].offsetIntoRange;
 
       // Restore the comparison type.
-      thisModel.comparisonTypeProperty.value = modes[ newMode ].continuousOrDiscreteProperty.value;
+      thisModel.comparisonTypeProperty.value = thisModel.modes[ newMode ].continuousOrDiscreteProperty.value;
     } );
 
     this.estimateProperty.link( function( estimate ) {
       // Propagate changes from the UI into the active mode.
-      modes[ thisModel.estimationModeProperty.value ].estimateProperty.value = estimate;
+      thisModel.modes[ thisModel.estimationModeProperty.value ].estimateProperty.value = estimate;
     } );
 
     this.comparisonTypeProperty.link( function( discreteOrContinuous ) {
       // Propagate changes from the UI into the active mode.
-      modes[ thisModel.estimationModeProperty.value ].continuousOrDiscreteProperty.value = discreteOrContinuous;
+      thisModel.modes[ thisModel.estimationModeProperty.value ].continuousOrDiscreteProperty.value = discreteOrContinuous;
     } );
-
-    // Special case: put the compare cube as a separate property so that the
-    // view can create a 'back view' for it.
-    this.compareCube = modes[ 'cubes' ].compareCube;
   }
 
   ExploreModel.prototype = {
