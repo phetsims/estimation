@@ -22,7 +22,16 @@ define( function( require ) {
   // Constants
   var MAX_DISCRETE_CUBES = 100;
   var MODE_NAME = 'cubes';
-  var INITIAL_REFERENCE_OBJECT_SIZE = new Dimension3( 0.25, 0.25, 0.25 );
+  var COMPARE_CUBE_SIZE = new Dimension3( 1.5, 1.5, 1.5 );
+  var VALID_REF_OBJECT_SIZES = [
+    new Dimension3( COMPARE_CUBE_SIZE.width / 6, COMPARE_CUBE_SIZE.height / 6, COMPARE_CUBE_SIZE.depth / 6 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 5, COMPARE_CUBE_SIZE.height / 5, COMPARE_CUBE_SIZE.depth / 5 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 4, COMPARE_CUBE_SIZE.height / 4, COMPARE_CUBE_SIZE.depth / 4 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 3, COMPARE_CUBE_SIZE.height / 3, COMPARE_CUBE_SIZE.depth / 3 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 2, COMPARE_CUBE_SIZE.height / 2, COMPARE_CUBE_SIZE.depth / 2 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 2, COMPARE_CUBE_SIZE.height / 4, COMPARE_CUBE_SIZE.depth / 4 )
+  ];
+  var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
 
   /**
    * @constructor
@@ -33,23 +42,26 @@ define( function( require ) {
 
     // Create the reference, compare, continuous, and discrete objects.
     var compareCubePosition = new Vector2( -1, 0 );
-    this.compareObject = new CubeModel( new Dimension3( 1, 1, 1 ), compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
-    this.continuousSizableObject = new CubeModel( new Dimension3( 0.25, 0.25, 0.25 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    this.compareObject = new CubeModel( COMPARE_CUBE_SIZE, compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
+    this.continuousSizableObject = new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     this.referenceObject = new CubeModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     _.times( MAX_DISCRETE_CUBES, function() {
       // Initial size is arbitrary, will be sized as needed.
-      thisMode.discreteObjectList.push( new CubeModel( new Dimension3( 0.25, 0.25, 0.25 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+      thisMode.discreteObjectList.push( new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
     } );
-    this.createReferenceObject( INITIAL_REFERENCE_OBJECT_SIZE );
+    this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
     this.numVisibleDiscreteCubes = 0;
 
     // Complete initialization by hooking up visibility updates in the parent class.
     this.hookUpVisibilityUpdates();
+
+    // Maintain a short history of reference object sizes so unique ones can be chosen.
+    this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
   }
 
   return inherit( AbstractExplorationMode, CubeExplorationMode, {
 
-    createReferenceObject: function( size ) {
+    setReferenceObjectSize: function( size ) {
       this.referenceObject.sizeProperty.value = size;
 
       // Size and position the discrete cubes based on the sizes of the
@@ -77,11 +89,21 @@ define( function( require ) {
           }
         }
       }
+
+      // Set the initial size of the continuous object.
+      this.updateContinuousObjectSize( this.estimateProperty.value );
     },
 
-    createNewReferenceObject: function() {
+    newReferenceObject: function() {
       // Choose a random size that hasn't been chosen for a while.
-      // TODO: Implement
+      var unique = false;
+      var referenceObjectSize = null;
+      while ( !unique ) {
+        referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( Math.random() * VALID_REF_OBJECT_SIZES.length ) ];
+        unique = ( referenceObjectSize !== this.previousReferenceObjectSize && referenceObjectSize !== this.referenceObject.size );
+      }
+      this.previousReferenceObjectSize = referenceObjectSize;
+      this.setReferenceObjectSize( referenceObjectSize );
     },
 
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {

@@ -72,7 +72,9 @@ define( function( require ) {
       {
         rectangleFillUp: new Color( 255, 252, 127 ),
         rectangleCornerRadius: 5,
-        listener: function() { console.log( 'New object not implemented' ) }
+        listener: function() {
+          model.newReferenceObject()
+        }
       }
     );
     this.addChild( newObjectButton );

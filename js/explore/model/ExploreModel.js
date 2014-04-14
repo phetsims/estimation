@@ -87,10 +87,17 @@ define( function( require ) {
   }
 
   ExploreModel.prototype = {
+
     reset: function() {
       this.estimationModeProperty.reset();
       this.estimationRangeProperty.reset();
       this.comparisonTypeProperty.reset();
+    },
+
+    newReferenceObject: function() {
+      this.estimationRangeProperty.reset();
+      this.offsetIntoRangeProperty.reset();
+      this.modes[ this.estimationModeProperty.value ].newReferenceObject();
     }
   };
 
