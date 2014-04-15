@@ -189,9 +189,12 @@ define( function( require ) {
     thisScreen.addChild( new LineView( model.modes['lines'].compareObject, mvt ) );
 
     // Rectangles mode
-    model.rectangles.forEach( function( rectangleModel ) {
-      thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
+    thisScreen.addChild( new RectangleView( model.modes['rectangles'].referenceObject, mvt ) );
+    thisScreen.addChild( new RectangleView( model.modes['rectangles'].compareObject, mvt ) );
+    model.modes['rectangles'].discreteObjectList.forEach( function( line ) {
+      thisScreen.addChild( new RectangleView( line, mvt ) );
     } );
+    thisScreen.addChild( new RectangleView( model.modes['rectangles'].continuousSizableObject, mvt ) );
 
     // Cubes mode
     thisScreen.addChild( new CubeView( model.modes['cubes'].referenceObject, mvt ) );

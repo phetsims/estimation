@@ -15,7 +15,6 @@ define( function( require ) {
    * @constructor
    */
   function AbstractExplorationMode( selectedModeProperty, modeName ) {
-    var thisMode = this;
     this.selectedModeProperty = selectedModeProperty;
     this.modeName = modeName;
 

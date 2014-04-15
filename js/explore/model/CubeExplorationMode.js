@@ -14,7 +14,6 @@ define( function( require ) {
   var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LineModel = require( 'ESTIMATION/common/model/LineModel' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 

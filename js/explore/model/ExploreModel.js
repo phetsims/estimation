@@ -36,7 +36,6 @@ define( function( require ) {
 
     // Externally visible lists of all shapes in the model.  These are intended
     // as the place where the view finds the shapes.
-    this.rectangles = [];
     this.cylinders = [];
 
     // Hook up internal property dependencies.
@@ -50,10 +49,10 @@ define( function( require ) {
 
     // Create the various modes that the user can explore.
     this.modes = {
-      lines: new LineExplorationMode( this.estimationModeProperty, this.lines ),
-      rectangles: new RectangleExplorationMode( this.estimationModeProperty, this.rectangles ),
-      cylinders: new CylinderExplorationMode( this.estimationModeProperty, this.cylinders ),
-      cubes: new CubeExplorationMode( this.estimationModeProperty, this.cubes )
+      lines: new LineExplorationMode( this.estimationModeProperty ),
+      rectangles: new RectangleExplorationMode( this.estimationModeProperty ),
+      cubes: new CubeExplorationMode( this.estimationModeProperty ),
+      cylinders: new CylinderExplorationMode( this.estimationModeProperty, this.cylinders )
     };
 
     this.estimationModeProperty.link( function( newMode, oldMode ) {
