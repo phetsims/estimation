@@ -76,7 +76,7 @@ define( function( require ) {
     },
 
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
-      this.discreteObjectList[0].visible = selectedMode === MODE_NAME && this.continuousOrDiscreteProperty.value === 'discrete';
+      this.discreteObjectList[0].visibleProperty.value = selectedMode === MODE_NAME && this.continuousOrDiscreteProperty.value === 'discrete';
       this.discreteObjectList[0].lengthProperty.value = this.referenceObject.lengthProperty.value * estimateValue;
     },
 
