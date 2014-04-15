@@ -24,12 +24,12 @@ define( function( require ) {
   var MODE_NAME = 'rectangles';
   var COMPARE_RECTANGLE_SIZE = new Dimension2( 2, 2 );
   var VALID_REF_OBJECT_SIZES = [
-    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 6, COMPARE_RECTANGLE_SIZE.height / 6 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 20, COMPARE_RECTANGLE_SIZE.height / 20 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 12, COMPARE_RECTANGLE_SIZE.height / 12 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 8, COMPARE_RECTANGLE_SIZE.height / 8 ),
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 5, COMPARE_RECTANGLE_SIZE.height / 5 ),
-    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 4, COMPARE_RECTANGLE_SIZE.height / 4 ),
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 3, COMPARE_RECTANGLE_SIZE.height / 3 ),
-    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 2 ),
-    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 4 )
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 2 )
   ];
   var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
 
@@ -72,9 +72,11 @@ define( function( require ) {
       for ( var i = 0; i < numRows; i++ ) {
         for ( var j = 0; j < rectanglesPerRow; j++ ) {
           var index = i * rectanglesPerRow + j;
-          this.discreteObjectList[ index ].sizeProperty.value = this.referenceObject.sizeProperty.value;
-          this.discreteObjectList[ index ].positionProperty.value = new Vector2( origin.x + j * this.referenceObject.sizeProperty.value.width,
-              origin.y + i * this.referenceObject.sizeProperty.value.height );
+          if ( index < MAX_DISCRETE_RECTANGLES ) {
+            this.discreteObjectList[ index ].sizeProperty.value = this.referenceObject.sizeProperty.value;
+            this.discreteObjectList[ index ].positionProperty.value = new Vector2( origin.x + j * this.referenceObject.sizeProperty.value.width,
+                origin.y + i * this.referenceObject.sizeProperty.value.height );
+          }
         }
       }
 

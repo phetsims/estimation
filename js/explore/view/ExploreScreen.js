@@ -170,12 +170,6 @@ define( function( require ) {
     readout.centerX = mvt.modelToViewX( 0 );
     readout.bottom = slider.top - 20;
 
-    // Map the shapes to the appropriate view class.
-    var viewClasses = {
-      line: LineView,
-      rectangle: RectangleView
-    };
-
     //------------------------------------------------------------------------
     // Add the shapes for each of the exploration modes.
     //------------------------------------------------------------------------
