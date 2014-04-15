@@ -31,7 +31,7 @@ define( function( require ) {
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 3, COMPARE_RECTANGLE_SIZE.height / 3 ),
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 2 )
   ];
-  var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
+  var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 3 ];
 
   /**
    * @constructor

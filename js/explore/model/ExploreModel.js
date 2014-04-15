@@ -85,7 +85,11 @@ define( function( require ) {
     reset: function() {
       this.estimationModeProperty.reset();
       this.estimationRangeProperty.reset();
+      this.offsetIntoRangeProperty.reset();
       this.comparisonTypeProperty.reset();
+      for ( var mode in this.modes ) {
+        this.modes[ mode ].reset();
+      }
     },
 
     newReferenceObject: function() {

@@ -20,7 +20,7 @@ define( function( require ) {
 
     // Properties that are part of the public API.
     this.estimateProperty = new Property( 1 );
-    this.continuousOrDiscreteProperty = new Property( 'continuous' );
+    this.continuousOrDiscreteProperty = new Property( 'discrete' );
 
     // Storage for this mode's estimate parameters for when the mode is
     // inactive. Necessary because the ranges overlap.
@@ -62,6 +62,13 @@ define( function( require ) {
       this.continuousOrDiscreteProperty.link( this.updateObjectVisibility.bind( this ) );
       this.estimateProperty.link( this.updateObjectVisibility.bind( this ) );
       this.estimateProperty.link( this.updateContinuousObjectSize.bind( this ) );
+    },
+
+    reset: function() {
+      this.continuousOrDiscreteProperty.reset();
+      this.estimateProperty.reset();
+      this.selectedRange = EstimationConstants.RANGE_1_TO_10;
+      this.offsetIntoRange = 0;
     }
   };
 
