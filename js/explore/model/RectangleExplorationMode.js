@@ -20,7 +20,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
-  var MAX_DISCRETE_RECTANGLES = 100;
+  var MAX_DISCRETE_RECTANGLES = 250;
   var MODE_NAME = 'rectangles';
   var COMPARE_RECTANGLE_SIZE = new Dimension2( 2, 2 );
   var VALID_REF_OBJECT_SIZES = [

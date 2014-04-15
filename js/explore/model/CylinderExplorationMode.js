@@ -18,7 +18,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
-  var MAX_CYLINDER_SLICES = 100;
+  var MAX_CYLINDER_SLICES = 150;
   var MODE_NAME = 'cylinders';
   var REFERENCE_CYLINDER_WIDTH = 1.5;
   var COMPARE_CYLINDER_SIZE = new Dimension2( REFERENCE_CYLINDER_WIDTH, 2 );
