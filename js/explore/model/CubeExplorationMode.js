@@ -18,11 +18,10 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
-  var MAX_DISCRETE_CUBES = 600;
+  var MAX_DISCRETE_CUBES = 200;
   var MODE_NAME = 'cubes';
   var COMPARE_CUBE_SIZE = new Dimension3( 1.5, 1.5, 1.5 );
   var VALID_REF_OBJECT_SIZES = [
-    new Dimension3( COMPARE_CUBE_SIZE.width / 6, COMPARE_CUBE_SIZE.height / 6, COMPARE_CUBE_SIZE.depth / 6 ),
     new Dimension3( COMPARE_CUBE_SIZE.width / 5, COMPARE_CUBE_SIZE.height / 5, COMPARE_CUBE_SIZE.depth / 5 ),
     new Dimension3( COMPARE_CUBE_SIZE.width / 4, COMPARE_CUBE_SIZE.height / 4, COMPARE_CUBE_SIZE.depth / 4 ),
     new Dimension3( COMPARE_CUBE_SIZE.width / 3, COMPARE_CUBE_SIZE.height / 3, COMPARE_CUBE_SIZE.depth / 3 ),
