@@ -96,6 +96,10 @@ define( function( require ) {
       this.setReferenceObjectSize( referenceObjectSize );
     },
 
+    setInitialReferenceObject: function() {
+      this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    },
+
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
       var targetNumVisibleDiscreteRects = selectedMode === 'rectangles' && this.continuousOrDiscreteProperty.value === 'discrete' ? estimateValue : 0;
       var startIndex = Math.min( this.numVisibleDiscreteRects, targetNumVisibleDiscreteRects );

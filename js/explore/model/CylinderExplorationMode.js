@@ -94,6 +94,10 @@ define( function( require ) {
       this.setReferenceObjectSize( referenceObjectSize );
     },
 
+    setInitialReferenceObject: function() {
+      this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    },
+
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
       var targetNumVisibleDiscreteCylinders = selectedMode === 'cylinders' && this.continuousOrDiscreteProperty.value === 'discrete' ? this.estimateProperty.value : 0;
       var startIndex = Math.min( this.numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );

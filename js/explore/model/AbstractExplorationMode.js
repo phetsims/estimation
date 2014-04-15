@@ -3,6 +3,10 @@
 /**
  * Base class for the various modes that the user can select in the "Explore"
  * screen.
+ *
+ * TODO: There are several things in the descendant classes that can be pulled into this class,
+ * such as the function to set the initial and new reference objects.  I just didn't want to
+ * take the time when doing early proof of concept to do this.
  */
 define( function( require ) {
   'use strict';
@@ -48,6 +52,10 @@ define( function( require ) {
       throw new Error( 'updateContinuousObjectSize must be overridden in descendant class' )
     },
 
+    setInitialReferenceObject: function() {
+      throw new Error( 'setInitialReferenceObject must be overridden in descendant class' )
+    },
+
     updateObjectVisibility: function() {
       var selectedMode = this.selectedModeProperty.value;
       this.referenceObject.visibleProperty.value = selectedMode === this.modeName;
@@ -69,6 +77,7 @@ define( function( require ) {
       this.estimateProperty.reset();
       this.selectedRange = EstimationConstants.RANGE_1_TO_10;
       this.offsetIntoRange = 0;
+      this.setInitialReferenceObject();
     }
   };
 

@@ -102,6 +102,10 @@ define( function( require ) {
       this.setReferenceObjectSize( referenceObjectSize );
     },
 
+    setInitialReferenceObject: function() {
+      this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    },
+
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
       var targetNumVisibleDiscreteCubes = selectedMode === 'cubes' && this.continuousOrDiscreteProperty.value === 'discrete' ? estimateValue : 0;
       var startIndex = Math.min( this.numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );

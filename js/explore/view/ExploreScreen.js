@@ -201,11 +201,11 @@ define( function( require ) {
 
     // Cylinders mode
     thisScreen.addChild( new CylinderView( model.modes['cylinders'].referenceObject, mvt ) );
-    thisScreen.addChild( new CylinderView( model.modes['cylinders'].compareObject, mvt ) );
     model.modes['cylinders'].discreteObjectList.forEach( function( line ) {
       thisScreen.addChild( new CylinderView( line, mvt ) );
     } );
     thisScreen.addChild( new CylinderView( model.modes['cylinders'].continuousSizableObject, mvt ) );
+    thisScreen.addChild( new CylinderView( model.modes['cylinders'].compareObject, mvt ) );
   }
 
   return inherit( ScreenView, ExploreScreen, {

@@ -75,6 +75,10 @@ define( function( require ) {
       this.setReferenceObjectSize( referenceObjectSize );
     },
 
+    setInitialReferenceObject: function() {
+      this.setReferenceObjectSize( INITIAL_REFERENCE_LINE_LENGTH );
+    },
+
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
       this.discreteObjectList[0].visibleProperty.value = selectedMode === MODE_NAME && this.continuousOrDiscreteProperty.value === 'discrete';
       this.discreteObjectList[0].lengthProperty.value = this.referenceObject.lengthProperty.value * estimateValue;
