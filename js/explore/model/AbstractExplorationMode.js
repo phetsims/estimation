@@ -14,7 +14,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function AbstractExplorationMode( selectedModeProperty, modeName, viewClass ) {
+  function AbstractExplorationMode( selectedModeProperty, modeName ) {
     var thisMode = this;
     this.selectedModeProperty = selectedModeProperty;
     this.modeName = modeName;
@@ -33,9 +33,6 @@ define( function( require ) {
     this.compareObject = null;
     this.continuousSizableObject = null;
     this.discreteObjectList = [];
-
-    // Class that the view should use when representing the objects in the view.
-    this.viewClass = viewClass;
   }
 
   AbstractExplorationMode.prototype = {

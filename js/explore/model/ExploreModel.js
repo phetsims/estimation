@@ -32,11 +32,10 @@ define( function( require ) {
     this.comparisonTypeProperty = new Property( 'discrete' ); // Valid values are 'discrete' or 'continuous'.
 
     // The following property should only be observed outside of this model, never set.
-    this.estimateProperty = new Property( 1 ); // Quantity of estimated objects
+    this.estimateProperty = new Property( 1 ); // Estimated quantity of reference objects to fill the compare object
 
     // Externally visible lists of all shapes in the model.  These are intended
-    // as the place where the view finds the shapes.  TODO: consider pushing these into the modes
-    this.lines = [];
+    // as the place where the view finds the shapes.
     this.rectangles = [];
     this.cylinders = [];
 

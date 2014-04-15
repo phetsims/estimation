@@ -82,28 +82,28 @@ define( function( require ) {
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
     var inOutButtonOptions = { xMargin: 3, yMargin: 3 };
     var modeControlPanel = new Panel( new VBox(
-      {
-        children: [
-          new InOutRadioButton( model.estimationModeProperty, 'lines', this.createImageOfGivenWidth( linesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-          new InOutRadioButton( model.estimationModeProperty, 'rectangles', this.createImageOfGivenWidth( squaresIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-          new InOutRadioButton( model.estimationModeProperty, 'cubes', this.createImageOfGivenWidth( cubesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-          new InOutRadioButton( model.estimationModeProperty, 'cylinders', this.createImageOfGivenWidth( cylindersIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
-        ],
-        spacing: 10
-      } ),
+        {
+          children: [
+            new InOutRadioButton( model.estimationModeProperty, 'lines', this.createImageOfGivenWidth( linesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
+            new InOutRadioButton( model.estimationModeProperty, 'rectangles', this.createImageOfGivenWidth( squaresIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
+            new InOutRadioButton( model.estimationModeProperty, 'cubes', this.createImageOfGivenWidth( cubesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
+            new InOutRadioButton( model.estimationModeProperty, 'cylinders', this.createImageOfGivenWidth( cylindersIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
+          ],
+          spacing: 10
+        } ),
       { fill: 'rgb( 0, 171, 51 )', stroke: null, yMargin: 10 } );
 
     this.addChild( modeControlPanel );
 
     // Create and add the panel for controlling discrete vs. continuous mode.
     var discreteOrContinuousControlPanel = new Panel( new VBox(
-      {
-        children: [
-          new InOutRadioButton( model.comparisonTypeProperty, 'continuous', this.createImageOfGivenWidth( continuousIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-          new InOutRadioButton( model.comparisonTypeProperty, 'discrete', this.createImageOfGivenWidth( discreteIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
-        ],
-        spacing: 10
-      } ),
+        {
+          children: [
+            new InOutRadioButton( model.comparisonTypeProperty, 'continuous', this.createImageOfGivenWidth( continuousIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
+            new InOutRadioButton( model.comparisonTypeProperty, 'discrete', this.createImageOfGivenWidth( discreteIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
+          ],
+          spacing: 10
+        } ),
       { fill: 'rgb( 252, 2, 47 )', stroke: null, yMargin: 10 } );
 
     this.addChild( discreteOrContinuousControlPanel );
@@ -116,14 +116,14 @@ define( function( require ) {
 
     // Create and add the panel for selecting the range.
     var rangeSelectionPanel = new Panel( new HBox(
-      {
-        children: [
-          this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_1_TO_10 ),
-          this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_10_TO_100 ),
-          this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_100_TO_1000 )
-        ],
-        spacing: 10
-      } ),
+        {
+          children: [
+            this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_1_TO_10 ),
+            this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_10_TO_100 ),
+            this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_100_TO_1000 )
+          ],
+          spacing: 10
+        } ),
       { stroke: null, fill: null } );
 
     this.addChild( rangeSelectionPanel );
@@ -176,15 +176,24 @@ define( function( require ) {
       rectangle: RectangleView
     };
 
-    // Add the shapes from the model.
-    model.lines.forEach( function( lineModel ) {
-      thisScreen.addChild( new LineView( lineModel, mvt ) );
+    //------------------------------------------------------------------------
+    // Add the shapes for each of the exploration modes.
+    //------------------------------------------------------------------------
+
+    // Lines mode
+    thisScreen.addChild( new LineView( model.modes['lines'].referenceObject, mvt ) );
+    model.modes['lines'].discreteObjectList.forEach( function( line ) {
+      thisScreen.addChild( new LineView( line, mvt ) );
     } );
+    thisScreen.addChild( new LineView( model.modes['lines'].continuousSizableObject, mvt ) );
+    thisScreen.addChild( new LineView( model.modes['lines'].compareObject, mvt ) );
+
+    // Rectangles mode
     model.rectangles.forEach( function( rectangleModel ) {
       thisScreen.addChild( new RectangleView( rectangleModel, mvt ) );
     } );
 
-    // Cube mode
+    // Cubes mode
     thisScreen.addChild( new CubeView( model.modes['cubes'].referenceObject, mvt ) );
     thisScreen.addChild( new CubeBackView( model.modes['cubes'].compareObject, mvt ) );
     model.modes['cubes'].discreteObjectList.forEach( function( cube ) {

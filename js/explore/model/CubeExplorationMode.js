@@ -7,10 +7,9 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var Color = require( 'SCENERY/util/Color' );
   var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
-  var CubeView = require( 'ESTIMATION/common/view/CubeView' );
-  var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
@@ -37,7 +36,7 @@ define( function( require ) {
    * @constructor
    */
   function CubeExplorationMode( selectedModeProperty ) {
-    AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME, CubeView );
+    AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
     var thisMode = this;
 
     // Create the reference, compare, continuous, and discrete objects.
