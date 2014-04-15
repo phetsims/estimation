@@ -34,10 +34,6 @@ define( function( require ) {
     // The following property should only be observed outside of this model, never set.
     this.estimateProperty = new Property( 1 ); // Estimated quantity of reference objects to fill the compare object
 
-    // Externally visible lists of all shapes in the model.  These are intended
-    // as the place where the view finds the shapes.
-    this.cylinders = [];
-
     // Hook up internal property dependencies.
     this.estimationRangeProperty.link( function( range ) {
       thisModel.offsetIntoRangeProperty.value = 0;

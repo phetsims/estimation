@@ -7,100 +7,108 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var Color = require( 'SCENERY/util/Color' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var LineModel = require( 'ESTIMATION/common/model/LineModel' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
   var MAX_CYLINDER_SLICES = 100;
+  var MODE_NAME = 'cylinders';
+  var REFERENCE_CYLINDER_WIDTH = 1.5;
+  var COMPARE_CYLINDER_SIZE = new Dimension2( REFERENCE_CYLINDER_WIDTH, 2 );
+  var VALID_REF_OBJECT_SIZES = [
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 50 ),
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 20 ),
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 15 ),
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 10 ),
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 5 ),
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 3 ),
+    new Dimension2( REFERENCE_CYLINDER_WIDTH, COMPARE_CYLINDER_SIZE.height / 2 )
+  ];
+  var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
 
   /**
    * @constructor
    */
-  function CylinderExplorationMode( modeProperty, cylindersArray ) {
+  function CylinderExplorationMode( selectedModeProperty ) {
+    AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
     var thisMode = this;
 
-    // Properties that are part of the public API.
-    this.estimateProperty = new Property( 1 );
-    this.continuousOrDiscreteProperty = new Property( 'continuous' );
-
-    // Storage for this mode's estimate parameters for when the mode is inactive.
-    this.selectedRange = EstimationConstants.RANGE_1_TO_10;
-    this.offsetIntoRange = 0;
-
-    var refCylinderWidth = 1.5;
-    var referenceCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 0.25 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-    var compareCylinderPosition = new Vector2( 1, 0 );
-    var compareCylinder = new CylinderModel( new Dimension2( refCylinderWidth, 2.0 ), compareCylinderPosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
-    var continuousSizableCylinder = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-    var discreteSizableCylinders = [];
+    // Create the reference, compare, continuous, and discrete objects.
+    var compareCylinderPosition = new Vector2( 1, -0.5 );
+    this.compareObject = new CylinderModel( COMPARE_CYLINDER_SIZE, compareCylinderPosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
+    this.continuousSizableObject = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    this.referenceObject = new CylinderModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     _.times( MAX_CYLINDER_SLICES, function() {
-      discreteSizableCylinders.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+      // Initial size is arbitrary, will be sized as needed.
+      thisMode.discreteObjectList.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
     } );
+    this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    this.numVisibleDiscreteCylinders = 0;
 
-    var numVisibleDiscreteCylinders = 0;
+    // Complete initialization by hooking up visibility updates in the parent class.
+    this.hookUpVisibilityUpdates();
 
-    function updateCylinderVisibility() {
-      var estimationMode = modeProperty.value;
-      var continuousOrDiscrete = thisMode.continuousOrDiscreteProperty.value;
-      referenceCylinder.visibleProperty.value = estimationMode === 'cylinders';
-      compareCylinder.visibleProperty.value = estimationMode === 'cylinders';
-      continuousSizableCylinder.visibleProperty.value = estimationMode === 'cylinders' && continuousOrDiscrete === 'continuous';
-      var targetNumVisibleDiscreteCylinders = estimationMode === 'cylinders' && continuousOrDiscrete === 'discrete' ? thisMode.estimateProperty.value : 0;
-      var startIndex = Math.min( numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
-      var endIndex = Math.max( numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
-      var visibility = targetNumVisibleDiscreteCylinders > numVisibleDiscreteCylinders;
-      for ( var i = startIndex; i < endIndex && i < MAX_CYLINDER_SLICES; i++ ) {
-        discreteSizableCylinders[ i ].visibleProperty.value = visibility;
-      }
-      numVisibleDiscreteCylinders = targetNumVisibleDiscreteCylinders;
-    }
-
-    modeProperty.link( function() {
-      updateCylinderVisibility();
-    } );
-
-    this.continuousOrDiscreteProperty.link( function() {
-      updateCylinderVisibility();
-    } );
-
-    this.estimateProperty.link( function( estimateValue ) {
-
-      // Handle the discrete cylinders by changing which ones are visible.
-      if ( thisMode.continuousOrDiscreteProperty.value === 'discrete' ) {
-        updateCylinderVisibility();
-      }
-
-      // Size the continuous cylinder
-      continuousSizableCylinder.sizeProperty.value = new Dimension2( referenceCylinder.sizeProperty.value.width,
-        referenceCylinder.sizeProperty.value.height * estimateValue );
-    } );
-
-    // Size and position the discrete cylinders TODO: Will need to be linked to reference object size.
-    var cylindersPerRow = compareCylinder.sizeProperty.value.width / referenceCylinder.sizeProperty.value.width;
-    var numRows = discreteSizableCylinders.length / cylindersPerRow;
-    var origin = compareCylinder.positionProperty.value;
-    for ( var i = 0; i < numRows; i++ ) {
-      for ( var j = 0; j < cylindersPerRow; j++ ) {
-        var index = i * cylindersPerRow + j;
-        discreteSizableCylinders[ index ].sizeProperty.value = referenceCylinder.sizeProperty.value;
-        discreteSizableCylinders[ index ].positionProperty.value = new Vector2( origin.x + j * referenceCylinder.sizeProperty.value.width,
-          origin.y + i * referenceCylinder.sizeProperty.value.height );
-      }
-    }
-
-    // Add the cylinders.  Order matters, as it determines z-order layering in view.
-    cylindersArray.push( referenceCylinder );
-    cylindersArray.push( continuousSizableCylinder );
-    _.times( discreteSizableCylinders.length, function( i ) { cylindersArray.push( discreteSizableCylinders[i ] ) } );
-    cylindersArray.push( compareCylinder );
+    // Maintain a short history of reference object sizes so unique ones can be chosen.
+    this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
   }
 
-  return CylinderExplorationMode;
+  return inherit( AbstractExplorationMode, CylinderExplorationMode, {
+
+    setReferenceObjectSize: function( size ) {
+      this.referenceObject.sizeProperty.value = size;
+
+      // Size and position the discrete cylinder slices based on the sizes of
+      // the reference cube and the compare cylinder.
+      var cylindersPerRow = this.compareObject.sizeProperty.value.width / this.referenceObject.sizeProperty.value.width;
+      var numRows = this.discreteObjectList.length / cylindersPerRow;
+      var origin = this.compareObject.positionProperty.value;
+      for ( var i = 0; i < numRows; i++ ) {
+        for ( var j = 0; j < cylindersPerRow; j++ ) {
+          var index = i * cylindersPerRow + j;
+          this.discreteObjectList[ index ].sizeProperty.value = this.referenceObject.sizeProperty.value;
+          this.discreteObjectList[ index ].positionProperty.value = new Vector2( origin.x + j * this.referenceObject.sizeProperty.value.width,
+              origin.y + i * this.referenceObject.sizeProperty.value.height );
+        }
+      }
+
+      // Set the initial size of the continuous object.
+      this.updateContinuousObjectSize( this.estimateProperty.value );
+    },
+
+    newReferenceObject: function() {
+      // Choose a random size that hasn't been chosen for a while.
+      var unique = false;
+      var referenceObjectSize = null;
+      while ( !unique ) {
+        referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( Math.random() * VALID_REF_OBJECT_SIZES.length ) ];
+        unique = ( referenceObjectSize !== this.previousReferenceObjectSize && referenceObjectSize !== this.referenceObject.size );
+      }
+      this.previousReferenceObjectSize = referenceObjectSize;
+      this.setReferenceObjectSize( referenceObjectSize );
+    },
+
+    updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
+      var targetNumVisibleDiscreteCylinders = selectedMode === 'cylinders' && this.continuousOrDiscreteProperty.value === 'discrete' ? this.estimateProperty.value : 0;
+      var startIndex = Math.min( this.numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
+      var endIndex = Math.max( this.numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
+      var visibility = targetNumVisibleDiscreteCylinders > this.numVisibleDiscreteCylinders;
+      for ( var i = startIndex; i < endIndex && i < MAX_CYLINDER_SLICES; i++ ) {
+        this.discreteObjectList[ i ].visibleProperty.value = visibility;
+      }
+      this.numVisibleDiscreteCylinders = targetNumVisibleDiscreteCylinders;
+    },
+
+    updateContinuousObjectSize: function( estimateValue ) {
+      this.continuousSizableObject.sizeProperty.value = new Dimension2( this.referenceObject.sizeProperty.value.width,
+          this.referenceObject.sizeProperty.value.height * estimateValue );
+    }
+  } );
 
 } );

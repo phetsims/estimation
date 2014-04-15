@@ -205,9 +205,13 @@ define( function( require ) {
     thisScreen.addChild( new CubeView( model.modes['cubes'].continuousSizableObject, mvt ) );
     thisScreen.addChild( new CubeView( model.modes['cubes'].compareObject, mvt ) );
 
-    model.cylinders.forEach( function( cylinderModel ) {
-      thisScreen.addChild( new CylinderView( cylinderModel, mvt ) );
+    // Cylinders mode
+    thisScreen.addChild( new CylinderView( model.modes['cylinders'].referenceObject, mvt ) );
+    thisScreen.addChild( new CylinderView( model.modes['cylinders'].compareObject, mvt ) );
+    model.modes['cylinders'].discreteObjectList.forEach( function( line ) {
+      thisScreen.addChild( new CylinderView( line, mvt ) );
     } );
+    thisScreen.addChild( new CylinderView( model.modes['cylinders'].continuousSizableObject, mvt ) );
   }
 
   return inherit( ScreenView, ExploreScreen, {
