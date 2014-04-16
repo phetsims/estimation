@@ -41,7 +41,7 @@ define( function( require ) {
     var thisMode = this;
 
     // Create the reference, compare, continuous, and discrete objects.
-    var compareRectPosition = new Vector2( -1, 0 );
+    var compareRectPosition = new Vector2( 0, 0 );
     this.compareObject = new RectangleModel( new Dimension2( 2.0, 2.0 ), compareRectPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false, false );
     this.continuousSizableObject = new RectangleModel( new Dimension2( 2, 1 ), compareRectPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     this.referenceObject = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );

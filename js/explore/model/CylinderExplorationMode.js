@@ -41,10 +41,10 @@ define( function( require ) {
     var thisMode = this;
 
     // Create the reference, compare, continuous, and discrete objects.
-    var compareCylinderPosition = new Vector2( 1, -0.5 );
+    var compareCylinderPosition = new Vector2( 0.75, -0.5 );
     this.compareObject = new CylinderModel( COMPARE_CYLINDER_SIZE, compareCylinderPosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
     this.continuousSizableObject = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-    this.referenceObject = new CylinderModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    this.referenceObject = new CylinderModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2.0, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     _.times( MAX_CYLINDER_SLICES, function() {
       // Initial size is arbitrary, will be sized as needed.
       thisMode.discreteObjectList.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );

@@ -22,9 +22,9 @@ define( function( require ) {
 
   // Constants
   var MODE_NAME = 'lines';
-  var COMPARE_LINE_LENGTH = 0.75; // In meters
+  var COMPARE_LINE_LENGTH = 2.5; // In meters
   var VALID_REF_OBJECT_SIZES = [
-      COMPARE_LINE_LENGTH / 100,
+      COMPARE_LINE_LENGTH / 120,
       COMPARE_LINE_LENGTH / 60,
       COMPARE_LINE_LENGTH / 40,
       COMPARE_LINE_LENGTH / 10,
@@ -36,15 +36,15 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function LineExplorationMode( selectedModeProperty, linesArray ) {
+  function LineExplorationMode( selectedModeProperty ) {
     AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
     var thisMode = this;
 
     // Create the reference, compare, continuous, and discrete objects.
-    this.compareObject = new LineModel( 2, new Vector2( -1, 0.5 ), EstimationConstants.COMPARISON_OBJECT_COLOR, false );
-    this.continuousSizableObject = new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
-    this.referenceObject = new LineModel( 0.1, new Vector2( -2, 1.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
-    this.discreteObjectList.push( new LineModel( 2, new Vector2( -1, 0.45 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false ) );
+    this.compareObject = new LineModel( COMPARE_LINE_LENGTH, new Vector2( -0.5, 0.5 ), EstimationConstants.COMPARISON_OBJECT_COLOR, false );
+    this.continuousSizableObject = new LineModel( 2, new Vector2( -0.5, 0.4 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    this.referenceObject = new LineModel( 0.1, new Vector2( -2, 1.0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false );
+    this.discreteObjectList.push( new LineModel( 2, new Vector2( -0.5, 0.4 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false ) );
     this.setReferenceObjectSize( INITIAL_REFERENCE_LINE_LENGTH );
 
     // Complete initialization by hooking up visibility updates in the parent class.
@@ -59,8 +59,9 @@ define( function( require ) {
     setReferenceObjectSize: function( length ) {
       this.referenceObject.lengthProperty.value = length;
 
-      // Set the initial size of the continuous object.
+      // Set the initial size of the objects.
       this.updateContinuousObjectSize( this.estimateProperty.value );
+      this.updateDiscreteObjectVisibility( this.selectedModeProperty.value, this.estimateProperty.value );
     },
 
     newReferenceObject: function() {

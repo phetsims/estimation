@@ -154,15 +154,15 @@ define( function( require ) {
     var resetAllButton = new ResetAllButton( function() { thisScreen.reset(); }, { scale: 0.75 } );
     this.addChild( resetAllButton );
 
-    // Layout
+    // Layout of controls
     modeControlPanel.top = EDGE_INSET;
     modeControlPanel.left = EDGE_INSET;
     newObjectButton.top = EDGE_INSET;
     newObjectButton.left = 100;
-    resetAllButton.right = this.layoutBounds.width - EDGE_INSET;
-    resetAllButton.bottom = this.layoutBounds.height - EDGE_INSET;
-    discreteOrContinuousControlPanel.right = ( resetAllButton.right );
+    discreteOrContinuousControlPanel.right = ( this.layoutBounds.width - EDGE_INSET );
     discreteOrContinuousControlPanel.bottom = this.layoutBounds.height - 100;
+    resetAllButton.centerX = discreteOrContinuousControlPanel.centerX;
+    resetAllButton.bottom = this.layoutBounds.height - EDGE_INSET;
     rangeSelectionPanel.centerX = mvt.modelToViewX( 0 );
     rangeSelectionPanel.bottom = this.layoutBounds.height - EDGE_INSET;
     slider.centerX = rangeSelectionPanel.centerX;
