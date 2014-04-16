@@ -10,11 +10,9 @@ define( function( require ) {
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var Color = require( 'SCENERY/util/Color' );
   var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants

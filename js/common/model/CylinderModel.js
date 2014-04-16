@@ -8,7 +8,6 @@ define( function( require ) {
 
   // Imports
   var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Dimension2} initialSize

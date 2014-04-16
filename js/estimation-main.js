@@ -14,7 +14,6 @@ define( function( require ) {
   var EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
   var EstimationGameScreen = require( 'ESTIMATION/game/view/EstimationGameScreen' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );

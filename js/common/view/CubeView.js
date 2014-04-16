@@ -10,11 +10,8 @@ define( function( require ) {
 
   // Imports
   var Color = require( 'SCENERY/util/Color' );
-  var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -56,19 +53,19 @@ define( function( require ) {
 
       front.setRect( 0, 0, faceWidth, height );
       side.setShape( new Shape()
-        .moveTo( faceWidth, height )
-        .lineToRelative( projectionVector.x, projectionVector.y )
-        .lineToRelative( 0, -height )
-        .lineToRelative( -projectionVector.x, -projectionVector.y )
-        .close()
+          .moveTo( faceWidth, height )
+          .lineToRelative( projectionVector.x, projectionVector.y )
+          .lineToRelative( 0, -height )
+          .lineToRelative( -projectionVector.x, -projectionVector.y )
+          .close()
       );
 
       top.setShape( new Shape()
-        .moveTo( 0, 0 )
-        .lineToRelative( projectionVector.x, projectionVector.y )
-        .lineToRelative( faceWidth, 0 )
-        .lineToRelative( -projectionVector.x, -projectionVector.y )
-        .close()
+          .moveTo( 0, 0 )
+          .lineToRelative( projectionVector.x, projectionVector.y )
+          .lineToRelative( faceWidth, 0 )
+          .lineToRelative( -projectionVector.x, -projectionVector.y )
+          .close()
       );
 
       updatePosition();

@@ -41,19 +41,19 @@ define( function( require ) {
   AbstractExplorationMode.prototype = {
 
     createNewReferenceObject: function() {
-      throw new Error( 'createNewReferenceObject must be overridden in descendant class' )
+      throw new Error( 'createNewReferenceObject must be overridden in descendant class' );
     },
 
     updateDiscreteObjectVisibility: function( modeName ) {
-      throw new Error( 'updateDiscreteObjectVisibility must be overridden in descendant class' )
+      throw new Error( 'updateDiscreteObjectVisibility must be overridden in descendant class' );
     },
 
     updateContinuousObjectSize: function() {
-      throw new Error( 'updateContinuousObjectSize must be overridden in descendant class' )
+      throw new Error( 'updateContinuousObjectSize must be overridden in descendant class' );
     },
 
     setInitialReferenceObject: function() {
-      throw new Error( 'setInitialReferenceObject must be overridden in descendant class' )
+      throw new Error( 'setInitialReferenceObject must be overridden in descendant class' );
     },
 
     updateObjectVisibility: function() {

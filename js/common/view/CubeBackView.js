@@ -49,7 +49,7 @@ define( function( require ) {
         .lineToRelative( -projectionVector.x, -projectionVector.y )
         .moveTo( origin.x, origin.y )
         .lineToRelative( faceWidth, 0 )
-      )
+      );
       updatePosition();
     } );
 
