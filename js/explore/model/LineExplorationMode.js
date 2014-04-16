@@ -8,16 +8,9 @@ define( function( require ) {
 
   // Imports
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
-  var Color = require( 'SCENERY/util/Color' );
-  var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
-  var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var LineModel = require( 'ESTIMATION/common/model/LineModel' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -38,7 +31,6 @@ define( function( require ) {
    */
   function LineExplorationMode( selectedModeProperty ) {
     AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-    var thisMode = this;
 
     // Create the reference, compare, continuous, and discrete objects.
     this.compareObject = new LineModel( COMPARE_LINE_LENGTH, new Vector2( -0.5, 0.5 ), EstimationConstants.COMPARISON_OBJECT_COLOR, false );

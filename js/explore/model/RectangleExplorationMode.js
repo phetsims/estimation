@@ -8,14 +8,9 @@ define( function( require ) {
 
   // Imports
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
-  var Color = require( 'SCENERY/util/Color' );
-  var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LineModel = require( 'ESTIMATION/common/model/LineModel' );
-  var Property = require( 'AXON/Property' );
   var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
 

@@ -18,7 +18,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SUN/HStrut' );
   var Image = require( 'SCENERY/nodes/Image' );
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -29,14 +28,11 @@ define( function( require ) {
   var newObjectString = require( 'string!ESTIMATION/newObject' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
-  var PushButton = require( 'SUN/PushButton' );
   var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var RectanglePushButton = require( 'SUN/RectanglePushButton' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -73,7 +69,7 @@ define( function( require ) {
         rectangleFillUp: new Color( 255, 252, 127 ),
         rectangleCornerRadius: 5,
         listener: function() {
-          model.newReferenceObject()
+          model.newReferenceObject();
         }
       }
     );
@@ -111,7 +107,7 @@ define( function( require ) {
     // The continuous or discrete panel doesn't make sense for one-dimensional
     // estimates, so hide it in those cases.
     model.estimationModeProperty.link( function( estimationMode ) {
-      discreteOrContinuousControlPanel.visible = !( estimationMode === 'lines' );
+      discreteOrContinuousControlPanel.visible = estimationMode !== 'lines';
     } );
 
     // Create and add the panel for selecting the range.
@@ -175,37 +171,37 @@ define( function( require ) {
     //------------------------------------------------------------------------
 
     // Lines mode
-    thisScreen.addChild( new LineView( model.modes['lines'].referenceObject, mvt ) );
-    model.modes['lines'].discreteObjectList.forEach( function( line ) {
+    thisScreen.addChild( new LineView( model.modes.lines.referenceObject, mvt ) );
+    model.modes.lines.discreteObjectList.forEach( function( line ) {
       thisScreen.addChild( new LineView( line, mvt ) );
     } );
-    thisScreen.addChild( new LineView( model.modes['lines'].continuousSizableObject, mvt ) );
-    thisScreen.addChild( new LineView( model.modes['lines'].compareObject, mvt ) );
+    thisScreen.addChild( new LineView( model.modes.lines.continuousSizableObject, mvt ) );
+    thisScreen.addChild( new LineView( model.modes.lines.compareObject, mvt ) );
 
     // Rectangles mode
-    thisScreen.addChild( new RectangleView( model.modes['rectangles'].referenceObject, mvt ) );
-    thisScreen.addChild( new RectangleView( model.modes['rectangles'].compareObject, mvt ) );
-    model.modes['rectangles'].discreteObjectList.forEach( function( line ) {
+    thisScreen.addChild( new RectangleView( model.modes.rectangles.referenceObject, mvt ) );
+    thisScreen.addChild( new RectangleView( model.modes.rectangles.compareObject, mvt ) );
+    model.modes.rectangles.discreteObjectList.forEach( function( line ) {
       thisScreen.addChild( new RectangleView( line, mvt ) );
     } );
-    thisScreen.addChild( new RectangleView( model.modes['rectangles'].continuousSizableObject, mvt ) );
+    thisScreen.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, mvt ) );
 
     // Cubes mode
-    thisScreen.addChild( new CubeView( model.modes['cubes'].referenceObject, mvt ) );
-    thisScreen.addChild( new CubeBackView( model.modes['cubes'].compareObject, mvt ) );
-    model.modes['cubes'].discreteObjectList.forEach( function( cube ) {
+    thisScreen.addChild( new CubeView( model.modes.cubes.referenceObject, mvt ) );
+    thisScreen.addChild( new CubeBackView( model.modes.cubes.compareObject, mvt ) );
+    model.modes.cubes.discreteObjectList.forEach( function( cube ) {
       thisScreen.addChild( new CubeView( cube, mvt ) );
     } );
-    thisScreen.addChild( new CubeView( model.modes['cubes'].continuousSizableObject, mvt ) );
-    thisScreen.addChild( new CubeView( model.modes['cubes'].compareObject, mvt ) );
+    thisScreen.addChild( new CubeView( model.modes.cubes.continuousSizableObject, mvt ) );
+    thisScreen.addChild( new CubeView( model.modes.cubes.compareObject, mvt ) );
 
     // Cylinders mode
-    thisScreen.addChild( new CylinderView( model.modes['cylinders'].referenceObject, mvt ) );
-    model.modes['cylinders'].discreteObjectList.forEach( function( line ) {
+    thisScreen.addChild( new CylinderView( model.modes.cylinders.referenceObject, mvt ) );
+    model.modes.cylinders.discreteObjectList.forEach( function( line ) {
       thisScreen.addChild( new CylinderView( line, mvt ) );
     } );
-    thisScreen.addChild( new CylinderView( model.modes['cylinders'].continuousSizableObject, mvt ) );
-    thisScreen.addChild( new CylinderView( model.modes['cylinders'].compareObject, mvt ) );
+    thisScreen.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, mvt ) );
+    thisScreen.addChild( new CylinderView( model.modes.cylinders.compareObject, mvt ) );
   }
 
   return inherit( ScreenView, ExploreScreen, {

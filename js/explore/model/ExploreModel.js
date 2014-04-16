@@ -10,7 +10,6 @@ define( function( require ) {
   var LineExplorationMode = require( 'ESTIMATION/explore/model/LineExplorationMode' );
   var Property = require( 'AXON/Property' );
   var RectangleExplorationMode = require( 'ESTIMATION/explore/model/RectangleExplorationMode' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @constructor
