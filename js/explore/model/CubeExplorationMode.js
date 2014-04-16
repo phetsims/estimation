@@ -37,7 +37,7 @@ define( function( require ) {
     var thisMode = this;
 
     // Create the reference, compare, continuous, and discrete objects.
-    var compareCubePosition = new Vector2( 0, 0 );
+    var compareCubePosition = new Vector2( 0, -0.2 );
     this.compareObject = new CubeModel( COMPARE_CUBE_SIZE, compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
     this.continuousSizableObject = new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     this.referenceObject = new CubeModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
