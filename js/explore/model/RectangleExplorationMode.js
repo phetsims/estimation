@@ -24,7 +24,11 @@ define( function( require ) {
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 8, COMPARE_RECTANGLE_SIZE.height / 8 ),
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 5, COMPARE_RECTANGLE_SIZE.height / 5 ),
     new Dimension2( COMPARE_RECTANGLE_SIZE.width / 3, COMPARE_RECTANGLE_SIZE.height / 3 ),
-    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 2 )
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 2 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 2, COMPARE_RECTANGLE_SIZE.height / 4 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 4, COMPARE_RECTANGLE_SIZE.height / 2 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 4, COMPARE_RECTANGLE_SIZE.height / 8 ),
+    new Dimension2( COMPARE_RECTANGLE_SIZE.width / 8, COMPARE_RECTANGLE_SIZE.height / 4 )
   ];
   var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 3 ];
 
@@ -107,9 +111,15 @@ define( function( require ) {
     },
 
     updateContinuousObjectSize: function( estimateValue ) {
+      var hr = this.referenceObject.sizeProperty.value.height;
+      var wr = this.referenceObject.sizeProperty.value.width;
+      var hc = this.compareObject.sizeProperty.value.height;
+      var wc = this.compareObject.sizeProperty.value.width;
+      var answer = hc * wc / ( hr * wr );
+      var a = ( ( 1 - wc / wr ) / ( 1 - answer ) ) * ( estimateValue - 1 ) + 1;
+      var b = ( ( 1 - hc / hr ) / ( 1 - answer ) ) * ( estimateValue - 1 ) + 1;
       // Set the size of the continuous rectangle
-      this.continuousSizableObject.sizeProperty.value = new Dimension2( this.referenceObject.sizeProperty.value.width * Math.sqrt( estimateValue ),
-          this.referenceObject.sizeProperty.value.height * Math.sqrt( estimateValue ) );
+      this.continuousSizableObject.sizeProperty.value = new Dimension2( a * wr, b * hr );
     }
   } );
 } );
