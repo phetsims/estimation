@@ -23,7 +23,10 @@ define( function( require ) {
     new Dimension3( COMPARE_CUBE_SIZE.width / 5, COMPARE_CUBE_SIZE.height / 5, COMPARE_CUBE_SIZE.depth / 5 ),
     new Dimension3( COMPARE_CUBE_SIZE.width / 4, COMPARE_CUBE_SIZE.height / 4, COMPARE_CUBE_SIZE.depth / 4 ),
     new Dimension3( COMPARE_CUBE_SIZE.width / 3, COMPARE_CUBE_SIZE.height / 3, COMPARE_CUBE_SIZE.depth / 3 ),
-    new Dimension3( COMPARE_CUBE_SIZE.width / 2, COMPARE_CUBE_SIZE.height / 2, COMPARE_CUBE_SIZE.depth / 2 )
+    new Dimension3( COMPARE_CUBE_SIZE.width / 2, COMPARE_CUBE_SIZE.height / 2, COMPARE_CUBE_SIZE.depth / 2 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 3, COMPARE_CUBE_SIZE.height / 2, COMPARE_CUBE_SIZE.depth / 2 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 4, COMPARE_CUBE_SIZE.height / 2, COMPARE_CUBE_SIZE.depth / 2 ),
+    new Dimension3( COMPARE_CUBE_SIZE.width / 2, COMPARE_CUBE_SIZE.height / 4, COMPARE_CUBE_SIZE.depth / 2 )
   ];
   var INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
 
@@ -116,11 +119,33 @@ define( function( require ) {
     },
 
     updateContinuousObjectSize: function( estimateValue ) {
+
+      var hr = this.referenceObject.sizeProperty.value.height;
+      var wr = this.referenceObject.sizeProperty.value.width;
+      var dr = this.referenceObject.sizeProperty.value.depth;
+
       // Set the size of the continuous cube
-      this.continuousSizableObject.sizeProperty.value = new Dimension3(
-          this.referenceObject.sizeProperty.value.width * Math.pow( estimateValue, 1 / 3 ),
-          this.referenceObject.sizeProperty.value.height * Math.pow( estimateValue, 1 / 3 ),
-          this.referenceObject.sizeProperty.value.depth * Math.pow( estimateValue, 1 / 3 ) );
+      if ( hr === wr && wr === dr ) {
+        this.continuousSizableObject.sizeProperty.value = new Dimension3(
+            wr * Math.pow( estimateValue, 1 / 3 ),
+            hr * Math.pow( estimateValue, 1 / 3 ),
+            dr * Math.pow( estimateValue, 1 / 3 ) );
+      }
+      else {
+        // Scale each dimension linearly. This isn't used all the time
+        // because the size won't quite match the estimate value in cases
+        // other than estimate = 1 and estimate = answer, but it is likely
+        // close enough that no one will be disturbed by it.
+        var hc = this.compareObject.sizeProperty.value.height;
+        var wc = this.compareObject.sizeProperty.value.width;
+        var dc = this.compareObject.sizeProperty.value.depth;
+        var answer = hc * wc * dc / ( hr * wr * dr );
+        var a = ( ( 1 - wc / wr ) / ( 1 - answer ) ) * ( estimateValue - 1 ) + 1;
+        var b = ( ( 1 - hc / hr ) / ( 1 - answer ) ) * ( estimateValue - 1 ) + 1;
+        var c = ( ( 1 - dc / dr ) / ( 1 - answer ) ) * ( estimateValue - 1 ) + 1;
+        this.continuousSizableObject.sizeProperty.value = new Dimension3( a * wr, b * hr, c * dr );
+
+      }
 
       // The following hairy calculation is about figuring out where to
       // position the continuous cube so that its back corner is in the same
