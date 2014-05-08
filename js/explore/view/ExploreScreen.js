@@ -31,7 +31,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var RectanglePushButtonDeprecated = require( 'SUN/RectanglePushButtonDeprecated' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -147,7 +147,7 @@ define( function( require ) {
     readout.addChild( readoutText );
 
     // Add the general control buttons.
-    var resetAllButton = new ResetAllButtonDeprecated( function() { thisScreen.reset(); }, { scale: 0.75 } );
+    var resetAllButton = new ResetAllButton( { listener: function() { thisScreen.reset(); } } );
     this.addChild( resetAllButton );
 
     // Layout of controls
