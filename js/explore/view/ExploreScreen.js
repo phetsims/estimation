@@ -29,7 +29,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/rectangle' );
-  var RectanglePushButtonDeprecated = require( 'SUN/RectanglePushButtonDeprecated' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -64,10 +64,11 @@ define( function( require ) {
       105 );
 
     // Add the various selectors and buttons for choosing which objects to explore.
-    var newObjectButton = new RectanglePushButtonDeprecated( new Text( newObjectString, { font: new PhetFont( 20 ) } ),
+    var newObjectButton = new TextPushButton( newObjectString,
       {
-        rectangleFillUp: new Color( 255, 252, 127 ),
-        rectangleCornerRadius: 5,
+        font: new PhetFont( 20 ),
+        baseColor: 'rgb( 255, 252, 127 )',
+        cornerRounding: 5,
         listener: function() {
           model.newReferenceObject();
         }
