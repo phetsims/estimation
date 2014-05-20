@@ -68,7 +68,7 @@ define( function( require ) {
       {
         font: new PhetFont( 20 ),
         baseColor: 'rgb( 255, 252, 127 )',
-        cornerRounding: 5,
+        cornerRadius: 5,
         listener: function() {
           model.newReferenceObject();
         }
