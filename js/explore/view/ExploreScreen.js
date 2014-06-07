@@ -7,7 +7,6 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var Color = require( 'SCENERY/util/Color' );
   var CubeBackView = require( 'ESTIMATION/common/view/CubeBackView' );
   var CubeView = require( 'ESTIMATION/common/view/CubeView' );
   var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
