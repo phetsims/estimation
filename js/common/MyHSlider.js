@@ -1,12 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Horizontal slider.
- *
- * Moved from beers-law-lab/EvaporationSlider on 9/15/2013
- * see https://github.com/phetsims/sun/issues/9
- *
- * @author Chris Malley (PixelZoom, Inc.)
+ * TODO This is a copy of sun.HSlider, it should be removed.
  */
 define( function( require ) {
   'use strict';
