@@ -21,7 +21,7 @@ define( function( require ) {
   /**
    * @param {Property<Number>} valueProperty
    * @param { {min:Number, max:Number} } range
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function MyHSlider( valueProperty, range, options ) {
