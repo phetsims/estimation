@@ -29,7 +29,7 @@ define( function( require ) {
     credits: {
       leadDesign: 'Bryce Gruneich',
       softwareDevelopment: 'John Blanco',
-      team: 'Mike Dubson, Karina Hensberry, Ariel Paul, Kathy Perkins'
+      team: 'Mike Dubson, Karina K. R. Hensberry, Ariel Paul, Kathy Perkins'
     }
   };
 
