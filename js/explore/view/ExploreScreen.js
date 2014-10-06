@@ -30,7 +30,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
+  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
   var Text = require( 'SCENERY/nodes/Text' );
