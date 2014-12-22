@@ -49,7 +49,7 @@ define( function( require ) {
    * @constructor
    */
   function ExploreScreen( model ) {
-    ScreenView.call( this );
+    ScreenView.call( this, { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
     var thisScreen = this;
     this.model = model;
 

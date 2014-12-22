@@ -3,7 +3,13 @@
 define( function( require ) {
   'use strict';
 
+  // modules
+  var Bounds2 = require( 'DOT/Bounds2' );
+
   return {
+
+    LAYOUT_BOUNDS: new Bounds2( 0, 0, 768, 504 ),
+
     RANGE_1_TO_10: { min: 1, max: 10 },
     RANGE_10_TO_100: { min: 10, max: 100 },
     RANGE_100_TO_1000: { min: 100, max: 1000 },
