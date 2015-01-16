@@ -9,7 +9,7 @@
 
 require.config( {
 
-  deps: ['estimation-main'],
+  deps: [ 'estimation-main' ],
 
   paths: {
 

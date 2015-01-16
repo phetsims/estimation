@@ -74,7 +74,7 @@ define( function( require ) {
           if ( index < MAX_DISCRETE_RECTANGLES ) {
             this.discreteObjectList[ index ].sizeProperty.value = this.referenceObject.sizeProperty.value;
             this.discreteObjectList[ index ].positionProperty.value = new Vector2( origin.x + j * this.referenceObject.sizeProperty.value.width,
-                origin.y + i * this.referenceObject.sizeProperty.value.height );
+              origin.y + i * this.referenceObject.sizeProperty.value.height );
           }
         }
       }

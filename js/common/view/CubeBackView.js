@@ -43,12 +43,12 @@ define( function( require ) {
       var height = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
       var origin = new Vector2( projectionVector.x, height + projectionVector.y );
       dottedLineBack.setShape( new Shape()
-        .moveTo( origin.x, origin.y )
-        .lineToRelative( 0, -height )
-        .moveTo( origin.x, origin.y )
-        .lineToRelative( -projectionVector.x, -projectionVector.y )
-        .moveTo( origin.x, origin.y )
-        .lineToRelative( faceWidth, 0 )
+          .moveTo( origin.x, origin.y )
+          .lineToRelative( 0, -height )
+          .moveTo( origin.x, origin.y )
+          .lineToRelative( -projectionVector.x, -projectionVector.y )
+          .moveTo( origin.x, origin.y )
+          .lineToRelative( faceWidth, 0 )
       );
       updatePosition();
     } );

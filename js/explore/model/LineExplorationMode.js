@@ -17,12 +17,12 @@ define( function( require ) {
   var MODE_NAME = 'lines';
   var COMPARE_LINE_LENGTH = 2.5; // In meters
   var VALID_REF_OBJECT_SIZES = [
-      COMPARE_LINE_LENGTH / 120,
-      COMPARE_LINE_LENGTH / 60,
-      COMPARE_LINE_LENGTH / 40,
-      COMPARE_LINE_LENGTH / 10,
-      COMPARE_LINE_LENGTH / 4,
-      COMPARE_LINE_LENGTH / 2
+    COMPARE_LINE_LENGTH / 120,
+    COMPARE_LINE_LENGTH / 60,
+    COMPARE_LINE_LENGTH / 40,
+    COMPARE_LINE_LENGTH / 10,
+    COMPARE_LINE_LENGTH / 4,
+    COMPARE_LINE_LENGTH / 2
   ];
   var INITIAL_REFERENCE_LINE_LENGTH = VALID_REF_OBJECT_SIZES[ 4 ];
 
@@ -73,8 +73,8 @@ define( function( require ) {
     },
 
     updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
-      this.discreteObjectList[0].visibleProperty.value = selectedMode === MODE_NAME && this.continuousOrDiscreteProperty.value === 'discrete';
-      this.discreteObjectList[0].lengthProperty.value = this.referenceObject.lengthProperty.value * estimateValue;
+      this.discreteObjectList[ 0 ].visibleProperty.value = selectedMode === MODE_NAME && this.continuousOrDiscreteProperty.value === 'discrete';
+      this.discreteObjectList[ 0 ].lengthProperty.value = this.referenceObject.lengthProperty.value * estimateValue;
     },
 
     updateContinuousObjectSize: function( estimateValue ) {

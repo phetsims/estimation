@@ -219,7 +219,11 @@ define( function( require ) {
       // Create a node with a fixed size so that all range buttons are sized
       // the same.  Size was empirically determined.
       var background = new Rectangle( 0, 0, MIN_RANGE_BUTTON_WIDTH * 1.3, 40, 10, 10, { fill: 'white' } );
-      background.addChild( new Text( range.min + ' - ' + range.max, { font: RANGE_BUTTON_FONT, centerX: background.width / 2, centerY: background.height / 2  } ) );
+      background.addChild( new Text( range.min + ' - ' + range.max, {
+        font: RANGE_BUTTON_FONT,
+        centerX: background.width / 2,
+        centerY: background.height / 2
+      } ) );
       return new InOutRadioButton( property, range, background, { cornerRadius: 5 } );
     }
   } );

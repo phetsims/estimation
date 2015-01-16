@@ -102,7 +102,12 @@ define( function( require ) {
     var arcWidth = 0.25 * this._options.thumbSize.width;
     var thumbFill = thisSlider._options.enabledProperty.get() ? thisSlider._options.thumbFillEnabled : thisSlider._options.thumbFillDisabled;
     var thumb = new Rectangle( -thisSlider._options.thumbSize.width / 2, -thisSlider._options.thumbSize.height / 2, thisSlider._options.thumbSize.width, thisSlider._options.thumbSize.height, arcWidth, arcWidth,
-      { cursor: thisSlider._options.cursor, fill: thumbFill, stroke: thisSlider._options.thumbStroke, lineWidth: thisSlider._options.thumbLineWidth } );
+      {
+        cursor: thisSlider._options.cursor,
+        fill: thumbFill,
+        stroke: thisSlider._options.thumbStroke,
+        lineWidth: thisSlider._options.thumbLineWidth
+      } );
     var centerLineYMargin = 3;
     thumb.addChild( new Path( Shape.lineSegment( 0, -( thisSlider._options.thumbSize.height / 2 ) + centerLineYMargin, 0, ( thisSlider._options.thumbSize.height / 2 ) - centerLineYMargin ), { stroke: 'white' } ) );
     thumb.centerY = thisSlider._track.centerY;
@@ -194,8 +199,8 @@ define( function( require ) {
       var labelX = this._valueToPosition( value );
       // ticks
       var tick = new Path( new Shape()
-        .moveTo( labelX, this._track.top )
-        .lineTo( labelX, this._track.top - length ),
+          .moveTo( labelX, this._track.top )
+          .lineTo( labelX, this._track.top - length ),
         { stroke: stroke, lineWidth: lineWidth } );
       this._ticksParent.addChild( tick );
       // label

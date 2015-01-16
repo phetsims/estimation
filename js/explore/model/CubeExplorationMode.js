@@ -81,7 +81,7 @@ define( function( require ) {
             this.discreteObjectList[ numCubesPlaced ].sizeProperty.value = this.referenceObject.sizeProperty.value;
             xDisplacement.setX( xUnitDisplacement.x * x );
             this.discreteObjectList[ numCubesPlaced ].positionProperty.value = new Vector2( compareCubeBackCorner.x + xDisplacement.x + zDisplacement.x + yDisplacement.x,
-                compareCubeBackCorner.y + xDisplacement.y + zDisplacement.y + yDisplacement.y );
+              compareCubeBackCorner.y + xDisplacement.y + zDisplacement.y + yDisplacement.y );
             numCubesPlaced++;
           }
         }
@@ -127,9 +127,9 @@ define( function( require ) {
       // Set the size of the continuous cube
       if ( hr === wr && wr === dr ) {
         this.continuousSizableObject.sizeProperty.value = new Dimension3(
-            wr * Math.pow( estimateValue, 1 / 3 ),
-            hr * Math.pow( estimateValue, 1 / 3 ),
-            dr * Math.pow( estimateValue, 1 / 3 ) );
+          wr * Math.pow( estimateValue, 1 / 3 ),
+          hr * Math.pow( estimateValue, 1 / 3 ),
+          dr * Math.pow( estimateValue, 1 / 3 ) );
       }
       else {
         // Scale each dimension linearly. This isn't used all the time

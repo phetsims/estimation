@@ -72,7 +72,7 @@ define( function( require ) {
           var index = i * cylindersPerRow + j;
           this.discreteObjectList[ index ].sizeProperty.value = this.referenceObject.sizeProperty.value;
           this.discreteObjectList[ index ].positionProperty.value = new Vector2( origin.x + j * this.referenceObject.sizeProperty.value.width,
-              origin.y + i * this.referenceObject.sizeProperty.value.height );
+            origin.y + i * this.referenceObject.sizeProperty.value.height );
         }
       }
 
@@ -109,7 +109,7 @@ define( function( require ) {
 
     updateContinuousObjectSize: function( estimateValue ) {
       this.continuousSizableObject.sizeProperty.value = new Dimension2( this.referenceObject.sizeProperty.value.width,
-          this.referenceObject.sizeProperty.value.height * estimateValue );
+        this.referenceObject.sizeProperty.value.height * estimateValue );
     }
   } );
 
