@@ -27,7 +27,7 @@ define( function( require ) {
   var newObjectString = require( 'string!ESTIMATION/newObject' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/rectangle' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
