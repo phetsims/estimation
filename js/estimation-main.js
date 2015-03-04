@@ -33,14 +33,6 @@ define( function( require ) {
     }
   };
 
-  // Appending '?dev' to the URL will enable developer-only features.
-  if ( phet.chipper.getQueryParameter( 'dev' ) ) {
-    simOptions = _.extend( {
-      // add dev-specific options here
-      showHomeScreen: false
-    }, simOptions );
-  }
-
   SimLauncher.launch( function() {
     //Create and start the sim
     new Sim( simTitle, [
