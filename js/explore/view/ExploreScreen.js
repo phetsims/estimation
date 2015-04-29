@@ -37,6 +37,7 @@ define( function( require ) {
 
   // Constants
   var EDGE_INSET = 10;
+  var MODE_ICON_SCALE = 0.68;
   var DISCRETE_OR_CONTINUOUS_ICON_SCALE = 0.68;
 
   /**
@@ -80,17 +81,18 @@ define( function( require ) {
     this.addChild( newObjectButton );
 
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
-    var modeImageScale = 0.37;
     var modeButtons = new RadioButtonGroup( model.estimationModeProperty, [
-      { value: 'lines', node: new Image( linesIconImage, { scale: modeImageScale } ) },
-      { value: 'rectangles', node: new Image( squaresIconImage, { scale: modeImageScale } ) },
-      { value: 'cubes', node: new Image( cubesIconImage, { scale: modeImageScale } ) },
-      { value: 'cylinders', node: new Image( cylindersIconImage, { scale: modeImageScale } ) }
+      { value: 'lines', node: new Image( linesIconImage, { scale: MODE_ICON_SCALE } ) },
+      { value: 'rectangles', node: new Image( squaresIconImage, { scale: MODE_ICON_SCALE } ) },
+      { value: 'cubes', node: new Image( cubesIconImage, { scale: MODE_ICON_SCALE } ) },
+      { value: 'cylinders', node: new Image( cylindersIconImage, { scale: MODE_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
       baseColor: 'white',
       cornerRadius: 10,
-      spacing: 10
+      spacing: 10,
+      buttonContentXMargin: 6,
+      buttonContentYMargin: 14
     } );
     var modeControlPanel = new Panel( modeButtons, {
       fill: 'rgb( 0, 171, 51 )',
