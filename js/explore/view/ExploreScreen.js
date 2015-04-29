@@ -16,7 +16,6 @@ define( function( require ) {
   var cylindersIconImage = require( 'image!ESTIMATION/cylinders-icon.png' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var Image = require( 'SCENERY/nodes/Image' );
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -36,13 +35,20 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
   // Constants
   var EDGE_INSET = 10;
   var BUTTON_IMAGE_WIDTH = 50; // In screen coords, which are roughly pixels
-  var RANGE_BUTTON_FONT = new PhetFont( { size: 20, weight: 'normal' } );
-  var MIN_RANGE_BUTTON_WIDTH = new Text( EstimationConstants.RANGE_10_TO_100.min + ' - ' + EstimationConstants.RANGE_100_TO_1000.max,
-    { font: RANGE_BUTTON_FONT } ).bounds.width;
+
+  /**
+   * Creates the label for a range button
+   * @param {Range} range
+   * @returns {Node}
+   */
+  var createRangeLabel = function( range ) {
+    return new Text( range.min + ' - ' + range.max, { font: new PhetFont( 20 ) } );
+  };
 
   /**
    * @param model
@@ -111,16 +117,17 @@ define( function( require ) {
     } );
 
     // Create and add the panel for selecting the range.
-    var rangeSelectionPanel = new Panel( new HBox(
-        {
-          children: [
-            this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_1_TO_10 ),
-            this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_10_TO_100 ),
-            this.createRangeButton( model.estimationRangeProperty, EstimationConstants.RANGE_100_TO_1000 )
-          ],
-          spacing: 10
-        } ),
-      { stroke: null, fill: null } );
+    var rangeButtons = new RadioButtonGroup( model.estimationRangeProperty, [
+      { value: EstimationConstants.RANGE_1_TO_10, node: createRangeLabel( EstimationConstants.RANGE_1_TO_10 ) },
+      { value: EstimationConstants.RANGE_10_TO_100, node: createRangeLabel( EstimationConstants.RANGE_10_TO_100 ) },
+      { value: EstimationConstants.RANGE_100_TO_1000, node: createRangeLabel( EstimationConstants.RANGE_100_TO_1000 ) }
+    ], {
+      orientation: 'horizontal',
+      baseColor: 'white',
+      buttonContentXMargin: 10,
+      buttonContentYMargin: 12
+    } );
+    var rangeSelectionPanel = new Panel( rangeButtons, { stroke: null, fill: null } );
 
     this.addChild( rangeSelectionPanel );
 
@@ -213,18 +220,6 @@ define( function( require ) {
       var imageNode = new Image( imageSource );
       imageNode.scale( width / imageNode.width );
       return imageNode;
-    },
-
-    createRangeButton: function( property, range ) {
-      // Create a node with a fixed size so that all range buttons are sized
-      // the same.  Size was empirically determined.
-      var background = new Rectangle( 0, 0, MIN_RANGE_BUTTON_WIDTH * 1.3, 40, 10, 10, { fill: 'white' } );
-      background.addChild( new Text( range.min + ' - ' + range.max, {
-        font: RANGE_BUTTON_FONT,
-        centerX: background.width / 2,
-        centerY: background.height / 2
-      } ) );
-      return new InOutRadioButton( property, range, background, { cornerRadius: 5 } );
     }
   } );
 } );
