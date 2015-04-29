@@ -37,6 +37,7 @@ define( function( require ) {
 
   // Constants
   var EDGE_INSET = 10;
+  var DISCRETE_OR_CONTINUOUS_ICON_SCALE = 0.68;
 
   /**
    * Creates the label for a range button
@@ -99,15 +100,15 @@ define( function( require ) {
     this.addChild( modeControlPanel );
 
     // Create and add the panel for controlling discrete vs. continuous mode.
-    var discreteOrContinuousImageScale = 0.37;
     var discreteOrContinuousButtons = new RadioButtonGroup( model.comparisonTypeProperty, [
-      { value: 'continuous', node: new Image( continuousIconImage, { scale: discreteOrContinuousImageScale } ) },
-      { value: 'discrete', node: new Image( discreteIconImage, { scale: discreteOrContinuousImageScale } ) }
+      { value: 'continuous', node: new Image( continuousIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
+      { value: 'discrete', node: new Image( discreteIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
       baseColor: 'white',
       cornerRadius: 10,
-      spacing: 10
+      spacing: 10,
+      buttonContentYMargin: 20
     } );
     var discreteOrContinuousControlPanel = new Panel( discreteOrContinuousButtons, {
       fill: 'rgb( 252, 2, 47 )',
