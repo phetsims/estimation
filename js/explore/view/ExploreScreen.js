@@ -17,7 +17,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var linesIconImage = require( 'image!ESTIMATION/lines-icon.png' );
   var LineView = require( 'ESTIMATION/common/view/LineView' );
@@ -33,13 +32,11 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
   // Constants
   var EDGE_INSET = 10;
-  var BUTTON_IMAGE_WIDTH = 50; // In screen coords, which are roughly pixels
 
   /**
    * Creates the label for a range button
@@ -82,32 +79,41 @@ define( function( require ) {
     this.addChild( newObjectButton );
 
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
-    var inOutButtonOptions = { xMargin: 3, yMargin: 3 };
-    var modeControlPanel = new Panel( new VBox(
-        {
-          children: [
-            new InOutRadioButton( model.estimationModeProperty, 'lines', this.createImageOfGivenWidth( linesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-            new InOutRadioButton( model.estimationModeProperty, 'rectangles', this.createImageOfGivenWidth( squaresIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-            new InOutRadioButton( model.estimationModeProperty, 'cubes', this.createImageOfGivenWidth( cubesIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-            new InOutRadioButton( model.estimationModeProperty, 'cylinders', this.createImageOfGivenWidth( cylindersIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
-          ],
-          spacing: 10
-        } ),
-      { fill: 'rgb( 0, 171, 51 )', stroke: null, yMargin: 10 } );
-
+    var modeImageScale = 0.37;
+    var modeButtons = new RadioButtonGroup( model.estimationModeProperty, [
+      { value: 'lines', node: new Image( linesIconImage, { scale: modeImageScale } ) },
+      { value: 'rectangles', node: new Image( squaresIconImage, { scale: modeImageScale } ) },
+      { value: 'cubes', node: new Image( cubesIconImage, { scale: modeImageScale } ) },
+      { value: 'cylinders', node: new Image( cylindersIconImage, { scale: modeImageScale } ) }
+    ], {
+      orientation: 'vertical',
+      baseColor: 'white',
+      cornerRadius: 10,
+      spacing: 10
+    } );
+    var modeControlPanel = new Panel( modeButtons, {
+      fill: 'rgb( 0, 171, 51 )',
+      stroke: null,
+      yMargin: 10
+    } );
     this.addChild( modeControlPanel );
 
     // Create and add the panel for controlling discrete vs. continuous mode.
-    var discreteOrContinuousControlPanel = new Panel( new VBox(
-        {
-          children: [
-            new InOutRadioButton( model.comparisonTypeProperty, 'continuous', this.createImageOfGivenWidth( continuousIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions ),
-            new InOutRadioButton( model.comparisonTypeProperty, 'discrete', this.createImageOfGivenWidth( discreteIconImage, BUTTON_IMAGE_WIDTH ), inOutButtonOptions )
-          ],
-          spacing: 10
-        } ),
-      { fill: 'rgb( 252, 2, 47 )', stroke: null, yMargin: 10 } );
-
+    var discreteOrContinuousImageScale = 0.37;
+    var discreteOrContinuousButtons = new RadioButtonGroup( model.comparisonTypeProperty, [
+      { value: 'continuous', node: new Image( continuousIconImage, { scale: discreteOrContinuousImageScale } ) },
+      { value: 'discrete', node: new Image( discreteIconImage, { scale: discreteOrContinuousImageScale } ) }
+    ], {
+      orientation: 'vertical',
+      baseColor: 'white',
+      cornerRadius: 10,
+      spacing: 10
+    } );
+    var discreteOrContinuousControlPanel = new Panel( discreteOrContinuousButtons, {
+      fill: 'rgb( 252, 2, 47 )',
+      stroke: null,
+      yMargin: 10
+    } );
     this.addChild( discreteOrContinuousControlPanel );
 
     // The continuous or discrete panel doesn't make sense for one-dimensional
@@ -214,12 +220,6 @@ define( function( require ) {
   return inherit( ScreenView, ExploreScreen, {
     reset: function() {
       this.model.reset();
-    },
-
-    createImageOfGivenWidth: function( imageSource, width ) {
-      var imageNode = new Image( imageSource );
-      imageNode.scale( width / imageNode.width );
-      return imageNode;
     }
   } );
 } );
