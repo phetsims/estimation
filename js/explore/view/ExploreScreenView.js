@@ -53,7 +53,7 @@ define( function( require ) {
    * @param model
    * @constructor
    */
-  function ExploreScreen( model ) {
+  function ExploreScreenView( model ) {
     ScreenView.call( this, { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
     var thisScreen = this;
     this.model = model;
@@ -220,7 +220,7 @@ define( function( require ) {
     thisScreen.addChild( new CylinderView( model.modes.cylinders.compareObject, mvt ) );
   }
 
-  return inherit( ScreenView, ExploreScreen, {
+  return inherit( ScreenView, ExploreScreenView, {
     reset: function() {
       this.model.reset();
     }

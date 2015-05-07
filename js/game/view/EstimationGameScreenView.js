@@ -13,14 +13,14 @@ define( function( require ) {
   var screenshot1Image = require( 'image!ESTIMATION/screenshot-01-temp.jpg' );
 
 
-  function EstimationScreen() {
+  function EstimationGameScreenView() {
     ScreenView.call( this, { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
 
     // TODO: Temp for quick demo
     this.addChild( new Image( screenshot1Image, { scale: 0.75, centerX: this.layoutBounds.centerX, centerY: this.layoutBounds.centerY } ) );
   }
 
-  return inherit( ScreenView, EstimationScreen, {
+  return inherit( ScreenView, EstimationGameScreenView, {
     //TODO prototypes
   } );
 } );

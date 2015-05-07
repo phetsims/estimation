@@ -10,9 +10,9 @@ define( function( require ) {
 
   // imports
   var ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
-  var ExploreScreen = require( 'ESTIMATION/explore/view/ExploreScreen' );
+  var ExploreScreenView = require( 'ESTIMATION/explore/view/ExploreScreenView' );
   var EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
-  var EstimationGameScreen = require( 'ESTIMATION/game/view/EstimationGameScreen' );
+  var EstimationGameScreenView = require( 'ESTIMATION/game/view/EstimationGameScreenView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
@@ -38,12 +38,12 @@ define( function( require ) {
     new Sim( simTitle, [
       new Screen( exploreString, new Image( exploreScreenIcon ),
         function() {return new ExploreModel();},
-        function( model ) {return new ExploreScreen( model );},
+        function( model ) {return new ExploreScreenView( model );},
         { backgroundColor: 'rgb( 255, 248, 186 )' }
       ),
       new Screen( gameString, new Image( gameScreenIcon ),
         function() {return new EstimationGameModel();},
-        function( model ) {return new EstimationGameScreen( model );},
+        function( model ) {return new EstimationGameScreenView( model );},
         { backgroundColor: 'rgb( 255, 248, 186 )' }
       )
     ], simOptions ).start();
