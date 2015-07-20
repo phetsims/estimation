@@ -5,6 +5,5 @@ discrete-icon.png source=PhET
 explore-screen-icon.png source=PhET
 game-screen-icon.png source=PhET
 lines-icon.png source=PhET
-lines-icon.png source=PhET
 screenshot-01-temp.jpg source=PhET
 squares-icon.png source=PhET
