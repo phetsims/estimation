@@ -1,9 +1,9 @@
-continuous-icon.png source=PhET
-cubes-icon.png source=PhET
-cylinders-icon.png source=PhET
-discrete-icon.png source=PhET
-explore-screen-icon.png source=PhET
-game-screen-icon.png source=PhET
-lines-icon.png source=PhET
-screenshot-01-temp.jpg source=PhET
-squares-icon.png source=PhET
+continuous-icon.png source=PhET author=John Blanco
+cubes-icon.png source=PhET author=John Blanco
+cylinders-icon.png source=PhET author=John Blanco
+discrete-icon.png source=PhET author=John Blanco
+explore-screen-icon.png source=PhET author=John Blanco
+game-screen-icon.png source=PhET author=John Blanco
+lines-icon.png source=PhET author=John Blanco
+screenshot-01-temp.jpg source=PhET author=John Blanco
+squares-icon.png source=PhET author=John Blanco
