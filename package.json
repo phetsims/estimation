@@ -2,6 +2,7 @@
   "name": "estimation",
   "version": "1.0.0-dev.3",
   "license": "GPLv3",
+  "requirejsNamespace": "ESTIMATION",
   "simTitleStringKey": "ESTIMATION/estimation.name",
   "phetLibs": [
     "estimation",
