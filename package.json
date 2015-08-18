@@ -17,7 +17,6 @@
     "requirejsNamespace": "ESTIMATION",
     "simTitleStringKey": "ESTIMATION/estimation.name",
     "phetLibs": [
-      "estimation",
       "vegas",
       "vibe"
     ]
