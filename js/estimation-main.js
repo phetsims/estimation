@@ -21,7 +21,7 @@ define( function( require ) {
   // strings and images
   var exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
   var gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
-  var simTitle = require( 'string!ESTIMATION/estimation.name' );
+  var simTitle = require( 'string!ESTIMATION/estimation.title' );
   var exploreString = require( 'string!ESTIMATION/explore' );
   var gameString = require( 'string!ESTIMATION/game' );
 
