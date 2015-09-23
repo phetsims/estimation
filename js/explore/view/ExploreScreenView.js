@@ -6,7 +6,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var CubeBackView = require( 'ESTIMATION/common/view/CubeBackView' );
   var CubeView = require( 'ESTIMATION/common/view/CubeView' );
   var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );

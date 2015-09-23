@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var Color = require( 'SCENERY/util/Color' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var inherit = require( 'PHET_CORE/inherit' );

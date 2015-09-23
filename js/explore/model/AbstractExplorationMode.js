@@ -11,7 +11,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var Property = require( 'AXON/Property' );
 

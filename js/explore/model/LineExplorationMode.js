@@ -6,7 +6,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var LineModel = require( 'ESTIMATION/common/model/LineModel' );

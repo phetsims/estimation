@@ -3,7 +3,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var CubeExplorationMode = require( 'ESTIMATION/explore/model/CubeExplorationMode' );
   var CylinderExplorationMode = require( 'ESTIMATION/explore/model/CylinderExplorationMode' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );

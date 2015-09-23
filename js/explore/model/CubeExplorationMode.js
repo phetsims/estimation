@@ -6,7 +6,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var Color = require( 'SCENERY/util/Color' );
   var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
