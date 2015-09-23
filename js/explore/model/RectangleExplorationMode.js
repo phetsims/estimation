@@ -14,7 +14,7 @@ define( function( require ) {
   var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MAX_DISCRETE_RECTANGLES = 200;
   var MODE_NAME = 'rectangles';
   var COMPARE_RECTANGLE_SIZE = new Dimension2( 2, 2 );

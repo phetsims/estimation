@@ -15,7 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MAX_DISCRETE_CUBES = 200;
   var MODE_NAME = 'cubes';
   var COMPARE_CUBE_SIZE = new Dimension3( 1.75, 1.75, 1.75 );

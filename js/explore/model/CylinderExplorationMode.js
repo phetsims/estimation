@@ -15,7 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MAX_CYLINDER_SLICES = 100;
   var MODE_NAME = 'cylinders';
   var REFERENCE_CYLINDER_WIDTH = 1.5;

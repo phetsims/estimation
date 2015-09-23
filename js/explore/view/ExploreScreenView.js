@@ -35,7 +35,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
-  // Constants
+  // constants
   var EDGE_INSET = 10;
   var MODE_ICON_SCALE = 0.68;
   var DISCRETE_OR_CONTINUOUS_ICON_SCALE = 0.68;

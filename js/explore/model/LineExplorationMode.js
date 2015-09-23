@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MODE_NAME = 'lines';
   var COMPARE_LINE_LENGTH = 2.5; // In meters
   var VALID_REF_OBJECT_SIZES = [
