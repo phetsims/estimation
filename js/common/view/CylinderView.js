@@ -44,7 +44,7 @@ define( function( require ) {
       var ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
       var ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
       var cylinderHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
-      top.setShape( new Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
+      top.setShape( Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
       var shape = new Shape();
       shape.moveTo( -ellipseWidth / 2, 0 )
         .lineTo( -ellipseWidth / 2, cylinderHeight )

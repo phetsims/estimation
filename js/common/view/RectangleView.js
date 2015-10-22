@@ -34,7 +34,7 @@ define( function( require ) {
 
     // Hook up the update functions
     rectangleModel.sizeProperty.link( function() {
-      path.setShape( new Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( rectangleModel.sizeProperty.value.width ),
+      path.setShape( Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( rectangleModel.sizeProperty.value.width ),
         -mvt.modelToViewDeltaY( rectangleModel.sizeProperty.value.height ) ) );
       updatePosition();
     } );
