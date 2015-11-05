@@ -21,7 +21,7 @@ define( function( require ) {
   // strings and images
   var exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
   var gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
-  var simTitle = require( 'string!ESTIMATION/estimation.title' );
+  var estimationTitleString = require( 'string!ESTIMATION/estimation.title' );
   var exploreString = require( 'string!ESTIMATION/explore' );
   var gameString = require( 'string!ESTIMATION/game' );
 
@@ -35,7 +35,7 @@ define( function( require ) {
 
   SimLauncher.launch( function() {
     //Create and start the sim
-    new Sim( simTitle, [
+    new Sim( estimationTitleString, [
       new Screen( exploreString, new Image( exploreScreenIcon ),
         function() {return new ExploreModel();},
         function( model ) {return new ExploreScreenView( model );},
