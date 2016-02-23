@@ -73,22 +73,23 @@ define( function( require ) {
       { fill: thisSlider._options.trackFill, stroke: thisSlider._options.trackStroke, lineWidth: thisSlider._options.trackLineWidth } );
     thisSlider.addChild( thisSlider._track );
 
+    function handleTrackEvent( event ) {
+      if ( thisSlider._options.enabledProperty.get() ) {
+        var x = thisSlider._track.globalToLocalPoint( event.pointer.point ).x;
+        valueProperty.set( thisSlider._valueToPosition.inverse( x ) );
+      }
+    }
+
     // click in the track to change the value, continue dragging if desired
     var trackHandler = new SimpleDragHandler( {
-      handleTrackEvent: function( event ) {
-        if ( thisSlider._options.enabledProperty.get() ) {
-          var x = thisSlider._track.globalToLocalPoint( event.pointer.point ).x;
-          valueProperty.set( thisSlider._valueToPosition.inverse( x ) );
-        }
-      },
       start: function( event ) {
         if ( thisSlider._options.enabledProperty.get() ) {
           thisSlider._options.startDrag();
         }
-        this.handleTrackEvent( event );
+        handleTrackEvent( event );
       },
       drag: function( event ) {
-        this.handleTrackEvent( event );
+        handleTrackEvent( event );
       },
       end: function() {
         if ( thisSlider._options.enabledProperty.get() ) {
@@ -121,19 +122,20 @@ define( function( require ) {
     // highlight on mouse enter
     thumb.addInputListener( new FillHighlightListener( thisSlider._options.thumbFillEnabled, thisSlider._options.thumbFillHighlighted, thisSlider._options.enabledProperty ) );
 
+    var clickXOffset; // x-offset between initial click and thumb's origin
+
     // update value when thumb is dragged
     var thumbHandler = new SimpleDragHandler( {
-      clickXOffset: 0, // x-offset between initial click and thumb's origin
       allowTouchSnag: true,
       start: function( event ) {
         if ( thisSlider._options.enabledProperty.get() ) {
           thisSlider._options.startDrag();
         }
-        this.clickXOffset = thumb.globalToParentPoint( event.pointer.point ).x - thumb.x;
+        clickXOffset = thumb.globalToParentPoint( event.pointer.point ).x - thumb.x;
       },
       drag: function( event ) {
         if ( thisSlider._options.enabledProperty.get() ) {
-          var x = thumb.globalToParentPoint( event.pointer.point ).x - this.clickXOffset;
+          var x = thumb.globalToParentPoint( event.pointer.point ).x - clickXOffset;
           valueProperty.set( thisSlider._valueToPosition.inverse( x ) );
         }
       },
