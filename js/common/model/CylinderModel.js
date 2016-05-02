@@ -8,6 +8,7 @@ define( function( require ) {
 
   // modules
   var Property = require( 'AXON/Property' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {Dimension2} initialSize
@@ -31,5 +32,7 @@ define( function( require ) {
 
   CylinderModel.PERSPECTIVE_TILT = Math.PI / 10; // Must be between 0 and pi/2
 
+  estimation.register( 'CylinderModel', CylinderModel );
+  
   return CylinderModel;
 } );

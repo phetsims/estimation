@@ -14,6 +14,7 @@ define( function( require ) {
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var MAX_CYLINDER_SLICES = 100;
@@ -57,6 +58,8 @@ define( function( require ) {
     this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
   }
 
+  estimation.register( 'CylinderExplorationMode', CylinderExplorationMode );
+  
   return inherit( AbstractExplorationMode, CylinderExplorationMode, {
 
     setReferenceObjectSize: function( size ) {

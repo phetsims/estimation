@@ -8,6 +8,7 @@ define( function( require ) {
 
   // modules
   var Property = require( 'AXON/Property' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {Dimension3} initialSize
@@ -28,6 +29,8 @@ define( function( require ) {
     this.positionProperty = new Property( initialPosition );
     this.visibleProperty = new Property( initiallyVisible );
   }
+
+  estimation.register( 'CubeModel', CubeModel );
 
   return CubeModel;
 } );

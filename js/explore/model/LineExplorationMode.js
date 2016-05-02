@@ -12,6 +12,7 @@ define( function( require ) {
   var LineModel = require( 'ESTIMATION/common/model/LineModel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var MODE_NAME = 'lines';
@@ -45,6 +46,8 @@ define( function( require ) {
     // Maintain a short history of reference object sizes so unique ones can be chosen.
     this.previousReferenceObjectSize = INITIAL_REFERENCE_LINE_LENGTH;
   }
+
+  estimation.register( 'LineExplorationMode', LineExplorationMode );
 
   return inherit( AbstractExplorationMode, LineExplorationMode, {
 

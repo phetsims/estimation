@@ -14,6 +14,7 @@ define( function( require ) {
   // modules
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var Property = require( 'AXON/Property' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @constructor
@@ -80,6 +81,8 @@ define( function( require ) {
       this.setInitialReferenceObject();
     }
   };
+
+  estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
 
   return AbstractExplorationMode;
 } );

@@ -5,8 +5,9 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
-  return {
+  var EstimationConstants = {
 
     LAYOUT_BOUNDS: new Bounds2( 0, 0, 768, 504 ),
 
@@ -22,4 +23,8 @@ define( function( require ) {
     // Angle of depth projection for cubes, in radians
     CUBE_PROJECTION_ANGLE: Math.PI / 4
   };
+
+  estimation.register( 'EstimationConstants', EstimationConstants );
+
+  return EstimationConstants;
 } );

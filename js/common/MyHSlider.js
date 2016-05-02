@@ -17,6 +17,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {Property<Number>} valueProperty
@@ -165,6 +166,8 @@ define( function( require ) {
     thisSlider.mutate( _.omit( thisSlider._options, Object.keys( defaultOptions ) ) );
   }
 
+  estimation.register( 'MyHSlider', MyHSlider );
+  
   return inherit( Node, MyHSlider, {
 
     /**

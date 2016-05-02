@@ -13,6 +13,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {ModelShape} rectangleModel
@@ -44,5 +45,7 @@ define( function( require ) {
     } );
   }
 
+  estimation.register( 'RectangleView', RectangleView );
+  
   return inherit( Node, RectangleView );
 } );

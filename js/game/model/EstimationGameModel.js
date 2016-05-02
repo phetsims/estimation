@@ -3,12 +3,16 @@
 define( function( require ) {
   'use strict';
 
-  function EstimationModel() {
+  // modules
+  var inherit = require( 'PHET_CORE/inherit' );
+  var estimation = require( 'ESTIMATION/estimation' );
+
+  function EstimationGameModel() {
   }
 
-  EstimationModel.prototype = {
-    step: function() {}
-  };
+  estimation.register( 'EstimationGameModel', EstimationGameModel );
 
-  return EstimationModel;
+  return inherit( Object, EstimationGameModel, {
+    step: function() {}
+  } );
 } );

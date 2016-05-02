@@ -17,6 +17,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {ModelShape} cubeModel
@@ -76,5 +77,7 @@ define( function( require ) {
     } );
   }
 
+  estimation.register( 'CubeView', CubeView );
+  
   return inherit( Node, CubeView );
 } );

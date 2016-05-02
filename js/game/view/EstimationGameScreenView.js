@@ -8,6 +8,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   // images
   var screenshot1Image = require( 'image!ESTIMATION/screenshot-01-temp.jpg' );
@@ -20,6 +21,8 @@ define( function( require ) {
     this.addChild( new Image( screenshot1Image, { scale: 0.75, centerX: this.layoutBounds.centerX, centerY: this.layoutBounds.centerY } ) );
   }
 
+  estimation.register( 'EstimationGameScreenView', EstimationGameScreenView );
+  
   return inherit( ScreenView, EstimationGameScreenView, {
     //TODO prototypes
   } );

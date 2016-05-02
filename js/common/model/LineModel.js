@@ -8,6 +8,7 @@ define( function( require ) {
 
   // modules
   var Property = require( 'AXON/Property' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {Number} initialLength
@@ -27,5 +28,7 @@ define( function( require ) {
     this.visibleProperty = new Property( initiallyVisible );
   }
 
+  estimation.register( 'LineModel', LineModel );
+  
   return LineModel;
 } );

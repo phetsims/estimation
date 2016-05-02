@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var MAX_DISCRETE_RECTANGLES = 200;
@@ -58,6 +59,8 @@ define( function( require ) {
     this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
   }
 
+  estimation.register( 'RectangleExplorationMode', RectangleExplorationMode );
+  
   return inherit( AbstractExplorationMode, RectangleExplorationMode, {
 
     setReferenceObjectSize: function( size ) {

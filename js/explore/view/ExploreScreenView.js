@@ -34,6 +34,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var EDGE_INSET = 10;
@@ -219,6 +220,8 @@ define( function( require ) {
     thisScreen.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, mvt ) );
     thisScreen.addChild( new CylinderView( model.modes.cylinders.compareObject, mvt ) );
   }
+
+  estimation.register( 'ExploreScreenView', ExploreScreenView );
 
   return inherit( ScreenView, ExploreScreenView, {
     reset: function() {
