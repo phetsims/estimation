@@ -34,17 +34,30 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
+
     //Create and start the sim
     new Sim( estimationTitleString, [
-      new Screen( exploreString, new Image( exploreScreenIcon ),
+
+      // Explore screen
+      new Screen(
         function() {return new ExploreModel();},
         function( model ) {return new ExploreScreenView( model );},
-        { backgroundColor: 'rgb( 255, 248, 186 )' }
+        {
+          name: exploreString,
+          backgroundColor: 'rgb( 255, 248, 186 )',
+          homeScreenIcon: new Image( exploreScreenIcon )
+        }
       ),
-      new Screen( gameString, new Image( gameScreenIcon ),
+
+      // Game screen
+      new Screen(
         function() {return new EstimationGameModel();},
         function( model ) {return new EstimationGameScreenView( model );},
-        { backgroundColor: 'rgb( 255, 248, 186 )' }
+        {
+          name: gameString,
+          backgroundColor: 'rgb( 255, 248, 186 )',
+          homeScreenIcon: new Image( gameScreenIcon )
+        }
       )
     ], simOptions ).start();
   } );
