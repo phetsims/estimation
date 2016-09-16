@@ -24,7 +24,7 @@ define( function( require ) {
    */
   function CubeBackView( cubeModel, mvt ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     var dottedLineBack = new Path( null, { stroke: '#8b7d6b', lineDash: [ 4, 5 ] } );
     this.addChild( dottedLineBack );
@@ -32,8 +32,8 @@ define( function( require ) {
     function updatePosition() {
       var transformedPosition = mvt.modelToViewPosition( cubeModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
-      thisNode.left = transformedPosition.x;
-      thisNode.bottom = transformedPosition.y;
+      self.left = transformedPosition.x;
+      self.bottom = transformedPosition.y;
     }
 
     // Hook up the update functions
@@ -57,7 +57,7 @@ define( function( require ) {
     cubeModel.positionProperty.link( updatePosition );
 
     cubeModel.visibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
   }
 

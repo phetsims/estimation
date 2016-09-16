@@ -37,7 +37,7 @@ define( function( require ) {
    */
   function CylinderExplorationMode( selectedModeProperty ) {
     AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-    var thisMode = this;
+    var self = this;
 
     // Create the reference, compare, continuous, and discrete objects.
     var compareCylinderPosition = new Vector2( 0.75, -0.5 );
@@ -46,7 +46,7 @@ define( function( require ) {
     this.referenceObject = new CylinderModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2.0, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     _.times( MAX_CYLINDER_SLICES, function() {
       // Initial size is arbitrary, will be sized as needed.
-      thisMode.discreteObjectList.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+      self.discreteObjectList.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
     } );
     this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
     this.numVisibleDiscreteCylinders = 0;

@@ -22,15 +22,15 @@ define( function( require ) {
    */
   function RectangleView( rectangleModel, mvt ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
     var path = new Path( null, { fill: rectangleModel.color, stroke: ( rectangleModel.showOutline ? 'white' : null ) } );
     this.addChild( path );
 
     function updatePosition() {
       var transformedPosition = mvt.modelToViewPosition( rectangleModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
-      thisNode.left = transformedPosition.x;
-      thisNode.bottom = transformedPosition.y;
+      self.left = transformedPosition.x;
+      self.bottom = transformedPosition.y;
     }
 
     // Hook up the update functions
@@ -41,7 +41,7 @@ define( function( require ) {
     } );
     rectangleModel.positionProperty.link( updatePosition );
     rectangleModel.visibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
   }
 

@@ -56,7 +56,7 @@ define( function( require ) {
    */
   function ExploreScreenView( model ) {
     ScreenView.call( this, { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
-    var thisScreen = this;
+    var self = this;
     this.model = model;
 
     // Create the model-view transform.  The primary units used in the model
@@ -65,7 +65,7 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.5, thisScreen.layoutBounds.height * 0.5 ),
+      new Vector2( self.layoutBounds.width * 0.5, self.layoutBounds.height * 0.5 ),
       105 );
 
     // Add the various selectors and buttons for choosing which objects to explore.
@@ -164,7 +164,7 @@ define( function( require ) {
     readout.addChild( readoutText );
 
     // Add the general control buttons.
-    var resetAllButton = new ResetAllButton( { listener: function() { thisScreen.reset(); } } );
+    var resetAllButton = new ResetAllButton( { listener: function() { self.reset(); } } );
     this.addChild( resetAllButton );
 
     // Layout of controls
@@ -188,37 +188,37 @@ define( function( require ) {
     //------------------------------------------------------------------------
 
     // Lines mode
-    thisScreen.addChild( new LineView( model.modes.lines.referenceObject, mvt ) );
+    self.addChild( new LineView( model.modes.lines.referenceObject, mvt ) );
     model.modes.lines.discreteObjectList.forEach( function( line ) {
-      thisScreen.addChild( new LineView( line, mvt ) );
+      self.addChild( new LineView( line, mvt ) );
     } );
-    thisScreen.addChild( new LineView( model.modes.lines.continuousSizableObject, mvt ) );
-    thisScreen.addChild( new LineView( model.modes.lines.compareObject, mvt ) );
+    self.addChild( new LineView( model.modes.lines.continuousSizableObject, mvt ) );
+    self.addChild( new LineView( model.modes.lines.compareObject, mvt ) );
 
     // Rectangles mode
-    thisScreen.addChild( new RectangleView( model.modes.rectangles.referenceObject, mvt ) );
-    thisScreen.addChild( new RectangleView( model.modes.rectangles.compareObject, mvt ) );
+    self.addChild( new RectangleView( model.modes.rectangles.referenceObject, mvt ) );
+    self.addChild( new RectangleView( model.modes.rectangles.compareObject, mvt ) );
     model.modes.rectangles.discreteObjectList.forEach( function( line ) {
-      thisScreen.addChild( new RectangleView( line, mvt ) );
+      self.addChild( new RectangleView( line, mvt ) );
     } );
-    thisScreen.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, mvt ) );
+    self.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, mvt ) );
 
     // Cubes mode
-    thisScreen.addChild( new CubeView( model.modes.cubes.referenceObject, mvt ) );
-    thisScreen.addChild( new CubeBackView( model.modes.cubes.compareObject, mvt ) );
+    self.addChild( new CubeView( model.modes.cubes.referenceObject, mvt ) );
+    self.addChild( new CubeBackView( model.modes.cubes.compareObject, mvt ) );
     model.modes.cubes.discreteObjectList.forEach( function( cube ) {
-      thisScreen.addChild( new CubeView( cube, mvt ) );
+      self.addChild( new CubeView( cube, mvt ) );
     } );
-    thisScreen.addChild( new CubeView( model.modes.cubes.continuousSizableObject, mvt ) );
-    thisScreen.addChild( new CubeView( model.modes.cubes.compareObject, mvt ) );
+    self.addChild( new CubeView( model.modes.cubes.continuousSizableObject, mvt ) );
+    self.addChild( new CubeView( model.modes.cubes.compareObject, mvt ) );
 
     // Cylinders mode
-    thisScreen.addChild( new CylinderView( model.modes.cylinders.referenceObject, mvt ) );
+    self.addChild( new CylinderView( model.modes.cylinders.referenceObject, mvt ) );
     model.modes.cylinders.discreteObjectList.forEach( function( line ) {
-      thisScreen.addChild( new CylinderView( line, mvt ) );
+      self.addChild( new CylinderView( line, mvt ) );
     } );
-    thisScreen.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, mvt ) );
-    thisScreen.addChild( new CylinderView( model.modes.cylinders.compareObject, mvt ) );
+    self.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, mvt ) );
+    self.addChild( new CylinderView( model.modes.cylinders.compareObject, mvt ) );
   }
 
   estimation.register( 'ExploreScreenView', ExploreScreenView );

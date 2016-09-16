@@ -38,7 +38,7 @@ define( function( require ) {
    */
   function RectangleExplorationMode( selectedModeProperty ) {
     AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-    var thisMode = this;
+    var self = this;
 
     // Create the reference, compare, continuous, and discrete objects.
     var compareRectPosition = new Vector2( 0, 0 );
@@ -47,7 +47,7 @@ define( function( require ) {
     this.referenceObject = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     _.times( MAX_DISCRETE_RECTANGLES, function() {
       // Initial size is arbitrary, will be sized as needed.
-      thisMode.discreteObjectList.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+      self.discreteObjectList.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
     } );
     this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
     this.numVisibleDiscreteRects = 0;

@@ -25,7 +25,7 @@ define( function( require ) {
    */
   function CylinderView( cylinderModel, mvt ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
     var side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
     this.addChild( side );
     var top = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
@@ -34,8 +34,8 @@ define( function( require ) {
     function updatePosition() {
       var transformedPosition = mvt.modelToViewPosition( cylinderModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
-      thisNode.left = transformedPosition.x;
-      thisNode.bottom = transformedPosition.y;
+      self.left = transformedPosition.x;
+      self.bottom = transformedPosition.y;
     }
 
     var baseColor = cylinderModel.color instanceof Color ? cylinderModel.color : new Color( cylinderModel.color );
@@ -62,7 +62,7 @@ define( function( require ) {
     } );
     cylinderModel.positionProperty.link( updatePosition );
     cylinderModel.visibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
   }
 

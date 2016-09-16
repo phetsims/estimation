@@ -27,8 +27,8 @@ define( function( require ) {
    */
   function MyHSlider( valueProperty, range, options ) {
 
-    var thisSlider = this;
-    Node.call( thisSlider );
+    var self = this;
+    Node.call( self );
 
     // default options, these will not be passed to supertype
     var defaultOptions = {
@@ -60,32 +60,32 @@ define( function( require ) {
     };
 
     // fill in options with defaults
-    thisSlider._options = _.extend( defaultOptions, options );
+    self._options = _.extend( defaultOptions, options );
 
     // ticks are added to this parent, so they are behind knob
-    thisSlider._ticksParent = new Node();
-    thisSlider.addChild( thisSlider._ticksParent );
+    self._ticksParent = new Node();
+    self.addChild( self._ticksParent );
 
     // mapping between value and track position
-    thisSlider._valueToPosition = new LinearFunction( range.min, range.max, 0, this._options.trackSize.width, true /* clamp */ );
+    self._valueToPosition = new LinearFunction( range.min, range.max, 0, this._options.trackSize.width, true /* clamp */ );
 
     // track
-    thisSlider._track = new Rectangle( 0, 0, thisSlider._options.trackSize.width, thisSlider._options.trackSize.height,
-      { fill: thisSlider._options.trackFill, stroke: thisSlider._options.trackStroke, lineWidth: thisSlider._options.trackLineWidth } );
-    thisSlider.addChild( thisSlider._track );
+    self._track = new Rectangle( 0, 0, self._options.trackSize.width, self._options.trackSize.height,
+      { fill: self._options.trackFill, stroke: self._options.trackStroke, lineWidth: self._options.trackLineWidth } );
+    self.addChild( self._track );
 
     function handleTrackEvent( event ) {
-      if ( thisSlider._options.enabledProperty.get() ) {
-        var x = thisSlider._track.globalToLocalPoint( event.pointer.point ).x;
-        valueProperty.set( thisSlider._valueToPosition.inverse( x ) );
+      if ( self._options.enabledProperty.get() ) {
+        var x = self._track.globalToLocalPoint( event.pointer.point ).x;
+        valueProperty.set( self._valueToPosition.inverse( x ) );
       }
     }
 
     // click in the track to change the value, continue dragging if desired
     var trackHandler = new SimpleDragHandler( {
       start: function( event ) {
-        if ( thisSlider._options.enabledProperty.get() ) {
-          thisSlider._options.startDrag();
+        if ( self._options.enabledProperty.get() ) {
+          self._options.startDrag();
         }
         handleTrackEvent( event );
       },
@@ -93,27 +93,27 @@ define( function( require ) {
         handleTrackEvent( event );
       },
       end: function() {
-        if ( thisSlider._options.enabledProperty.get() ) {
-          thisSlider._options.endDrag();
+        if ( self._options.enabledProperty.get() ) {
+          self._options.endDrag();
         }
       }
     } );
-    thisSlider._track.addInputListener( trackHandler );
+    self._track.addInputListener( trackHandler );
 
     // thumb, points up
     var arcWidth = 0.25 * this._options.thumbSize.width;
-    var thumbFill = thisSlider._options.enabledProperty.get() ? thisSlider._options.thumbFillEnabled : thisSlider._options.thumbFillDisabled;
-    var thumb = new Rectangle( -thisSlider._options.thumbSize.width / 2, -thisSlider._options.thumbSize.height / 2, thisSlider._options.thumbSize.width, thisSlider._options.thumbSize.height, arcWidth, arcWidth,
+    var thumbFill = self._options.enabledProperty.get() ? self._options.thumbFillEnabled : self._options.thumbFillDisabled;
+    var thumb = new Rectangle( -self._options.thumbSize.width / 2, -self._options.thumbSize.height / 2, self._options.thumbSize.width, self._options.thumbSize.height, arcWidth, arcWidth,
       {
-        cursor: thisSlider._options.cursor,
+        cursor: self._options.cursor,
         fill: thumbFill,
-        stroke: thisSlider._options.thumbStroke,
-        lineWidth: thisSlider._options.thumbLineWidth
+        stroke: self._options.thumbStroke,
+        lineWidth: self._options.thumbLineWidth
       } );
     var centerLineYMargin = 3;
-    thumb.addChild( new Path( Shape.lineSegment( 0, -( thisSlider._options.thumbSize.height / 2 ) + centerLineYMargin, 0, ( thisSlider._options.thumbSize.height / 2 ) - centerLineYMargin ), { stroke: 'white' } ) );
-    thumb.centerY = thisSlider._track.centerY;
-    thisSlider.addChild( thumb );
+    thumb.addChild( new Path( Shape.lineSegment( 0, -( self._options.thumbSize.height / 2 ) + centerLineYMargin, 0, ( self._options.thumbSize.height / 2 ) - centerLineYMargin ), { stroke: 'white' } ) );
+    thumb.centerY = self._track.centerY;
+    self.addChild( thumb );
 
     // thumb touch area
     var dx = 0.5 * thumb.width;
@@ -121,7 +121,7 @@ define( function( require ) {
     thumb.touchArea = Shape.rectangle( ( -thumb.width / 2 ) - dx, ( -thumb.height / 2 ) - dy, thumb.width + dx + dx, thumb.height + dy + dy );
 
     // highlight on mouse enter
-    thumb.addInputListener( new FillHighlightListener( thisSlider._options.thumbFillEnabled, thisSlider._options.thumbFillHighlighted, thisSlider._options.enabledProperty ) );
+    thumb.addInputListener( new FillHighlightListener( self._options.thumbFillEnabled, self._options.thumbFillHighlighted, self._options.enabledProperty ) );
 
     var clickXOffset; // x-offset between initial click and thumb's origin
 
@@ -129,28 +129,28 @@ define( function( require ) {
     var thumbHandler = new SimpleDragHandler( {
       allowTouchSnag: true,
       start: function( event ) {
-        if ( thisSlider._options.enabledProperty.get() ) {
-          thisSlider._options.startDrag();
+        if ( self._options.enabledProperty.get() ) {
+          self._options.startDrag();
         }
         clickXOffset = thumb.globalToParentPoint( event.pointer.point ).x - thumb.x;
       },
       drag: function( event ) {
-        if ( thisSlider._options.enabledProperty.get() ) {
+        if ( self._options.enabledProperty.get() ) {
           var x = thumb.globalToParentPoint( event.pointer.point ).x - clickXOffset;
-          valueProperty.set( thisSlider._valueToPosition.inverse( x ) );
+          valueProperty.set( self._valueToPosition.inverse( x ) );
         }
       },
       end: function() {
-        if ( thisSlider._options.enabledProperty.get() ) {
-          thisSlider._options.endDrag();
+        if ( self._options.enabledProperty.get() ) {
+          self._options.endDrag();
         }
       }
     } );
     thumb.addInputListener( thumbHandler );
 
     // enable/disable thumb
-    thisSlider._options.enabledProperty.link( function( enabled ) {
-      thumb.fill = enabled ? thisSlider._options.thumbFillEnabled : thisSlider._options.thumbFillDisabled;
+    self._options.enabledProperty.link( function( enabled ) {
+      thumb.fill = enabled ? self._options.thumbFillEnabled : self._options.thumbFillDisabled;
       thumb.cursor = enabled ? 'pointer' : 'default';
       if ( !enabled ) {
         if ( thumbHandler.dragging ) { thumbHandler.endDrag(); }
@@ -160,10 +160,10 @@ define( function( require ) {
 
     // update thumb location when value changes
     valueProperty.link( function( value ) {
-      thumb.centerX = thisSlider._valueToPosition( value );
+      thumb.centerX = self._valueToPosition( value );
     } );
 
-    thisSlider.mutate( _.omit( thisSlider._options, Object.keys( defaultOptions ) ) );
+    self.mutate( _.omit( self._options, Object.keys( defaultOptions ) ) );
   }
 
   estimation.register( 'MyHSlider', MyHSlider );

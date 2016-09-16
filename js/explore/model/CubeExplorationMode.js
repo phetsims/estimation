@@ -36,7 +36,7 @@ define( function( require ) {
    */
   function CubeExplorationMode( selectedModeProperty ) {
     AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-    var thisMode = this;
+    var self = this;
 
     // Create the reference, compare, continuous, and discrete objects.
     var compareCubePosition = new Vector2( 0, -0.2 );
@@ -45,7 +45,7 @@ define( function( require ) {
     this.referenceObject = new CubeModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
     _.times( MAX_DISCRETE_CUBES, function() {
       // Initial size is arbitrary, will be sized as needed.
-      thisMode.discreteObjectList.push( new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+      self.discreteObjectList.push( new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
     } );
     this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
     this.numVisibleDiscreteCubes = 0;

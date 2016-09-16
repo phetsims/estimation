@@ -23,7 +23,7 @@ define( function( require ) {
    */
   function LineView( lineModel, mvt ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
     var path = new Path( null, { stroke: lineModel.color, lineWidth: 3 } );
     this.addChild( path );
     lineModel.lengthProperty.link( function( width ) {
@@ -32,7 +32,7 @@ define( function( require ) {
       path.setShape( Shape.lineSegment( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y ) );
     } );
     lineModel.visibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
   }
 

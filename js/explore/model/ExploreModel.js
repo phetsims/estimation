@@ -16,7 +16,7 @@ define( function( require ) {
    * @constructor
    */
   function ExploreModel() {
-    var thisModel = this;
+    var self = this;
 
     // Externally visible properties.
     this.estimationModeProperty = new Property( 'lines' ); // Valid values are 'lines', 'rectangles', 'cubes', and 'cylinders'.
@@ -29,11 +29,11 @@ define( function( require ) {
 
     // Hook up internal property dependencies.
     this.estimationRangeProperty.link( function( range ) {
-      thisModel.offsetIntoRangeProperty.value = 0;
-      thisModel.estimateProperty.value = range.min;
+      self.offsetIntoRangeProperty.value = 0;
+      self.estimateProperty.value = range.min;
     } );
     this.offsetIntoRangeProperty.link( function( offset ) {
-      thisModel.estimateProperty.value = Math.floor( offset * thisModel.estimationRangeProperty.value.max - thisModel.estimationRangeProperty.value.min * ( offset - 1) );
+      self.estimateProperty.value = Math.floor( offset * self.estimationRangeProperty.value.max - self.estimationRangeProperty.value.min * ( offset - 1) );
     } );
 
     // Create the various modes that the user can explore.
@@ -50,26 +50,26 @@ define( function( require ) {
       // do this in order to restore it, since ranges are not mutually
       // exclusive.
       if ( oldMode ) {
-        thisModel.modes[ oldMode ].selectedRange = thisModel.estimationRangeProperty.value;
-        thisModel.modes[ oldMode ].offsetIntoRange = thisModel.offsetIntoRangeProperty.value;
+        self.modes[ oldMode ].selectedRange = self.estimationRangeProperty.value;
+        self.modes[ oldMode ].offsetIntoRange = self.offsetIntoRangeProperty.value;
       }
 
       // Restore the estimate for this mode.
-      thisModel.estimationRangeProperty.value = thisModel.modes[ newMode ].selectedRange;
-      thisModel.offsetIntoRangeProperty.value = thisModel.modes[ newMode ].offsetIntoRange;
+      self.estimationRangeProperty.value = self.modes[ newMode ].selectedRange;
+      self.offsetIntoRangeProperty.value = self.modes[ newMode ].offsetIntoRange;
 
       // Restore the comparison type.
-      thisModel.comparisonTypeProperty.value = thisModel.modes[ newMode ].continuousOrDiscreteProperty.value;
+      self.comparisonTypeProperty.value = self.modes[ newMode ].continuousOrDiscreteProperty.value;
     } );
 
     this.estimateProperty.link( function( estimate ) {
       // Propagate changes from the UI into the active mode.
-      thisModel.modes[ thisModel.estimationModeProperty.value ].estimateProperty.value = estimate;
+      self.modes[ self.estimationModeProperty.value ].estimateProperty.value = estimate;
     } );
 
     this.comparisonTypeProperty.link( function( discreteOrContinuous ) {
       // Propagate changes from the UI into the active mode.
-      thisModel.modes[ thisModel.estimationModeProperty.value ].continuousOrDiscreteProperty.value = discreteOrContinuous;
+      self.modes[ self.estimationModeProperty.value ].continuousOrDiscreteProperty.value = discreteOrContinuous;
     } );
   }
 
