@@ -11,9 +11,9 @@ define( function( require ) {
   var estimation = require( 'ESTIMATION/estimation' );
 
   /**
-   * @param {Number} initialLength
+   * @param {number} initialLength
    * @param {Vector2} initialPosition
-   * @param {String} color
+   * @param {string} color
    * @param {boolean} initiallyVisible
    * @constructor
    */
@@ -29,6 +29,6 @@ define( function( require ) {
   }
 
   estimation.register( 'LineModel', LineModel );
-  
+
   return LineModel;
 } );

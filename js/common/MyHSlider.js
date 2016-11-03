@@ -167,12 +167,12 @@ define( function( require ) {
   }
 
   estimation.register( 'MyHSlider', MyHSlider );
-  
+
   return inherit( Node, MyHSlider, {
 
     /**
      * Adds a major tick mark.
-     * @param {Number} value
+     * @param {number} value
      * @param {Node} label optional
      */
     addMajorTick: function( value, label ) {
@@ -181,7 +181,7 @@ define( function( require ) {
 
     /**
      * Adds a minor tick mark.
-     * @param {Number} value
+     * @param {number} value
      * @param {Node} label optional
      */
     addMinorTick: function( value, label ) {
@@ -194,11 +194,11 @@ define( function( require ) {
 
     /*
      * Adds a tick mark above the track.
-     * @param {Number} value
+     * @param {number} value
      * @param {Node} label optional
-     * @param {Number} length
-     * @param {Number} stroke
-     * @param {Number} lineWidth
+     * @param {number} length
+     * @param {number} stroke
+     * @param {number} lineWidth
      */
     _addTick: function( value, label, length, stroke, lineWidth ) {
       var labelX = this._valueToPosition( value );

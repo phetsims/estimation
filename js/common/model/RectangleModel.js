@@ -13,7 +13,7 @@ define( function( require ) {
   /**
    * @param {Dimension2} initialSize
    * @param {Vector2} initialPosition
-   * @param {String} color
+   * @param {string} color
    * @param {boolean} showOutline
    * @param {boolean} initiallyVisible
    * @constructor
@@ -31,6 +31,6 @@ define( function( require ) {
   }
 
   estimation.register( 'RectangleModel', RectangleModel );
-  
+
   return RectangleModel;
 } );

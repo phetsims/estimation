@@ -13,7 +13,7 @@ define( function( require ) {
   /**
    * @param {Dimension2} initialSize
    * @param {Vector2} initialPosition
-   * @param {String} color
+   * @param {string} color
    * @param {boolean} showOutline
    * @param {boolean} initiallyVisible
    * @constructor
@@ -33,6 +33,6 @@ define( function( require ) {
   CylinderModel.PERSPECTIVE_TILT = Math.PI / 10; // Must be between 0 and pi/2
 
   estimation.register( 'CylinderModel', CylinderModel );
-  
+
   return CylinderModel;
 } );

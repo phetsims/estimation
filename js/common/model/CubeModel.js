@@ -13,7 +13,7 @@ define( function( require ) {
   /**
    * @param {Dimension3} initialSize
    * @param {Vector2} initialPosition
-   * @param {String} color
+   * @param {string} color
    * @param {boolean} showOutline
    * @param {boolean} initiallyVisible
    * @constructor
