@@ -18,7 +18,6 @@ define( function( require ) {
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings and images
   var exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
@@ -46,7 +45,7 @@ define( function( require ) {
         function( model ) {return new ExploreScreenView( model );},
         {
           name: exploreString,
-          backgroundColorProperty: new Property( Color.toColor( 'rgb( 255, 248, 186 )' ) ),
+          backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
           homeScreenIcon: new Image( exploreScreenIcon )
         }
       ),
@@ -57,7 +56,7 @@ define( function( require ) {
         function( model ) {return new EstimationGameScreenView( model );},
         {
           name: gameString,
-          backgroundColorProperty: new Property( Color.toColor( 'rgb( 255, 248, 186 )' ) ),
+          backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
           homeScreenIcon: new Image( gameScreenIcon )
         }
       )
