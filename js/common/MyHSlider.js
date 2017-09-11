@@ -8,6 +8,7 @@ define( function( require ) {
 
   // imports
   var Dimension2 = require( 'DOT/Dimension2' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var FillHighlightListener = require( 'SCENERY_PHET/input/FillHighlightListener' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
@@ -17,7 +18,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {Property<Number>} valueProperty

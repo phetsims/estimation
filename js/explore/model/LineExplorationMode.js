@@ -8,11 +8,11 @@ define( function( require ) {
 
   // modules
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var LineModel = require( 'ESTIMATION/common/model/LineModel' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Vector2 = require( 'DOT/Vector2' );
   var estimation = require( 'ESTIMATION/estimation' );
+  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var LineModel = require( 'ESTIMATION/common/model/LineModel' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var MODE_NAME = 'lines';

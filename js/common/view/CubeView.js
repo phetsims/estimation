@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -17,7 +18,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {ModelShape} cubeModel

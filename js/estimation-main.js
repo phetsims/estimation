@@ -9,21 +9,21 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
-  var ExploreScreenView = require( 'ESTIMATION/explore/view/ExploreScreenView' );
   var EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
   var EstimationGameScreenView = require( 'ESTIMATION/game/view/EstimationGameScreenView' );
+  var ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
+  var ExploreScreenView = require( 'ESTIMATION/explore/view/ExploreScreenView' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
-  var Property = require( 'AXON/Property' );
 
   // strings and images
-  var exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
-  var gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
   var estimationTitleString = require( 'string!ESTIMATION/estimation.title' );
+  var exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
   var exploreString = require( 'string!ESTIMATION/explore' );
+  var gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
   var gameString = require( 'string!ESTIMATION/game' );
 
   var simOptions = {

@@ -9,11 +9,11 @@ define( function( require ) {
   // modules
   var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
   var Vector2 = require( 'DOT/Vector2' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var MAX_DISCRETE_RECTANGLES = 200;

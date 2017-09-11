@@ -11,12 +11,12 @@ define( function( require ) {
   // modules
   var Color = require( 'SCENERY/util/Color' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @param {ModelShape} cylinderModel

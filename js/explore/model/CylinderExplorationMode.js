@@ -11,10 +11,10 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var MAX_CYLINDER_SLICES = 100;

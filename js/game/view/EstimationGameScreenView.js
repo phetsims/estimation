@@ -4,11 +4,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var estimation = require( 'ESTIMATION/estimation' );
+  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   // images
   var screenshot1Image = require( 'image!ESTIMATION/screenshot-01-temp.jpg' );

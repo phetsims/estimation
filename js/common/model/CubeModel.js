@@ -7,8 +7,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Property = require( 'AXON/Property' );
   var estimation = require( 'ESTIMATION/estimation' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @param {Dimension3} initialSize

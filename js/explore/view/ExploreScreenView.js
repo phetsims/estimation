@@ -7,15 +7,16 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CubeBackView = require( 'ESTIMATION/common/view/CubeBackView' );
-  var CubeView = require( 'ESTIMATION/common/view/CubeView' );
-  var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
   var continuousIconImage = require( 'image!ESTIMATION/continuous-icon.png' );
+  var CubeBackView = require( 'ESTIMATION/common/view/CubeBackView' );
+  var cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
+  var CubeView = require( 'ESTIMATION/common/view/CubeView' );
   var cylindersIconImage = require( 'image!ESTIMATION/cylinders-icon.png' );
+  var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
+  var estimation = require( 'ESTIMATION/estimation' );
+  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var linesIconImage = require( 'image!ESTIMATION/lines-icon.png' );
@@ -25,16 +26,15 @@ define( function( require ) {
   var newObjectString = require( 'string!ESTIMATION/newObject' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var Vector2 = require( 'DOT/Vector2' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var EDGE_INSET = 10;

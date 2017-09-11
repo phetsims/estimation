@@ -11,10 +11,10 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var CubeModel = require( 'ESTIMATION/common/model/CubeModel' );
   var Dimension3 = require( 'ESTIMATION/common/model/Dimension3' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   // constants
   var MAX_DISCRETE_CUBES = 200;

@@ -12,9 +12,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var estimation = require( 'ESTIMATION/estimation' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var Property = require( 'AXON/Property' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @constructor

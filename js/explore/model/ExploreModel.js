@@ -6,11 +6,11 @@ define( function( require ) {
   // modules
   var CubeExplorationMode = require( 'ESTIMATION/explore/model/CubeExplorationMode' );
   var CylinderExplorationMode = require( 'ESTIMATION/explore/model/CylinderExplorationMode' );
+  var estimation = require( 'ESTIMATION/estimation' );
   var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
   var LineExplorationMode = require( 'ESTIMATION/explore/model/LineExplorationMode' );
   var Property = require( 'AXON/Property' );
   var RectangleExplorationMode = require( 'ESTIMATION/explore/model/RectangleExplorationMode' );
-  var estimation = require( 'ESTIMATION/estimation' );
 
   /**
    * @constructor

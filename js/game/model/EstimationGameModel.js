@@ -4,8 +4,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
   var estimation = require( 'ESTIMATION/estimation' );
+  var inherit = require( 'PHET_CORE/inherit' );
 
   function EstimationGameModel() {
   }
