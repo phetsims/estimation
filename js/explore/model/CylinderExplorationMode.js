@@ -59,7 +59,7 @@ define( function( require ) {
   }
 
   estimation.register( 'CylinderExplorationMode', CylinderExplorationMode );
-  
+
   return inherit( AbstractExplorationMode, CylinderExplorationMode, {
 
     setReferenceObjectSize: function( size ) {
@@ -88,7 +88,7 @@ define( function( require ) {
       var unique = false;
       var referenceObjectSize = null;
       while ( !unique ) {
-        referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( Math.random() * VALID_REF_OBJECT_SIZES.length ) ];
+        referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( phet.joist.random.nextDouble() * VALID_REF_OBJECT_SIZES.length ) ];
         unique = ( referenceObjectSize !== this.previousReferenceObjectSize && referenceObjectSize !== this.referenceObject.size );
       }
       this.previousReferenceObjectSize = referenceObjectSize;
