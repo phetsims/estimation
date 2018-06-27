@@ -32,6 +32,9 @@ define( function( require ) {
       self.offsetIntoRangeProperty.value = 0;
       self.estimateProperty.value = range.min;
     } );
+
+    // to calculate the user's estimate, linearly map offset from  0-1 to  estimationRange.min-estimationRange.max, and
+    // then make it an integer
     this.offsetIntoRangeProperty.link( function( offset ) {
       self.estimateProperty.value = Math.floor( offset * self.estimationRangeProperty.value.max - self.estimationRangeProperty.value.min * ( offset - 1) );
     } );
