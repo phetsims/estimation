@@ -15,13 +15,14 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
   /**
    * @param {Property<Number>} valueProperty
-   * @param { {min:Number, max:Number} } range
+   * @param {Range} range
    * @param {Object} [options]
    * @constructor
    */
@@ -58,6 +59,8 @@ define( function( require ) {
       startDrag: function() {}, // called when a drag sequence starts
       endDrag: function() {} // called when a drag sequence ends
     };
+
+    assert && assert( range instanceof Range, 'range must be of type Range:' + range );
 
     // fill in options with defaults
     self._options = _.extend( defaultOptions, options );
