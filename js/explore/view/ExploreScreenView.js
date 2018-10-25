@@ -27,6 +27,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -142,7 +143,7 @@ define( function( require ) {
     this.addChild( rangeSelectionPanel );
 
     // Add the slider that will control the fine-grained estimate value.
-    var slider = new MyHSlider( model.offsetIntoRangeProperty, { min: 0, max: 1 },
+    var slider = new MyHSlider( model.offsetIntoRangeProperty, new Range( 0, 1 ),
       {
         trackFill: 'black',
         trackSize: new Dimension2( 400, 4 )
