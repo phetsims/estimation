@@ -156,8 +156,8 @@ define( function( require ) {
       thumb.fill = enabled ? self._options.thumbFillEnabled : self._options.thumbFillDisabled;
       thumb.cursor = enabled ? 'pointer' : 'default';
       if ( !enabled ) {
-        if ( thumbHandler.dragging ) { thumbHandler.endDrag(); }
-        if ( trackHandler.dragging ) { trackHandler.endDrag(); }
+        if ( thumbHandler.dragging ) { thumbHandler.interrupt(); }
+        if ( trackHandler.dragging ) { trackHandler.interrupt(); }
       }
     } );
 
