@@ -28,7 +28,7 @@ define( function( require ) {
     this.addChild( path );
     lineModel.lengthProperty.link( function( width ) {
       var transformedOrigin = mvt.modelToViewPosition( lineModel.positionProperty.value );
-      var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ) ), 0 );
+      var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ) ) );
       path.setShape( Shape.lineSegment( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y ) );
     } );
     lineModel.visibleProperty.link( function( visible ) {
