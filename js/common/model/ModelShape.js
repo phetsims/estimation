@@ -9,6 +9,7 @@ define( function( require ) {
   // modules
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param type
@@ -31,7 +32,7 @@ define( function( require ) {
     this.heightProperty = new Property( initialHeight );
     this.depthProperty = new Property( initialDepth );
     this.visibleProperty = new Property( false );
-    this.positionProperty = new Property( Vector2.ZERO );
+    this.positionProperty = new Vector2Property( Vector2.ZERO );
   };
 
   ModelShape.line = function( initialLength, color, showOutline ) {
