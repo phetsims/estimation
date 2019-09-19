@@ -3,18 +3,18 @@
 /**
  * Definition of the 'cylinder exploration mode' for the exploration model.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
-  var Color = require( 'SCENERY/util/Color' );
-  var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
+  const Color = require( 'SCENERY/util/Color' );
+  const CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var MAX_CYLINDER_SLICES = 100;

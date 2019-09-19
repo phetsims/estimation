@@ -3,17 +3,17 @@
 /**
  * Definition of the 'line exploration mode' for the exploration model.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AbstractExplorationMode = require( 'ESTIMATION/explore/model/AbstractExplorationMode' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const RectangleModel = require( 'ESTIMATION/common/model/RectangleModel' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var MAX_DISCRETE_RECTANGLES = 200;

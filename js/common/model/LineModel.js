@@ -3,12 +3,12 @@
 /**
  * Model of a horizontal line that can move, change its length, and has a color.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var estimation = require( 'ESTIMATION/estimation' );
-  var Property = require( 'AXON/Property' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const Property = require( 'AXON/Property' );
 
   /**
    * @param {number} initialLength

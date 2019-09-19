@@ -3,39 +3,39 @@
 /**
  * Main view for the 'Explore' screen.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var continuousIconImage = require( 'image!ESTIMATION/continuous-icon.png' );
-  var CubeBackView = require( 'ESTIMATION/common/view/CubeBackView' );
-  var cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
-  var CubeView = require( 'ESTIMATION/common/view/CubeView' );
-  var cylindersIconImage = require( 'image!ESTIMATION/cylinders-icon.png' );
-  var CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var linesIconImage = require( 'image!ESTIMATION/lines-icon.png' );
-  var LineView = require( 'ESTIMATION/common/view/LineView' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var MyHSlider = require( 'ESTIMATION/common/MyHSlider' );
-  var newObjectString = require( 'string!ESTIMATION/newObject' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const continuousIconImage = require( 'image!ESTIMATION/continuous-icon.png' );
+  const CubeBackView = require( 'ESTIMATION/common/view/CubeBackView' );
+  const cubesIconImage = require( 'image!ESTIMATION/cubes-icon.png' );
+  const CubeView = require( 'ESTIMATION/common/view/CubeView' );
+  const cylindersIconImage = require( 'image!ESTIMATION/cylinders-icon.png' );
+  const CylinderView = require( 'ESTIMATION/common/view/CylinderView' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const discreteIconImage = require( 'image!ESTIMATION/discrete-icon.png' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const linesIconImage = require( 'image!ESTIMATION/lines-icon.png' );
+  const LineView = require( 'ESTIMATION/common/view/LineView' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const MyHSlider = require( 'ESTIMATION/common/MyHSlider' );
+  const newObjectString = require( 'string!ESTIMATION/newObject' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  const Range = require( 'DOT/Range' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RectangleView = require( 'ESTIMATION/common/view/RectangleView' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const squaresIconImage = require( 'image!ESTIMATION/squares-icon.png' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var EDGE_INSET = 10;

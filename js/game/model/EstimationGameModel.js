@@ -1,11 +1,11 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var estimation = require( 'ESTIMATION/estimation' );
-  var inherit = require( 'PHET_CORE/inherit' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const inherit = require( 'PHET_CORE/inherit' );
 
   function EstimationGameModel() {
   }

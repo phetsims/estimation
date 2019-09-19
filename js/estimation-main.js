@@ -5,26 +5,26 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // imports
-  var EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
-  var EstimationGameScreenView = require( 'ESTIMATION/game/view/EstimationGameScreenView' );
-  var ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
-  var ExploreScreenView = require( 'ESTIMATION/explore/view/ExploreScreenView' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
+  const EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
+  const EstimationGameScreenView = require( 'ESTIMATION/game/view/EstimationGameScreenView' );
+  const ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
+  const ExploreScreenView = require( 'ESTIMATION/explore/view/ExploreScreenView' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
+  const Sim = require( 'JOIST/Sim' );
+  const SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings and images
-  var estimationTitleString = require( 'string!ESTIMATION/estimation.title' );
-  var exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
-  var exploreString = require( 'string!ESTIMATION/explore' );
-  var gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
-  var gameString = require( 'string!ESTIMATION/game' );
+  const estimationTitleString = require( 'string!ESTIMATION/estimation.title' );
+  const exploreScreenIcon = require( 'image!ESTIMATION/explore-screen-icon.png' );
+  const exploreString = require( 'string!ESTIMATION/explore' );
+  const gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
+  const gameString = require( 'string!ESTIMATION/game' );
 
   var simOptions = {
     credits: {

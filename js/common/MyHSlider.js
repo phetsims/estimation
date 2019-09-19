@@ -3,22 +3,22 @@
 /**
  * TODO This is a copy of sun.HSlider, it should be removed.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // imports
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var FillHighlightListener = require( 'SCENERY_PHET/input/FillHighlightListener' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Shape = require( 'KITE/Shape' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const FillHighlightListener = require( 'SCENERY_PHET/input/FillHighlightListener' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Shape = require( 'KITE/Shape' );
+  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
   /**
    * @param {Property<Number>} valueProperty

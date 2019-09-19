@@ -1,12 +1,12 @@
 // Copyright 2014-2018, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var Range = require( 'DOT/Range' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const Range = require( 'DOT/Range' );
 
   var EstimationConstants = {
 

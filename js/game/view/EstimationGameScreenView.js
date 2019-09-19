@@ -1,17 +1,17 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ScreenView = require( 'JOIST/ScreenView' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ScreenView = require( 'JOIST/ScreenView' );
 
   // images
-  var screenshot1Image = require( 'image!ESTIMATION/screenshot-01-temp.jpg' );
+  const screenshot1Image = require( 'image!ESTIMATION/screenshot-01-temp.jpg' );
 
 
   function EstimationGameScreenView() {

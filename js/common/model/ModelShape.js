@@ -3,13 +3,13 @@
 /**
  * Model shape, which is a limited set of shapes that
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var Vector2Property = require( 'DOT/Vector2Property' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param type

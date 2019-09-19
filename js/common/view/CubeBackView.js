@@ -5,17 +5,17 @@
  * dotted lines that represent the back edges that are obscured by the front
  * surfaces.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Shape = require( 'KITE/Shape' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {ModelShape} cubeModel

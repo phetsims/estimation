@@ -1,16 +1,16 @@
 // Copyright 2014-2018, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var CubeExplorationMode = require( 'ESTIMATION/explore/model/CubeExplorationMode' );
-  var CylinderExplorationMode = require( 'ESTIMATION/explore/model/CylinderExplorationMode' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var LineExplorationMode = require( 'ESTIMATION/explore/model/LineExplorationMode' );
-  var Property = require( 'AXON/Property' );
-  var RectangleExplorationMode = require( 'ESTIMATION/explore/model/RectangleExplorationMode' );
+  const CubeExplorationMode = require( 'ESTIMATION/explore/model/CubeExplorationMode' );
+  const CylinderExplorationMode = require( 'ESTIMATION/explore/model/CylinderExplorationMode' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const LineExplorationMode = require( 'ESTIMATION/explore/model/LineExplorationMode' );
+  const Property = require( 'AXON/Property' );
+  const RectangleExplorationMode = require( 'ESTIMATION/explore/model/RectangleExplorationMode' );
 
   /**
    * @constructor

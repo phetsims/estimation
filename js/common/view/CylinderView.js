@@ -5,18 +5,18 @@
  * The cylinder is defined by a position, size, and color.  Some of these
  * attributes may change.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
-  var estimation = require( 'ESTIMATION/estimation' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
+  const Color = require( 'SCENERY/util/Color' );
+  const CylinderModel = require( 'ESTIMATION/common/model/CylinderModel' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Shape = require( 'KITE/Shape' );
 
   /**
    * @param {ModelShape} cylinderModel

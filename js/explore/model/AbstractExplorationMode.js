@@ -8,13 +8,13 @@
  * such as the function to set the initial and new reference objects.  I just didn't want to
  * take the time when doing early proof of concept to do this.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var estimation = require( 'ESTIMATION/estimation' );
-  var EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
-  var Property = require( 'AXON/Property' );
+  const estimation = require( 'ESTIMATION/estimation' );
+  const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const Property = require( 'AXON/Property' );
 
   /**
    * @constructor

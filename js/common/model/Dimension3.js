@@ -1,10 +1,10 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var estimation = require( 'ESTIMATION/estimation' );
+  const estimation = require( 'ESTIMATION/estimation' );
 
   function Dimension3( width, height, depth ) {
     this.width = width;
