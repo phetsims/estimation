@@ -26,7 +26,7 @@ define( require => {
   const gameScreenIcon = require( 'image!ESTIMATION/game-screen-icon.png' );
   const gameString = require( 'string!ESTIMATION/game' );
 
-  var simOptions = {
+  const simOptions = {
     credits: {
       leadDesign: 'Bryce Gruneich',
       softwareDevelopment: 'John Blanco',

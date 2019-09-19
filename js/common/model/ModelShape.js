@@ -20,7 +20,7 @@ define( require => {
    * @param showOutline
    * @constructor
    */
-  var ModelShape = function( type, color, initialWidth, initialHeight, initialDepth, showOutline ) {
+  const ModelShape = function( type, color, initialWidth, initialHeight, initialDepth, showOutline ) {
 
     // Fixed attributes
     this.type = type; // Valid types are line, rectangle, cube, cylinder, should not be changed.

@@ -38,16 +38,16 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var EDGE_INSET = 10;
-  var MODE_ICON_SCALE = 0.68;
-  var DISCRETE_OR_CONTINUOUS_ICON_SCALE = 0.68;
+  const EDGE_INSET = 10;
+  const MODE_ICON_SCALE = 0.68;
+  const DISCRETE_OR_CONTINUOUS_ICON_SCALE = 0.68;
 
   /**
    * Creates the label for a range button
    * @param {Range} range
    * @returns {Node}
    */
-  var createRangeLabel = function( range ) {
+  const createRangeLabel = function( range ) {
     return new Text( range.min + ' - ' + range.max, { font: new PhetFont( 20 ) } );
   };
 
@@ -57,20 +57,20 @@ define( require => {
    */
   function ExploreScreenView( model ) {
     ScreenView.call( this, { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
-    var self = this;
+    const self = this;
     this.model = model;
 
     // Create the model-view transform.  The primary units used in the model
     // are meters, so significant zoom is used.  The multipliers for the 2nd
     // parameter can be used to adjust where the model point (0, 0) is located
     // in the view.
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    const mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( self.layoutBounds.width * 0.5, self.layoutBounds.height * 0.5 ),
       105 );
 
     // Add the various selectors and buttons for choosing which objects to explore.
-    var newObjectButton = new TextPushButton( newObjectString,
+    const newObjectButton = new TextPushButton( newObjectString,
       {
         font: new PhetFont( 20 ),
         baseColor: 'rgb( 255, 252, 127 )',
@@ -83,7 +83,7 @@ define( require => {
     this.addChild( newObjectButton );
 
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
-    var modeButtons = new RadioButtonGroup( model.estimationModeProperty, [
+    const modeButtons = new RadioButtonGroup( model.estimationModeProperty, [
       { value: 'lines', node: new Image( linesIconImage, { scale: MODE_ICON_SCALE } ) },
       { value: 'rectangles', node: new Image( squaresIconImage, { scale: MODE_ICON_SCALE } ) },
       { value: 'cubes', node: new Image( cubesIconImage, { scale: MODE_ICON_SCALE } ) },
@@ -96,7 +96,7 @@ define( require => {
       buttonContentXMargin: 6,
       buttonContentYMargin: 14
     } );
-    var modeControlPanel = new Panel( modeButtons, {
+    const modeControlPanel = new Panel( modeButtons, {
       fill: 'rgb( 0, 171, 51 )',
       stroke: null,
       yMargin: 10
@@ -104,7 +104,7 @@ define( require => {
     this.addChild( modeControlPanel );
 
     // Create and add the panel for controlling discrete vs. continuous mode.
-    var discreteOrContinuousButtons = new RadioButtonGroup( model.comparisonTypeProperty, [
+    const discreteOrContinuousButtons = new RadioButtonGroup( model.comparisonTypeProperty, [
       { value: 'continuous', node: new Image( continuousIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
       { value: 'discrete', node: new Image( discreteIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
     ], {
@@ -114,7 +114,7 @@ define( require => {
       spacing: 10,
       buttonContentYMargin: 20
     } );
-    var discreteOrContinuousControlPanel = new Panel( discreteOrContinuousButtons, {
+    const discreteOrContinuousControlPanel = new Panel( discreteOrContinuousButtons, {
       fill: 'rgb( 252, 2, 47 )',
       stroke: null,
       yMargin: 10
@@ -128,7 +128,7 @@ define( require => {
     } );
 
     // Create and add the panel for selecting the range.
-    var rangeButtons = new RadioButtonGroup( model.estimationRangeProperty, [
+    const rangeButtons = new RadioButtonGroup( model.estimationRangeProperty, [
       { value: EstimationConstants.RANGE_1_TO_10, node: createRangeLabel( EstimationConstants.RANGE_1_TO_10 ) },
       { value: EstimationConstants.RANGE_10_TO_100, node: createRangeLabel( EstimationConstants.RANGE_10_TO_100 ) },
       { value: EstimationConstants.RANGE_100_TO_1000, node: createRangeLabel( EstimationConstants.RANGE_100_TO_1000 ) }
@@ -138,25 +138,25 @@ define( require => {
       buttonContentXMargin: 10,
       buttonContentYMargin: 12
     } );
-    var rangeSelectionPanel = new Panel( rangeButtons, { stroke: null, fill: null } );
+    const rangeSelectionPanel = new Panel( rangeButtons, { stroke: null, fill: null } );
 
     this.addChild( rangeSelectionPanel );
 
     // Add the slider that will control the fine-grained estimate value.
-    var slider = new MyHSlider( model.offsetIntoRangeProperty, new Range( 0, 1 ),
+    const slider = new MyHSlider( model.offsetIntoRangeProperty, new Range( 0, 1 ),
       {
         trackFill: 'black',
         trackSize: new Dimension2( 400, 4 )
       } );
-    for ( var i = 0; i <= 1; i += 0.1 ) {
+    for ( let i = 0; i <= 1; i += 0.1 ) {
       slider.addMajorTick( i );
     }
     this.addChild( slider );
 
     // Add the readout that will display the current estimate quantity.
-    var readout = new Rectangle( 0, 0, 60, 40, 5, 5, { fill: 'blue' } );
+    const readout = new Rectangle( 0, 0, 60, 40, 5, 5, { fill: 'blue' } );
     this.addChild( readout );
-    var readoutText = new Text( 'x', { font: new PhetFont( 20 ), fill: 'white' } );
+    const readoutText = new Text( 'x', { font: new PhetFont( 20 ), fill: 'white' } );
     model.estimateProperty.link( function( value ) {
       readoutText.text = value;
       readoutText.centerX = readout.width / 2;
@@ -165,7 +165,7 @@ define( require => {
     readout.addChild( readoutText );
 
     // Add the general control buttons.
-    var resetAllButton = new ResetAllButton( { listener: function() { self.reset(); } } );
+    const resetAllButton = new ResetAllButton( { listener: function() { self.reset(); } } );
     this.addChild( resetAllButton );
 
     // Layout of controls

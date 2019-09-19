@@ -28,11 +28,11 @@ define( require => {
    */
   function MyHSlider( valueProperty, range, options ) {
 
-    var self = this;
+    const self = this;
     Node.call( self );
 
     // default options, these will not be passed to supertype
-    var defaultOptions = {
+    const defaultOptions = {
       // track
       trackSize: new Dimension2( 100, 5 ),
       trackFill: 'white',
@@ -79,13 +79,13 @@ define( require => {
 
     function handleTrackEvent( event ) {
       if ( self._options.enabledProperty.get() ) {
-        var x = self._track.globalToLocalPoint( event.pointer.point ).x;
+        const x = self._track.globalToLocalPoint( event.pointer.point ).x;
         valueProperty.set( self._valueToPosition.inverse( x ) );
       }
     }
 
     // click in the track to change the value, continue dragging if desired
-    var trackHandler = new SimpleDragHandler( {
+    const trackHandler = new SimpleDragHandler( {
       start: function( event ) {
         if ( self._options.enabledProperty.get() ) {
           self._options.startDrag();
@@ -104,32 +104,32 @@ define( require => {
     self._track.addInputListener( trackHandler );
 
     // thumb, points up
-    var arcWidth = 0.25 * this._options.thumbSize.width;
-    var thumbFill = self._options.enabledProperty.get() ? self._options.thumbFillEnabled : self._options.thumbFillDisabled;
-    var thumb = new Rectangle( -self._options.thumbSize.width / 2, -self._options.thumbSize.height / 2, self._options.thumbSize.width, self._options.thumbSize.height, arcWidth, arcWidth,
+    const arcWidth = 0.25 * this._options.thumbSize.width;
+    const thumbFill = self._options.enabledProperty.get() ? self._options.thumbFillEnabled : self._options.thumbFillDisabled;
+    const thumb = new Rectangle( -self._options.thumbSize.width / 2, -self._options.thumbSize.height / 2, self._options.thumbSize.width, self._options.thumbSize.height, arcWidth, arcWidth,
       {
         cursor: self._options.cursor,
         fill: thumbFill,
         stroke: self._options.thumbStroke,
         lineWidth: self._options.thumbLineWidth
       } );
-    var centerLineYMargin = 3;
+    const centerLineYMargin = 3;
     thumb.addChild( new Path( Shape.lineSegment( 0, -( self._options.thumbSize.height / 2 ) + centerLineYMargin, 0, ( self._options.thumbSize.height / 2 ) - centerLineYMargin ), { stroke: 'white' } ) );
     thumb.centerY = self._track.centerY;
     self.addChild( thumb );
 
     // thumb touch area
-    var dx = 0.5 * thumb.width;
-    var dy = 0.25 * thumb.height;
+    const dx = 0.5 * thumb.width;
+    const dy = 0.25 * thumb.height;
     thumb.touchArea = Shape.rectangle( ( -thumb.width / 2 ) - dx, ( -thumb.height / 2 ) - dy, thumb.width + dx + dx, thumb.height + dy + dy );
 
     // highlight on mouse enter
     thumb.addInputListener( new FillHighlightListener( self._options.thumbFillEnabled, self._options.thumbFillHighlighted, self._options.enabledProperty ) );
 
-    var clickXOffset; // x-offset between initial click and thumb's origin
+    let clickXOffset; // x-offset between initial click and thumb's origin
 
     // update value when thumb is dragged
-    var thumbHandler = new SimpleDragHandler( {
+    const thumbHandler = new SimpleDragHandler( {
       allowTouchSnag: true,
       start: function( event ) {
         if ( self._options.enabledProperty.get() ) {
@@ -139,7 +139,7 @@ define( require => {
       },
       drag: function( event ) {
         if ( self._options.enabledProperty.get() ) {
-          var x = thumb.globalToParentPoint( event.pointer.point ).x - clickXOffset;
+          const x = thumb.globalToParentPoint( event.pointer.point ).x - clickXOffset;
           valueProperty.set( self._valueToPosition.inverse( x ) );
         }
       },
@@ -204,9 +204,9 @@ define( require => {
      * @param {number} lineWidth
      */
     _addTick: function( value, label, length, stroke, lineWidth ) {
-      var labelX = this._valueToPosition( value );
+      const labelX = this._valueToPosition( value );
       // ticks
-      var tick = new Path( new Shape()
+      const tick = new Path( new Shape()
           .moveTo( labelX, this._track.top )
           .lineTo( labelX, this._track.top - length ),
         { stroke: stroke, lineWidth: lineWidth } );

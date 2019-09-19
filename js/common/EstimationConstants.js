@@ -8,7 +8,7 @@ define( require => {
   const estimation = require( 'ESTIMATION/estimation' );
   const Range = require( 'DOT/Range' );
 
-  var EstimationConstants = {
+  const EstimationConstants = {
 
     LAYOUT_BOUNDS: new Bounds2( 0, 0, 768, 504 ),
 

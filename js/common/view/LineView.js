@@ -23,12 +23,12 @@ define( require => {
    */
   function LineView( lineModel, mvt ) {
     Node.call( this );
-    var self = this;
-    var path = new Path( null, { stroke: lineModel.color, lineWidth: 3 } );
+    const self = this;
+    const path = new Path( null, { stroke: lineModel.color, lineWidth: 3 } );
     this.addChild( path );
     lineModel.lengthProperty.link( function( width ) {
-      var transformedOrigin = mvt.modelToViewPosition( lineModel.positionProperty.value );
-      var transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ), 0 ) );
+      const transformedOrigin = mvt.modelToViewPosition( lineModel.positionProperty.value );
+      const transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ), 0 ) );
       path.setShape( Shape.lineSegment( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y ) );
     } );
     lineModel.visibleProperty.link( function( visible ) {

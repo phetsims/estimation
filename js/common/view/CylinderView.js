@@ -25,28 +25,28 @@ define( require => {
    */
   function CylinderView( cylinderModel, mvt ) {
     Node.call( this );
-    var self = this;
-    var side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
+    const self = this;
+    const side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
     this.addChild( side );
-    var top = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
+    const top = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
     this.addChild( top );
 
     function updatePosition() {
-      var transformedPosition = mvt.modelToViewPosition( cylinderModel.positionProperty.value );
+      const transformedPosition = mvt.modelToViewPosition( cylinderModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       self.left = transformedPosition.x;
       self.bottom = transformedPosition.y;
     }
 
-    var baseColor = cylinderModel.color instanceof Color ? cylinderModel.color : new Color( cylinderModel.color );
+    const baseColor = cylinderModel.color instanceof Color ? cylinderModel.color : new Color( cylinderModel.color );
 
     // Hook up the update functions
     cylinderModel.sizeProperty.link( function() {
-      var ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
-      var ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
-      var cylinderHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
+      const ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
+      const ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
+      const cylinderHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
       top.setShape( Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
-      var shape = new Shape();
+      const shape = new Shape();
       shape.moveTo( -ellipseWidth / 2, 0 )
         .lineTo( -ellipseWidth / 2, cylinderHeight )
         .ellipticalArc( 0, 0, ellipseWidth / 2, ellipseHeight / 2, 0, Math.PI, 0, true )

@@ -22,12 +22,12 @@ define( require => {
    */
   function RectangleView( rectangleModel, mvt ) {
     Node.call( this );
-    var self = this;
-    var path = new Path( null, { fill: rectangleModel.color, stroke: ( rectangleModel.showOutline ? 'white' : null ) } );
+    const self = this;
+    const path = new Path( null, { fill: rectangleModel.color, stroke: ( rectangleModel.showOutline ? 'white' : null ) } );
     this.addChild( path );
 
     function updatePosition() {
-      var transformedPosition = mvt.modelToViewPosition( rectangleModel.positionProperty.value );
+      const transformedPosition = mvt.modelToViewPosition( rectangleModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       self.left = transformedPosition.x;
       self.bottom = transformedPosition.y;

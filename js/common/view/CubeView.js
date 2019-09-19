@@ -26,19 +26,19 @@ define( require => {
    */
   function CubeView( cubeModel, mvt ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
-    var baseColor = cubeModel.color instanceof Color ? cubeModel.color : new Color( cubeModel.color );
+    const baseColor = cubeModel.color instanceof Color ? cubeModel.color : new Color( cubeModel.color );
 
-    var top = new Path( null, { fill: baseColor.colorUtilsBrighter( 0.3 ), stroke: ( cubeModel.showOutline ? 'white' : null ) } );
+    const top = new Path( null, { fill: baseColor.colorUtilsBrighter( 0.3 ), stroke: ( cubeModel.showOutline ? 'white' : null ) } );
     this.addChild( top );
-    var side = new Path( null, { fill: baseColor.colorUtilsDarker( 0.3 ), stroke: ( cubeModel.showOutline ? 'white' : null ) } );
+    const side = new Path( null, { fill: baseColor.colorUtilsDarker( 0.3 ), stroke: ( cubeModel.showOutline ? 'white' : null ) } );
     this.addChild( side );
-    var front = new Rectangle( 0, 0, 1, 1, 0, 0, { fill: baseColor, stroke: ( cubeModel.showOutline ? 'white' : null ) } );
+    const front = new Rectangle( 0, 0, 1, 1, 0, 0, { fill: baseColor, stroke: ( cubeModel.showOutline ? 'white' : null ) } );
     this.addChild( front );
 
     function updatePosition() {
-      var transformedPosition = mvt.modelToViewPosition( cubeModel.positionProperty.value );
+      const transformedPosition = mvt.modelToViewPosition( cubeModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       self.left = transformedPosition.x;
       self.bottom = transformedPosition.y;
@@ -47,10 +47,10 @@ define( require => {
 
     // Hook up the update functions
     cubeModel.sizeProperty.link( function() {
-      var faceWidth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.width );
-      var projectedDepth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION; // Assumes x & y scales are the same.
-      var projectionVector = Vector2.createPolar( projectedDepth, -EstimationConstants.CUBE_PROJECTION_ANGLE );
-      var height = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
+      const faceWidth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.width );
+      const projectedDepth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION; // Assumes x & y scales are the same.
+      const projectionVector = Vector2.createPolar( projectedDepth, -EstimationConstants.CUBE_PROJECTION_ANGLE );
+      const height = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
 
       front.setRect( 0, 0, faceWidth, height );
       side.setShape( new Shape()

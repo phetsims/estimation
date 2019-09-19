@@ -58,7 +58,7 @@ define( require => {
     },
 
     updateObjectVisibility: function() {
-      var selectedMode = this.selectedModeProperty.value;
+      const selectedMode = this.selectedModeProperty.value;
       this.referenceObject.visibleProperty.value = selectedMode === this.modeName;
       this.compareObject.visibleProperty.value = selectedMode === this.modeName;
       this.continuousSizableObject.visibleProperty.value = selectedMode === this.modeName && this.continuousOrDiscreteProperty.value === 'continuous';

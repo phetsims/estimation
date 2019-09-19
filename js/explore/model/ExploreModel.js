@@ -16,7 +16,7 @@ define( require => {
    * @constructor
    */
   function ExploreModel() {
-    var self = this;
+    const self = this;
 
     // Externally visible properties.
     this.estimationModeProperty = new Property( 'lines' ); // Valid values are 'lines', 'rectangles', 'cubes', and 'cylinders'.
@@ -83,7 +83,7 @@ define( require => {
       this.estimationRangeProperty.reset();
       this.offsetIntoRangeProperty.reset();
       this.comparisonTypeProperty.reset();
-      for ( var mode in this.modes ) {
+      for ( const mode in this.modes ) {
         this.modes[ mode ].reset();
       }
     },

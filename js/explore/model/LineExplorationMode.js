@@ -15,9 +15,9 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var MODE_NAME = 'lines';
-  var COMPARE_LINE_LENGTH = 2.5; // In meters
-  var VALID_REF_OBJECT_SIZES = [
+  const MODE_NAME = 'lines';
+  const COMPARE_LINE_LENGTH = 2.5; // In meters
+  const VALID_REF_OBJECT_SIZES = [
     COMPARE_LINE_LENGTH / 120,
     COMPARE_LINE_LENGTH / 60,
     COMPARE_LINE_LENGTH / 40,
@@ -25,7 +25,7 @@ define( require => {
     COMPARE_LINE_LENGTH / 4,
     COMPARE_LINE_LENGTH / 2
   ];
-  var INITIAL_REFERENCE_LINE_LENGTH = VALID_REF_OBJECT_SIZES[ 4 ];
+  const INITIAL_REFERENCE_LINE_LENGTH = VALID_REF_OBJECT_SIZES[ 4 ];
 
   /**
    * @constructor
@@ -61,8 +61,8 @@ define( require => {
 
     newReferenceObject: function() {
       // Choose a random size that hasn't been chosen for a while.
-      var unique = false;
-      var referenceObjectSize = null;
+      let unique = false;
+      let referenceObjectSize = null;
       while ( !unique ) {
         referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( phet.joist.random.nextDouble() * VALID_REF_OBJECT_SIZES.length ) ];
         unique = ( referenceObjectSize !== this.previousReferenceObjectSize && referenceObjectSize !== this.referenceObject.size );
