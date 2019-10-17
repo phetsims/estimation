@@ -12,6 +12,7 @@ define( require => {
   const FillHighlightListener = require( 'SCENERY_PHET/input/FillHighlightListener' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LinearFunction = require( 'DOT/LinearFunction' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Property = require( 'AXON/Property' );
@@ -63,7 +64,7 @@ define( require => {
     assert && assert( range instanceof Range, 'range must be of type Range:' + range );
 
     // fill in options with defaults
-    self._options = _.extend( defaultOptions, options );
+    self._options = merge( defaultOptions, options );
 
     // ticks are added to this parent, so they are behind knob
     self._ticksParent = new Node();
