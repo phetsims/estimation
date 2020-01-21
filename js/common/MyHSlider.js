@@ -6,7 +6,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const Dimension2 = require( 'DOT/Dimension2' );
   const estimation = require( 'ESTIMATION/estimation' );
   const FillHighlightListener = require( 'SCENERY_PHET/input/FillHighlightListener' );

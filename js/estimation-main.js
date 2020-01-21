@@ -8,7 +8,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const EstimationGameModel = require( 'ESTIMATION/game/model/EstimationGameModel' );
   const EstimationGameScreenView = require( 'ESTIMATION/game/view/EstimationGameScreenView' );
   const ExploreModel = require( 'ESTIMATION/explore/model/ExploreModel' );
