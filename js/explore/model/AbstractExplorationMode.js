@@ -1,4 +1,4 @@
-// Copyright 2014-2019, University of Colorado Boulder
+// Copyright 2014-2020, University of Colorado Boulder
 
 /**
  * Base class for the various modes that the user can select in the "Explore"
@@ -14,6 +14,7 @@ define( require => {
   // modules
   const estimation = require( 'ESTIMATION/estimation' );
   const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
   const Property = require( 'AXON/Property' );
 
   /**
@@ -39,7 +40,9 @@ define( require => {
     this.discreteObjectList = [];
   }
 
-  AbstractExplorationMode.prototype = {
+  estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
+
+  return inherit( Object, AbstractExplorationMode, {
 
     createNewReferenceObject: function() {
       throw new Error( 'createNewReferenceObject must be overridden in descendant class' );
@@ -80,9 +83,5 @@ define( require => {
       this.offsetIntoRange = 0;
       this.setInitialReferenceObject();
     }
-  };
-
-  estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
-
-  return AbstractExplorationMode;
+  } );
 } );

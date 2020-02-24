@@ -1,4 +1,4 @@
-// Copyright 2014-2019, University of Colorado Boulder
+// Copyright 2014-2020, University of Colorado Boulder
 
 define( require => {
   'use strict';
@@ -8,6 +8,7 @@ define( require => {
   const CylinderExplorationMode = require( 'ESTIMATION/explore/model/CylinderExplorationMode' );
   const estimation = require( 'ESTIMATION/estimation' );
   const EstimationConstants = require( 'ESTIMATION/common/EstimationConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
   const LineExplorationMode = require( 'ESTIMATION/explore/model/LineExplorationMode' );
   const Property = require( 'AXON/Property' );
   const RectangleExplorationMode = require( 'ESTIMATION/explore/model/RectangleExplorationMode' );
@@ -76,7 +77,9 @@ define( require => {
     } );
   }
 
-  ExploreModel.prototype = {
+  estimation.register( 'ExploreModel', ExploreModel );
+
+  return inherit( Object, ExploreModel, {
 
     reset: function() {
       this.estimationModeProperty.reset();
@@ -93,9 +96,5 @@ define( require => {
       this.offsetIntoRangeProperty.reset();
       this.modes[ this.estimationModeProperty.value ].newReferenceObject();
     }
-  };
-
-  estimation.register( 'ExploreModel', ExploreModel );
-  
-  return ExploreModel;
+  } );
 } );
