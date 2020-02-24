@@ -64,7 +64,7 @@ define( require => {
     // are meters, so significant zoom is used.  The multipliers for the 2nd
     // parameter can be used to adjust where the model point (0, 0) is located
     // in the view.
-    const mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( self.layoutBounds.width * 0.5, self.layoutBounds.height * 0.5 ),
       105 );
@@ -177,11 +177,11 @@ define( require => {
     discreteOrContinuousControlPanel.bottom = this.layoutBounds.height - 100;
     resetAllButton.centerX = discreteOrContinuousControlPanel.centerX;
     resetAllButton.bottom = this.layoutBounds.height - EDGE_INSET;
-    rangeSelectionPanel.centerX = mvt.modelToViewX( 0 );
+    rangeSelectionPanel.centerX = modelViewTransform.modelToViewX( 0 );
     rangeSelectionPanel.bottom = this.layoutBounds.height - EDGE_INSET;
     slider.centerX = rangeSelectionPanel.centerX;
     slider.bottom = rangeSelectionPanel.top - 20;
-    readout.centerX = mvt.modelToViewX( 0 );
+    readout.centerX = modelViewTransform.modelToViewX( 0 );
     readout.bottom = slider.top - 20;
 
     //------------------------------------------------------------------------
@@ -189,37 +189,37 @@ define( require => {
     //------------------------------------------------------------------------
 
     // Lines mode
-    self.addChild( new LineView( model.modes.lines.referenceObject, mvt ) );
+    self.addChild( new LineView( model.modes.lines.referenceObject, modelViewTransform ) );
     model.modes.lines.discreteObjectList.forEach( function( line ) {
-      self.addChild( new LineView( line, mvt ) );
+      self.addChild( new LineView( line, modelViewTransform ) );
     } );
-    self.addChild( new LineView( model.modes.lines.continuousSizableObject, mvt ) );
-    self.addChild( new LineView( model.modes.lines.compareObject, mvt ) );
+    self.addChild( new LineView( model.modes.lines.continuousSizableObject, modelViewTransform ) );
+    self.addChild( new LineView( model.modes.lines.compareObject, modelViewTransform ) );
 
     // Rectangles mode
-    self.addChild( new RectangleView( model.modes.rectangles.referenceObject, mvt ) );
-    self.addChild( new RectangleView( model.modes.rectangles.compareObject, mvt ) );
+    self.addChild( new RectangleView( model.modes.rectangles.referenceObject, modelViewTransform ) );
+    self.addChild( new RectangleView( model.modes.rectangles.compareObject, modelViewTransform ) );
     model.modes.rectangles.discreteObjectList.forEach( function( line ) {
-      self.addChild( new RectangleView( line, mvt ) );
+      self.addChild( new RectangleView( line, modelViewTransform ) );
     } );
-    self.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, mvt ) );
+    self.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, modelViewTransform ) );
 
     // Cubes mode
-    self.addChild( new CubeView( model.modes.cubes.referenceObject, mvt ) );
-    self.addChild( new CubeBackView( model.modes.cubes.compareObject, mvt ) );
+    self.addChild( new CubeView( model.modes.cubes.referenceObject, modelViewTransform ) );
+    self.addChild( new CubeBackView( model.modes.cubes.compareObject, modelViewTransform ) );
     model.modes.cubes.discreteObjectList.forEach( function( cube ) {
-      self.addChild( new CubeView( cube, mvt ) );
+      self.addChild( new CubeView( cube, modelViewTransform ) );
     } );
-    self.addChild( new CubeView( model.modes.cubes.continuousSizableObject, mvt ) );
-    self.addChild( new CubeView( model.modes.cubes.compareObject, mvt ) );
+    self.addChild( new CubeView( model.modes.cubes.continuousSizableObject, modelViewTransform ) );
+    self.addChild( new CubeView( model.modes.cubes.compareObject, modelViewTransform ) );
 
     // Cylinders mode
-    self.addChild( new CylinderView( model.modes.cylinders.referenceObject, mvt ) );
+    self.addChild( new CylinderView( model.modes.cylinders.referenceObject, modelViewTransform ) );
     model.modes.cylinders.discreteObjectList.forEach( function( line ) {
-      self.addChild( new CylinderView( line, mvt ) );
+      self.addChild( new CylinderView( line, modelViewTransform ) );
     } );
-    self.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, mvt ) );
-    self.addChild( new CylinderView( model.modes.cylinders.compareObject, mvt ) );
+    self.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, modelViewTransform ) );
+    self.addChild( new CylinderView( model.modes.cylinders.compareObject, modelViewTransform ) );
   }
 
   estimation.register( 'ExploreScreenView', ExploreScreenView );

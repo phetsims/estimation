@@ -20,10 +20,10 @@ define( require => {
 
   /**
    * @param {ModelShape} cylinderModel
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function CylinderView( cylinderModel, mvt ) {
+  function CylinderView( cylinderModel, modelViewTransform ) {
     Node.call( this );
     const self = this;
     const side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
@@ -32,7 +32,7 @@ define( require => {
     this.addChild( top );
 
     function updatePosition() {
-      const transformedPosition = mvt.modelToViewPosition( cylinderModel.positionProperty.value );
+      const transformedPosition = modelViewTransform.modelToViewPosition( cylinderModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       self.left = transformedPosition.x;
       self.bottom = transformedPosition.y;
@@ -42,9 +42,9 @@ define( require => {
 
     // Hook up the update functions
     cylinderModel.sizeProperty.link( function() {
-      const ellipseWidth = mvt.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
-      const ellipseHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
-      const cylinderHeight = -mvt.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
+      const ellipseWidth = modelViewTransform.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
+      const ellipseHeight = -modelViewTransform.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
+      const cylinderHeight = -modelViewTransform.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
       top.setShape( Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
       const shape = new Shape();
       shape.moveTo( -ellipseWidth / 2, 0 )

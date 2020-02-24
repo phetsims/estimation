@@ -19,10 +19,10 @@ define( require => {
 
   /**
    * @param {ModelShape} cubeModel
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function CubeBackView( cubeModel, mvt ) {
+  function CubeBackView( cubeModel, modelViewTransform ) {
     Node.call( this );
     const self = this;
 
@@ -30,7 +30,7 @@ define( require => {
     this.addChild( dottedLineBack );
 
     function updatePosition() {
-      const transformedPosition = mvt.modelToViewPosition( cubeModel.positionProperty.value );
+      const transformedPosition = modelViewTransform.modelToViewPosition( cubeModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       self.left = transformedPosition.x;
       self.bottom = transformedPosition.y;
@@ -38,10 +38,10 @@ define( require => {
 
     // Hook up the update functions
     cubeModel.sizeProperty.link( function() {
-      const faceWidth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.width );
-      const projectedDepth = mvt.modelToViewDeltaX( cubeModel.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION; // Assumes x & y scales are the same.
+      const faceWidth = modelViewTransform.modelToViewDeltaX( cubeModel.sizeProperty.value.width );
+      const projectedDepth = modelViewTransform.modelToViewDeltaX( cubeModel.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION; // Assumes x & y scales are the same.
       const projectionVector = Vector2.createPolar( projectedDepth, -EstimationConstants.CUBE_PROJECTION_ANGLE );
-      const height = -mvt.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
+      const height = -modelViewTransform.modelToViewDeltaY( cubeModel.sizeProperty.value.height );
       const origin = new Vector2( projectionVector.x, height + projectionVector.y );
       dottedLineBack.setShape( new Shape()
           .moveTo( origin.x, origin.y )

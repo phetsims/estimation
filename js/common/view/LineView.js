@@ -18,17 +18,17 @@ define( require => {
 
   /**
    * @param {LineModel} lineModel
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function LineView( lineModel, mvt ) {
+  function LineView( lineModel, modelViewTransform ) {
     Node.call( this );
     const self = this;
     const path = new Path( null, { stroke: lineModel.color, lineWidth: 3 } );
     this.addChild( path );
     lineModel.lengthProperty.link( function( width ) {
-      const transformedOrigin = mvt.modelToViewPosition( lineModel.positionProperty.value );
-      const transformedEndpoint = transformedOrigin.plus( new Vector2( mvt.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ), 0 ) );
+      const transformedOrigin = modelViewTransform.modelToViewPosition( lineModel.positionProperty.value );
+      const transformedEndpoint = transformedOrigin.plus( new Vector2( modelViewTransform.modelToViewDeltaX( lineModel.lengthProperty.value, 0 ), 0 ) );
       path.setShape( Shape.lineSegment( transformedOrigin.x, transformedOrigin.y, transformedEndpoint.x, transformedEndpoint.y ) );
     } );
     lineModel.visibleProperty.link( function( visible ) {

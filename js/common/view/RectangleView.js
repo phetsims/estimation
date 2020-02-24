@@ -17,17 +17,17 @@ define( require => {
 
   /**
    * @param {ModelShape} rectangleModel
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function RectangleView( rectangleModel, mvt ) {
+  function RectangleView( rectangleModel, modelViewTransform ) {
     Node.call( this );
     const self = this;
     const path = new Path( null, { fill: rectangleModel.color, stroke: ( rectangleModel.showOutline ? 'white' : null ) } );
     this.addChild( path );
 
     function updatePosition() {
-      const transformedPosition = mvt.modelToViewPosition( rectangleModel.positionProperty.value );
+      const transformedPosition = modelViewTransform.modelToViewPosition( rectangleModel.positionProperty.value );
       // Position is defined as the bottom left in this sim.
       self.left = transformedPosition.x;
       self.bottom = transformedPosition.y;
@@ -35,8 +35,8 @@ define( require => {
 
     // Hook up the update functions
     rectangleModel.sizeProperty.link( function() {
-      path.setShape( Shape.rectangle( 0, 0, mvt.modelToViewDeltaX( rectangleModel.sizeProperty.value.width ),
-        -mvt.modelToViewDeltaY( rectangleModel.sizeProperty.value.height ) ) );
+      path.setShape( Shape.rectangle( 0, 0, modelViewTransform.modelToViewDeltaX( rectangleModel.sizeProperty.value.width ),
+        -modelViewTransform.modelToViewDeltaY( rectangleModel.sizeProperty.value.height ) ) );
       updatePosition();
     } );
     rectangleModel.positionProperty.link( updatePosition );
