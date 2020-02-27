@@ -3,34 +3,30 @@
 /**
  * Model of a cube that can move, change dimensions, and has a color.
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const estimation = require( 'ESTIMATION/estimation' );
-  const Property = require( 'AXON/Property' );
+import Property from '../../../../axon/js/Property.js';
+import estimation from '../../estimation.js';
 
-  /**
-   * @param {Dimension3} initialSize
-   * @param {Vector2} initialPosition
-   * @param {string} color
-   * @param {boolean} showOutline
-   * @param {boolean} initiallyVisible
-   * @constructor
-   */
-  function CubeModel( initialSize, initialPosition, color, showOutline, initiallyVisible ) {
+/**
+ * @param {Dimension3} initialSize
+ * @param {Vector2} initialPosition
+ * @param {string} color
+ * @param {boolean} showOutline
+ * @param {boolean} initiallyVisible
+ * @constructor
+ */
+function CubeModel( initialSize, initialPosition, color, showOutline, initiallyVisible ) {
 
-    // Fixed attributes
-    this.color = color;
-    this.showOutline = showOutline;
+  // Fixed attributes
+  this.color = color;
+  this.showOutline = showOutline;
 
-    // Dynamic attributes
-    this.sizeProperty = new Property( initialSize );
-    this.positionProperty = new Property( initialPosition );
-    this.visibleProperty = new Property( initiallyVisible );
-  }
+  // Dynamic attributes
+  this.sizeProperty = new Property( initialSize );
+  this.positionProperty = new Property( initialPosition );
+  this.visibleProperty = new Property( initiallyVisible );
+}
 
-  estimation.register( 'CubeModel', CubeModel );
+estimation.register( 'CubeModel', CubeModel );
 
-  return CubeModel;
-} );
+export default CubeModel;

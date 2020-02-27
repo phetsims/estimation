@@ -1,18 +1,14 @@
 // Copyright 2014-2019, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const estimation = require( 'ESTIMATION/estimation' );
+import estimation from '../../estimation.js';
 
-  function Dimension3( width, height, depth ) {
-    this.width = width;
-    this.height = height;
-    this.depth = depth;
-  }
+function Dimension3( width, height, depth ) {
+  this.width = width;
+  this.height = height;
+  this.depth = depth;
+}
 
-  estimation.register( 'Dimension3', Dimension3 );
+estimation.register( 'Dimension3', Dimension3 );
 
-  return Dimension3;
-} );
+export default Dimension3;
