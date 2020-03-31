@@ -31,7 +31,7 @@ import CubeView from '../../common/view/CubeView.js';
 import CylinderView from '../../common/view/CylinderView.js';
 import LineView from '../../common/view/LineView.js';
 import RectangleView from '../../common/view/RectangleView.js';
-import estimationStrings from '../../estimation-strings.js';
+import estimationStrings from '../../estimationStrings.js';
 import estimation from '../../estimation.js';
 
 const newObjectString = estimationStrings.newObject;

@@ -13,7 +13,7 @@ import SimLauncher from '../../joist/js/SimLauncher.js';
 import Image from '../../scenery/js/nodes/Image.js';
 import exploreScreenIcon from '../images/explore-screen-icon_png.js';
 import gameScreenIcon from '../images/game-screen-icon_png.js';
-import estimationStrings from './estimation-strings.js';
+import estimationStrings from './estimationStrings.js';
 import ExploreModel from './explore/model/ExploreModel.js';
 import ExploreScreenView from './explore/view/ExploreScreenView.js';
 import EstimationGameModel from './game/model/EstimationGameModel.js';
