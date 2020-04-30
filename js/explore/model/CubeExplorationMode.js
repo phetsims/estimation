@@ -56,7 +56,7 @@ function CubeExplorationMode( selectedModeProperty ) {
 
 estimation.register( 'CubeExplorationMode', CubeExplorationMode );
 
-export default inherit( AbstractExplorationMode, CubeExplorationMode, {
+inherit( AbstractExplorationMode, CubeExplorationMode, {
 
   setReferenceObjectSize: function( size ) {
     this.referenceObject.sizeProperty.value = size;
@@ -155,3 +155,5 @@ export default inherit( AbstractExplorationMode, CubeExplorationMode, {
         0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE ) );
   }
 } );
+
+export default CubeExplorationMode;

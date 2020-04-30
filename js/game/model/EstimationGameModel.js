@@ -9,6 +9,8 @@ function EstimationGameModel() {
 
 estimation.register( 'EstimationGameModel', EstimationGameModel );
 
-export default inherit( Object, EstimationGameModel, {
+inherit( Object, EstimationGameModel, {
   step: function() {}
 } );
+
+export default EstimationGameModel;

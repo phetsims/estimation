@@ -39,7 +39,7 @@ function AbstractExplorationMode( selectedModeProperty, modeName ) {
 
 estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
 
-export default inherit( Object, AbstractExplorationMode, {
+inherit( Object, AbstractExplorationMode, {
 
   createNewReferenceObject: function() {
     throw new Error( 'createNewReferenceObject must be overridden in descendant class' );
@@ -81,3 +81,5 @@ export default inherit( Object, AbstractExplorationMode, {
     this.setInitialReferenceObject();
   }
 } );
+
+export default AbstractExplorationMode;

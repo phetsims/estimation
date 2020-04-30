@@ -58,7 +58,7 @@ function RectangleExplorationMode( selectedModeProperty ) {
 
 estimation.register( 'RectangleExplorationMode', RectangleExplorationMode );
 
-export default inherit( AbstractExplorationMode, RectangleExplorationMode, {
+inherit( AbstractExplorationMode, RectangleExplorationMode, {
 
   setReferenceObjectSize: function( size ) {
     this.referenceObject.sizeProperty.value = size;
@@ -122,3 +122,5 @@ export default inherit( AbstractExplorationMode, RectangleExplorationMode, {
     this.continuousSizableObject.sizeProperty.value = new Dimension2( a * wr, b * hr );
   }
 } );
+
+export default RectangleExplorationMode;

@@ -21,6 +21,8 @@ function EstimationGameScreenView() {
 
 estimation.register( 'EstimationGameScreenView', EstimationGameScreenView );
 
-export default inherit( ScreenView, EstimationGameScreenView, {
+inherit( ScreenView, EstimationGameScreenView, {
   //TODO prototypes
 } );
+
+export default EstimationGameScreenView;

@@ -169,7 +169,7 @@ function MyHSlider( valueProperty, range, options ) {
 
 estimation.register( 'MyHSlider', MyHSlider );
 
-export default inherit( Node, MyHSlider, {
+inherit( Node, MyHSlider, {
 
   /**
    * Adds a major tick mark.
@@ -217,3 +217,5 @@ export default inherit( Node, MyHSlider, {
     }
   }
 } );
+
+export default MyHSlider;

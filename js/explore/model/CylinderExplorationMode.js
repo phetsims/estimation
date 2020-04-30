@@ -57,7 +57,7 @@ function CylinderExplorationMode( selectedModeProperty ) {
 
 estimation.register( 'CylinderExplorationMode', CylinderExplorationMode );
 
-export default inherit( AbstractExplorationMode, CylinderExplorationMode, {
+inherit( AbstractExplorationMode, CylinderExplorationMode, {
 
   setReferenceObjectSize: function( size ) {
     this.referenceObject.sizeProperty.value = size;
@@ -112,3 +112,5 @@ export default inherit( AbstractExplorationMode, CylinderExplorationMode, {
       this.referenceObject.sizeProperty.value.height * estimateValue );
   }
 } );
+
+export default CylinderExplorationMode;

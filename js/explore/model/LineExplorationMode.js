@@ -46,7 +46,7 @@ function LineExplorationMode( selectedModeProperty ) {
 
 estimation.register( 'LineExplorationMode', LineExplorationMode );
 
-export default inherit( AbstractExplorationMode, LineExplorationMode, {
+inherit( AbstractExplorationMode, LineExplorationMode, {
 
   setReferenceObjectSize: function( length ) {
     this.referenceObject.lengthProperty.value = length;
@@ -81,3 +81,5 @@ export default inherit( AbstractExplorationMode, LineExplorationMode, {
     this.continuousSizableObject.lengthProperty.value = this.referenceObject.lengthProperty.value * estimateValue;
   }
 } );
+
+export default LineExplorationMode;

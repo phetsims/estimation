@@ -76,7 +76,7 @@ function ExploreModel() {
 
 estimation.register( 'ExploreModel', ExploreModel );
 
-export default inherit( Object, ExploreModel, {
+inherit( Object, ExploreModel, {
 
   reset: function() {
     this.estimationModeProperty.reset();
@@ -94,3 +94,5 @@ export default inherit( Object, ExploreModel, {
     this.modes[ this.estimationModeProperty.value ].newReferenceObject();
   }
 } );
+
+export default ExploreModel;

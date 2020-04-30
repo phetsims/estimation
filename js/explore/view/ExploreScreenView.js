@@ -223,8 +223,10 @@ function ExploreScreenView( model ) {
 
 estimation.register( 'ExploreScreenView', ExploreScreenView );
 
-export default inherit( ScreenView, ExploreScreenView, {
+inherit( ScreenView, ExploreScreenView, {
   reset: function() {
     this.model.reset();
   }
 } );
+
+export default ExploreScreenView;
