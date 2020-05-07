@@ -9,7 +9,7 @@
 import Property from '../../axon/js/Property.js';
 import Screen from '../../joist/js/Screen.js';
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Image from '../../scenery/js/nodes/Image.js';
 import exploreScreenIcon from '../images/explore-screen-icon_png.js';
 import gameScreenIcon from '../images/game-screen-icon_png.js';
@@ -32,7 +32,7 @@ const simOptions = {
   }
 };
 
-SimLauncher.launch( function() {
+simLauncher.launch( function() {
 
   //Create and start the sim
   new Sim( estimationTitleString, [
