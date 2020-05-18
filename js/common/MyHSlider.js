@@ -159,7 +159,7 @@ function MyHSlider( valueProperty, range, options ) {
     }
   } );
 
-  // update thumb location when value changes
+  // update thumb position when value changes
   valueProperty.link( function( value ) {
     thumb.centerX = self._valueToPosition( value );
   } );
