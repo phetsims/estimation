@@ -8,6 +8,7 @@
 
 import Property from '../../axon/js/Property.js';
 import Screen from '../../joist/js/Screen.js';
+import ScreenIcon from '../../joist/js/ScreenIcon.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Image from '../../scenery/js/nodes/Image.js';
@@ -44,7 +45,10 @@ simLauncher.launch( function() {
       {
         name: exploreString,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
-        homeScreenIcon: new Image( exploreScreenIcon )
+        homeScreenIcon: new ScreenIcon( new Image( exploreScreenIcon ), {
+          maxIconWidthProportion: 1,
+          maxIconHeightProportion: 1
+        } )
       }
     ),
 
@@ -55,7 +59,10 @@ simLauncher.launch( function() {
       {
         name: gameString,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
-        homeScreenIcon: new Image( gameScreenIcon )
+        homeScreenIcon: new ScreenIcon( new Image( gameScreenIcon ), {
+          maxIconWidthProportion: 1,
+          maxIconHeightProportion: 1
+        } )
       }
     )
   ], simOptions ).start();
