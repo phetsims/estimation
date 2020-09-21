@@ -17,6 +17,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
+import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
 import continuousIconImage from '../../../images/continuous-icon_png.js';
 import cubesIconImage from '../../../images/cubes-icon_png.js';
@@ -25,14 +26,13 @@ import discreteIconImage from '../../../images/discrete-icon_png.js';
 import linesIconImage from '../../../images/lines-icon_png.js';
 import squaresIconImage from '../../../images/squares-icon_png.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
-import MyHSlider from '../../common/MyHSlider.js';
 import CubeBackView from '../../common/view/CubeBackView.js';
 import CubeView from '../../common/view/CubeView.js';
 import CylinderView from '../../common/view/CylinderView.js';
 import LineView from '../../common/view/LineView.js';
 import RectangleView from '../../common/view/RectangleView.js';
-import estimationStrings from '../../estimationStrings.js';
 import estimation from '../../estimation.js';
+import estimationStrings from '../../estimationStrings.js';
 
 const newObjectString = estimationStrings.newObject;
 
@@ -142,7 +142,7 @@ function ExploreScreenView( model ) {
   this.addChild( rangeSelectionPanel );
 
   // Add the slider that will control the fine-grained estimate value.
-  const slider = new MyHSlider( model.offsetIntoRangeProperty, new Range( 0, 1 ),
+  const slider = new HSlider( model.offsetIntoRangeProperty, new Range( 0, 1 ),
     {
       trackFill: 'black',
       trackSize: new Dimension2( 400, 4 )
