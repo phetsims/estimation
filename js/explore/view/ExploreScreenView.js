@@ -14,7 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -73,7 +73,7 @@ class ExploreScreenView extends ScreenView {
     this.addChild( newObjectButton );
 
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
-    const modeButtons = new RadioButtonGroup( model.estimationModeProperty, [
+    const modeRadioButtonGroup = new RectangularRadioButtonGroup( model.estimationModeProperty, [
       { value: 'lines', node: new Image( linesIconImage, { scale: MODE_ICON_SCALE } ) },
       { value: 'rectangles', node: new Image( squaresIconImage, { scale: MODE_ICON_SCALE } ) },
       { value: 'cubes', node: new Image( cubesIconImage, { scale: MODE_ICON_SCALE } ) },
@@ -86,7 +86,7 @@ class ExploreScreenView extends ScreenView {
       buttonContentXMargin: 6,
       buttonContentYMargin: 14
     } );
-    const modeControlPanel = new Panel( modeButtons, {
+    const modeControlPanel = new Panel( modeRadioButtonGroup, {
       fill: 'rgb( 0, 171, 51 )',
       stroke: null,
       yMargin: 10
@@ -94,7 +94,7 @@ class ExploreScreenView extends ScreenView {
     this.addChild( modeControlPanel );
 
     // Create and add the panel for controlling discrete vs. continuous mode.
-    const discreteOrContinuousButtons = new RadioButtonGroup( model.comparisonTypeProperty, [
+    const discreteOrContinuousButtons = new RectangularRadioButtonGroup( model.comparisonTypeProperty, [
       { value: 'continuous', node: new Image( continuousIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
       { value: 'discrete', node: new Image( discreteIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
     ], {
@@ -118,7 +118,7 @@ class ExploreScreenView extends ScreenView {
     } );
 
     // Create and add the panel for selecting the range.
-    const rangeButtons = new RadioButtonGroup( model.estimationRangeProperty, [
+    const rangeButtons = new RectangularRadioButtonGroup( model.estimationRangeProperty, [
       { value: EstimationConstants.RANGE_1_TO_10, node: createRangeLabel( EstimationConstants.RANGE_1_TO_10 ) },
       { value: EstimationConstants.RANGE_10_TO_100, node: createRangeLabel( EstimationConstants.RANGE_10_TO_100 ) },
       { value: EstimationConstants.RANGE_100_TO_1000, node: createRangeLabel( EstimationConstants.RANGE_100_TO_1000 ) }
