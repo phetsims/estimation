@@ -10,76 +10,86 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import estimation from '../../estimation.js';
 
-/**
- * @constructor
- */
-function AbstractExplorationMode( selectedModeProperty, modeName ) {
-  this.selectedModeProperty = selectedModeProperty;
-  this.modeName = modeName;
+class AbstractExplorationMode {
 
-  // Properties that are part of the public API.
-  this.estimateProperty = new Property( 1 );
-  this.continuousOrDiscreteProperty = new Property( 'discrete' );
+  constructor( selectedModeProperty, modeName ) {
+    this.selectedModeProperty = selectedModeProperty;
+    this.modeName = modeName;
 
-  // Storage for this mode's estimate parameters for when the mode is
-  // inactive. Necessary because the ranges overlap.
-  this.selectedRange = EstimationConstants.RANGE_1_TO_10;
-  this.offsetIntoRange = 0;
+    // Properties that are part of the public API.
+    this.estimateProperty = new Property( 1 );
+    this.continuousOrDiscreteProperty = new Property( 'discrete' );
 
-  // Every mode has the following objects.  Descendant classes should populate.
-  this.referenceObject = null;
-  this.compareObject = null;
-  this.continuousSizableObject = null;
-  this.discreteObjectList = [];
-}
+    // Storage for this mode's estimate parameters for when the mode is
+    // inactive. Necessary because the ranges overlap.
+    this.selectedRange = EstimationConstants.RANGE_1_TO_10;
+    this.offsetIntoRange = 0;
 
-estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
+    // Every mode has the following objects.  Descendant classes should populate.
+    this.referenceObject = null;
+    this.compareObject = null;
+    this.continuousSizableObject = null;
+    this.discreteObjectList = [];
+  }
 
-inherit( Object, AbstractExplorationMode, {
+  // TODO: Visibility annotations should be checked and updated, see https://github.com/phetsims/estimation/issues/9
 
-  createNewReferenceObject: function() {
+  // @public
+  createNewReferenceObject() {
     throw new Error( 'createNewReferenceObject must be overridden in descendant class' );
-  },
+  }
 
-  updateDiscreteObjectVisibility: function( modeName ) {
+  // @public
+  updateDiscreteObjectVisibility( modeName ) {
     throw new Error( 'updateDiscreteObjectVisibility must be overridden in descendant class' );
-  },
+  }
 
-  updateContinuousObjectSize: function() {
+  // @public
+  updateContinuousObjectSize() {
     throw new Error( 'updateContinuousObjectSize must be overridden in descendant class' );
-  },
+  }
 
-  setInitialReferenceObject: function() {
+  // @public
+  setInitialReferenceObject() {
     throw new Error( 'setInitialReferenceObject must be overridden in descendant class' );
-  },
+  }
 
-  updateObjectVisibility: function() {
+  // @public
+  updateObjectVisibility() {
     const selectedMode = this.selectedModeProperty.value;
     this.referenceObject.visibleProperty.value = selectedMode === this.modeName;
     this.compareObject.visibleProperty.value = selectedMode === this.modeName;
     this.continuousSizableObject.visibleProperty.value = selectedMode === this.modeName && this.continuousOrDiscreteProperty.value === 'continuous';
     this.updateDiscreteObjectVisibility( selectedMode, this.estimateProperty.value );
-  },
+  }
 
-  // Must be called by descendant classes to complete initialization.
-  hookUpVisibilityUpdates: function() {
+  /**
+   * Must be called by descendant classes to complete initialization.
+   * @public
+   */
+  hookUpVisibilityUpdates() {
     this.selectedModeProperty.link( this.updateObjectVisibility.bind( this ) );
     this.continuousOrDiscreteProperty.link( this.updateObjectVisibility.bind( this ) );
     this.estimateProperty.link( this.updateObjectVisibility.bind( this ) );
     this.estimateProperty.link( this.updateContinuousObjectSize.bind( this ) );
-  },
+  }
 
-  reset: function() {
+  /**
+   * restore initial state
+   * @public
+   */
+  reset() {
     this.continuousOrDiscreteProperty.reset();
     this.estimateProperty.reset();
     this.selectedRange = EstimationConstants.RANGE_1_TO_10;
     this.offsetIntoRange = 0;
     this.setInitialReferenceObject();
   }
-} );
+}
+
+estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
 
 export default AbstractExplorationMode;

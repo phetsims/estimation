@@ -32,12 +32,8 @@ const ModelShape = function( type, color, initialWidth, initialHeight, initialDe
   this.positionProperty = new Vector2Property( Vector2.ZERO );
 };
 
-ModelShape.line = function( initialLength, color, showOutline ) {
-  return new ModelShape( 'line', color, initialLength, null, null, showOutline );
-};
+ModelShape.line = ( initialLength, color, showOutline ) => new ModelShape( 'line', color, initialLength, null, null, showOutline );
 
-ModelShape.rectangle = function( initialWidth, initialHeight, color, showOutline ) {
-  return new ModelShape( 'rectangle', color, initialWidth, initialHeight, null, showOutline );
-};
+ModelShape.rectangle = ( initialWidth, initialHeight, color, showOutline ) => new ModelShape( 'rectangle', color, initialWidth, initialHeight, null, showOutline );
 
 export default ModelShape;

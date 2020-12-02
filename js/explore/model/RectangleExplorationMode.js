@@ -6,7 +6,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import RectangleModel from '../../common/model/RectangleModel.js';
 import estimation from '../../estimation.js';
@@ -30,37 +29,34 @@ const VALID_REF_OBJECT_SIZES = [
 ];
 const INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 3 ];
 
-/**
- * @constructor
- */
-function RectangleExplorationMode( selectedModeProperty ) {
-  AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-  const self = this;
+class RectangleExplorationMode extends AbstractExplorationMode {
 
-  // Create the reference, compare, continuous, and discrete objects.
-  const compareRectPosition = new Vector2( 0, 0 );
-  this.compareObject = new RectangleModel( new Dimension2( 2.0, 2.0 ), compareRectPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false, false );
-  this.continuousSizableObject = new RectangleModel( new Dimension2( 2, 1 ), compareRectPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-  this.referenceObject = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-  _.times( MAX_DISCRETE_RECTANGLES, function() {
-    // Initial size is arbitrary, will be sized as needed.
-    self.discreteObjectList.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
-  } );
-  this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
-  this.numVisibleDiscreteRects = 0;
+  constructor( selectedModeProperty ) {
+    super( selectedModeProperty, MODE_NAME );
 
-  // Complete initialization by hooking up visibility updates in the parent class.
-  this.hookUpVisibilityUpdates();
+    // Create the reference, compare, continuous, and discrete objects.
+    const compareRectPosition = new Vector2( 0, 0 );
+    this.compareObject = new RectangleModel( new Dimension2( 2.0, 2.0 ), compareRectPosition, EstimationConstants.COMPARISON_OBJECT_COLOR, false, false );
+    this.continuousSizableObject = new RectangleModel( new Dimension2( 2, 1 ), compareRectPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    this.referenceObject = new RectangleModel( new Dimension2( 0.5, 0.5 ), new Vector2( -2.0, 0.5 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    _.times( MAX_DISCRETE_RECTANGLES, () => {
+      // Initial size is arbitrary, will be sized as needed.
+      this.discreteObjectList.push( new RectangleModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+    } );
+    this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    this.numVisibleDiscreteRects = 0;
 
-  // Maintain a short history of reference object sizes so unique ones can be chosen.
-  this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
-}
+    // Complete initialization by hooking up visibility updates in the parent class.
+    this.hookUpVisibilityUpdates();
 
-estimation.register( 'RectangleExplorationMode', RectangleExplorationMode );
+    // Maintain a short history of reference object sizes so unique ones can be chosen.
+    this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
+  }
 
-inherit( AbstractExplorationMode, RectangleExplorationMode, {
+  // TODO: Visibility annotations should be checked and updated, see https://github.com/phetsims/estimation/issues/9
 
-  setReferenceObjectSize: function( size ) {
+  // @public
+  setReferenceObjectSize( size ) {
     this.referenceObject.sizeProperty.value = size;
 
     // Size and position the discrete rectangles based on the sizes of the
@@ -81,9 +77,10 @@ inherit( AbstractExplorationMode, RectangleExplorationMode, {
 
     // Set the initial size of the continuous object.
     this.updateContinuousObjectSize( this.estimateProperty.value );
-  },
+  }
 
-  newReferenceObject: function() {
+  // @public
+  newReferenceObject() {
     // Choose a random size that hasn't been chosen for a while.
     let unique = false;
     let referenceObjectSize = null;
@@ -93,13 +90,15 @@ inherit( AbstractExplorationMode, RectangleExplorationMode, {
     }
     this.previousReferenceObjectSize = referenceObjectSize;
     this.setReferenceObjectSize( referenceObjectSize );
-  },
+  }
 
-  setInitialReferenceObject: function() {
+  // @public
+  setInitialReferenceObject() {
     this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
-  },
+  }
 
-  updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
+  // @public
+  updateDiscreteObjectVisibility( selectedMode, estimateValue ) {
     const targetNumVisibleDiscreteRects = selectedMode === 'rectangles' && this.continuousOrDiscreteProperty.value === 'discrete' ? estimateValue : 0;
     const startIndex = Math.min( this.numVisibleDiscreteRects, targetNumVisibleDiscreteRects );
     const endIndex = Math.max( this.numVisibleDiscreteRects, targetNumVisibleDiscreteRects );
@@ -108,9 +107,10 @@ inherit( AbstractExplorationMode, RectangleExplorationMode, {
       this.discreteObjectList[ i ].visibleProperty.value = visibility;
     }
     this.numVisibleDiscreteRects = targetNumVisibleDiscreteRects;
-  },
+  }
 
-  updateContinuousObjectSize: function( estimateValue ) {
+  // @public
+  updateContinuousObjectSize( estimateValue ) {
     const hr = this.referenceObject.sizeProperty.value.height;
     const wr = this.referenceObject.sizeProperty.value.width;
     const hc = this.compareObject.sizeProperty.value.height;
@@ -121,6 +121,8 @@ inherit( AbstractExplorationMode, RectangleExplorationMode, {
     // Set the size of the continuous rectangle
     this.continuousSizableObject.sizeProperty.value = new Dimension2( a * wr, b * hr );
   }
-} );
+}
+
+estimation.register( 'RectangleExplorationMode', RectangleExplorationMode );
 
 export default RectangleExplorationMode;

@@ -1,16 +1,16 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import estimation from '../../estimation.js';
 
-function EstimationGameModel() {
+class EstimationGameModel {
+  constructor() {
+  }
+
+  // @public
+  step() {}
 }
 
 estimation.register( 'EstimationGameModel', EstimationGameModel );
-
-inherit( Object, EstimationGameModel, {
-  step: function() {}
-} );
 
 export default EstimationGameModel;

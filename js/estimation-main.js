@@ -33,15 +33,15 @@ const simOptions = {
   }
 };
 
-simLauncher.launch( function() {
+simLauncher.launch( () => {
 
   //Create and start the sim
   new Sim( estimationTitleString, [
 
     // Explore screen
     new Screen(
-      function() {return new ExploreModel();},
-      function( model ) {return new ExploreScreenView( model );},
+      () => new ExploreModel(),
+      model => new ExploreScreenView( model ),
       {
         name: exploreString,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
@@ -54,8 +54,8 @@ simLauncher.launch( function() {
 
     // Game screen
     new Screen(
-      function() {return new EstimationGameModel();},
-      function( model ) {return new EstimationGameScreenView( model );},
+      () => new EstimationGameModel(),
+      model => new EstimationGameScreenView( model ),
       {
         name: gameString,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),

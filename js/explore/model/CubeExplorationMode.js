@@ -5,7 +5,6 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CubeModel from '../../common/model/CubeModel.js';
@@ -28,37 +27,34 @@ const VALID_REF_OBJECT_SIZES = [
 ];
 const INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
 
-/**
- * @constructor
- */
-function CubeExplorationMode( selectedModeProperty ) {
-  AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-  const self = this;
+class CubeExplorationMode extends AbstractExplorationMode {
 
-  // Create the reference, compare, continuous, and discrete objects.
-  const compareCubePosition = new Vector2( 0, -0.2 );
-  this.compareObject = new CubeModel( COMPARE_CUBE_SIZE, compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
-  this.continuousSizableObject = new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-  this.referenceObject = new CubeModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-  _.times( MAX_DISCRETE_CUBES, function() {
-    // Initial size is arbitrary, will be sized as needed.
-    self.discreteObjectList.push( new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
-  } );
-  this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
-  this.numVisibleDiscreteCubes = 0;
+  constructor( selectedModeProperty ) {
+    super( selectedModeProperty, MODE_NAME );
 
-  // Complete initialization by hooking up visibility updates in the parent class.
-  this.hookUpVisibilityUpdates();
+    // Create the reference, compare, continuous, and discrete objects.
+    const compareCubePosition = new Vector2( 0, -0.2 );
+    this.compareObject = new CubeModel( COMPARE_CUBE_SIZE, compareCubePosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
+    this.continuousSizableObject = new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), compareCubePosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    this.referenceObject = new CubeModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    _.times( MAX_DISCRETE_CUBES, () => {
+      // Initial size is arbitrary, will be sized as needed.
+      this.discreteObjectList.push( new CubeModel( new Dimension3( 0.1, 0.1, 0.1 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+    } );
+    this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    this.numVisibleDiscreteCubes = 0;
 
-  // Maintain a short history of reference object sizes so unique ones can be chosen.
-  this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
-}
+    // Complete initialization by hooking up visibility updates in the parent class.
+    this.hookUpVisibilityUpdates();
 
-estimation.register( 'CubeExplorationMode', CubeExplorationMode );
+    // Maintain a short history of reference object sizes so unique ones can be chosen.
+    this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
+  }
 
-inherit( AbstractExplorationMode, CubeExplorationMode, {
+  // TODO: Visibility annotations should be checked and updated, see https://github.com/phetsims/estimation/issues/9
 
-  setReferenceObjectSize: function( size ) {
+  // @public
+  setReferenceObjectSize( size ) {
     this.referenceObject.sizeProperty.value = size;
 
     // Size and position the discrete cubes based on the sizes of the
@@ -89,9 +85,10 @@ inherit( AbstractExplorationMode, CubeExplorationMode, {
 
     // Set the initial size of the continuous object.
     this.updateContinuousObjectSize( this.estimateProperty.value );
-  },
+  }
 
-  newReferenceObject: function() {
+  // @public
+  newReferenceObject() {
     // Choose a random size that hasn't been chosen for a while.
     let unique = false;
     let referenceObjectSize = null;
@@ -101,13 +98,15 @@ inherit( AbstractExplorationMode, CubeExplorationMode, {
     }
     this.previousReferenceObjectSize = referenceObjectSize;
     this.setReferenceObjectSize( referenceObjectSize );
-  },
+  }
 
-  setInitialReferenceObject: function() {
+  // @public
+  setInitialReferenceObject() {
     this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
-  },
+  }
 
-  updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
+  // @public
+  updateDiscreteObjectVisibility( selectedMode, estimateValue ) {
     const targetNumVisibleDiscreteCubes = selectedMode === 'cubes' && this.continuousOrDiscreteProperty.value === 'discrete' ? estimateValue : 0;
     const startIndex = Math.min( this.numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
     const endIndex = Math.max( this.numVisibleDiscreteCubes, targetNumVisibleDiscreteCubes );
@@ -116,9 +115,10 @@ inherit( AbstractExplorationMode, CubeExplorationMode, {
       this.discreteObjectList[ i ].visibleProperty.value = visibility;
     }
     this.numVisibleDiscreteCubes = targetNumVisibleDiscreteCubes;
-  },
+  }
 
-  updateContinuousObjectSize: function( estimateValue ) {
+  // @public
+  updateContinuousObjectSize( estimateValue ) {
 
     const hr = this.referenceObject.sizeProperty.value.height;
     const wr = this.referenceObject.sizeProperty.value.width;
@@ -154,6 +154,8 @@ inherit( AbstractExplorationMode, CubeExplorationMode, {
       new Vector2( ( this.compareObject.sizeProperty.value.depth - this.continuousSizableObject.sizeProperty.value.depth ) * EstimationConstants.DEPTH_PROJECTION_PROPORTION,
         0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE ) );
   }
-} );
+}
+
+estimation.register( 'CubeExplorationMode', CubeExplorationMode );
 
 export default CubeExplorationMode;

@@ -47,7 +47,6 @@ class ExploreScreenView extends ScreenView {
    */
   constructor( model ) {
     super( { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
-    const self = this;
     this.model = model;
 
     // Create the model-view transform.  The primary units used in the model
@@ -56,7 +55,7 @@ class ExploreScreenView extends ScreenView {
     // in the view.
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( self.layoutBounds.width * 0.5, self.layoutBounds.height * 0.5 ),
+      new Vector2( this.layoutBounds.width * 0.5, this.layoutBounds.height * 0.5 ),
       105 );
 
     // Add the various selectors and buttons for choosing which objects to explore.
@@ -65,7 +64,7 @@ class ExploreScreenView extends ScreenView {
         font: new PhetFont( 20 ),
         baseColor: 'rgb( 255, 252, 127 )',
         cornerRadius: 5,
-        listener: function() {
+        listener: () => {
           model.newReferenceObject();
         }
       }
@@ -113,7 +112,7 @@ class ExploreScreenView extends ScreenView {
 
     // The continuous or discrete panel doesn't make sense for one-dimensional
     // estimates, so hide it in those cases.
-    model.estimationModeProperty.link( function( estimationMode ) {
+    model.estimationModeProperty.link( estimationMode => {
       discreteOrContinuousControlPanel.visible = estimationMode !== 'lines';
     } );
 
@@ -147,7 +146,7 @@ class ExploreScreenView extends ScreenView {
     const readout = new Rectangle( 0, 0, 60, 40, 5, 5, { fill: 'blue' } );
     this.addChild( readout );
     const readoutText = new Text( 'x', { font: new PhetFont( 20 ), fill: 'white' } );
-    model.estimateProperty.link( function( value ) {
+    model.estimateProperty.link( value => {
       readoutText.text = value;
       readoutText.centerX = readout.width / 2;
       readoutText.centerY = readout.height / 2;
@@ -155,7 +154,7 @@ class ExploreScreenView extends ScreenView {
     readout.addChild( readoutText );
 
     // Add the general control buttons.
-    const resetAllButton = new ResetAllButton( { listener: function() { self.reset(); } } );
+    const resetAllButton = new ResetAllButton( { listener: () => { this.reset(); } } );
     this.addChild( resetAllButton );
 
     // Layout of controls
@@ -179,37 +178,37 @@ class ExploreScreenView extends ScreenView {
     //------------------------------------------------------------------------
 
     // Lines mode
-    self.addChild( new LineView( model.modes.lines.referenceObject, modelViewTransform ) );
-    model.modes.lines.discreteObjectList.forEach( function( line ) {
-      self.addChild( new LineView( line, modelViewTransform ) );
+    this.addChild( new LineView( model.modes.lines.referenceObject, modelViewTransform ) );
+    model.modes.lines.discreteObjectList.forEach( line => {
+      this.addChild( new LineView( line, modelViewTransform ) );
     } );
-    self.addChild( new LineView( model.modes.lines.continuousSizableObject, modelViewTransform ) );
-    self.addChild( new LineView( model.modes.lines.compareObject, modelViewTransform ) );
+    this.addChild( new LineView( model.modes.lines.continuousSizableObject, modelViewTransform ) );
+    this.addChild( new LineView( model.modes.lines.compareObject, modelViewTransform ) );
 
     // Rectangles mode
-    self.addChild( new RectangleView( model.modes.rectangles.referenceObject, modelViewTransform ) );
-    self.addChild( new RectangleView( model.modes.rectangles.compareObject, modelViewTransform ) );
-    model.modes.rectangles.discreteObjectList.forEach( function( line ) {
-      self.addChild( new RectangleView( line, modelViewTransform ) );
+    this.addChild( new RectangleView( model.modes.rectangles.referenceObject, modelViewTransform ) );
+    this.addChild( new RectangleView( model.modes.rectangles.compareObject, modelViewTransform ) );
+    model.modes.rectangles.discreteObjectList.forEach( line => {
+      this.addChild( new RectangleView( line, modelViewTransform ) );
     } );
-    self.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, modelViewTransform ) );
+    this.addChild( new RectangleView( model.modes.rectangles.continuousSizableObject, modelViewTransform ) );
 
     // Cubes mode
-    self.addChild( new CubeView( model.modes.cubes.referenceObject, modelViewTransform ) );
-    self.addChild( new CubeBackView( model.modes.cubes.compareObject, modelViewTransform ) );
-    model.modes.cubes.discreteObjectList.forEach( function( cube ) {
-      self.addChild( new CubeView( cube, modelViewTransform ) );
+    this.addChild( new CubeView( model.modes.cubes.referenceObject, modelViewTransform ) );
+    this.addChild( new CubeBackView( model.modes.cubes.compareObject, modelViewTransform ) );
+    model.modes.cubes.discreteObjectList.forEach( cube => {
+      this.addChild( new CubeView( cube, modelViewTransform ) );
     } );
-    self.addChild( new CubeView( model.modes.cubes.continuousSizableObject, modelViewTransform ) );
-    self.addChild( new CubeView( model.modes.cubes.compareObject, modelViewTransform ) );
+    this.addChild( new CubeView( model.modes.cubes.continuousSizableObject, modelViewTransform ) );
+    this.addChild( new CubeView( model.modes.cubes.compareObject, modelViewTransform ) );
 
     // Cylinders mode
-    self.addChild( new CylinderView( model.modes.cylinders.referenceObject, modelViewTransform ) );
-    model.modes.cylinders.discreteObjectList.forEach( function( line ) {
-      self.addChild( new CylinderView( line, modelViewTransform ) );
+    this.addChild( new CylinderView( model.modes.cylinders.referenceObject, modelViewTransform ) );
+    model.modes.cylinders.discreteObjectList.forEach( line => {
+      this.addChild( new CylinderView( line, modelViewTransform ) );
     } );
-    self.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, modelViewTransform ) );
-    self.addChild( new CylinderView( model.modes.cylinders.compareObject, modelViewTransform ) );
+    this.addChild( new CylinderView( model.modes.cylinders.continuousSizableObject, modelViewTransform ) );
+    this.addChild( new CylinderView( model.modes.cylinders.compareObject, modelViewTransform ) );
   }
 
   // @public

@@ -7,6 +7,7 @@ import EstimationConstants from '../../common/EstimationConstants.js';
 import estimation from '../../estimation.js';
 
 class EstimationGameScreenView extends ScreenView {
+
   constructor() {
     super( { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
 

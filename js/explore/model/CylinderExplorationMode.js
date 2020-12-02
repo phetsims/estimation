@@ -6,7 +6,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CylinderModel from '../../common/model/CylinderModel.js';
@@ -29,37 +28,34 @@ const VALID_REF_OBJECT_SIZES = [
 ];
 const INITIAL_REFERENCE_OBJECT_SIZE = VALID_REF_OBJECT_SIZES[ 2 ];
 
-/**
- * @constructor
- */
-function CylinderExplorationMode( selectedModeProperty ) {
-  AbstractExplorationMode.call( this, selectedModeProperty, MODE_NAME );
-  const self = this;
+class CylinderExplorationMode extends AbstractExplorationMode {
 
-  // Create the reference, compare, continuous, and discrete objects.
-  const compareCylinderPosition = new Vector2( 0.75, -0.5 );
-  this.compareObject = new CylinderModel( COMPARE_CYLINDER_SIZE, compareCylinderPosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
-  this.continuousSizableObject = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-  this.referenceObject = new CylinderModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2.0, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
-  _.times( MAX_CYLINDER_SLICES, function() {
-    // Initial size is arbitrary, will be sized as needed.
-    self.discreteObjectList.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
-  } );
-  this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
-  this.numVisibleDiscreteCylinders = 0;
+  constructor( selectedModeProperty ) {
+    super( selectedModeProperty, MODE_NAME );
 
-  // Complete initialization by hooking up visibility updates in the parent class.
-  this.hookUpVisibilityUpdates();
+    // Create the reference, compare, continuous, and discrete objects.
+    const compareCylinderPosition = new Vector2( 0.75, -0.5 );
+    this.compareObject = new CylinderModel( COMPARE_CYLINDER_SIZE, compareCylinderPosition, new Color( EstimationConstants.COMPARISON_OBJECT_COLOR ).setAlpha( 0.5 ), false, false );
+    this.continuousSizableObject = new CylinderModel( new Dimension2( 2, 1 ), compareCylinderPosition, EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    this.referenceObject = new CylinderModel( INITIAL_REFERENCE_OBJECT_SIZE, new Vector2( -2.0, 0 ), EstimationConstants.REFERENCE_OBJECT_COLOR, false, false );
+    _.times( MAX_CYLINDER_SLICES, () => {
+      // Initial size is arbitrary, will be sized as needed.
+      this.discreteObjectList.push( new CylinderModel( new Dimension2( 1.0, 1.0 ), Vector2.ZERO, EstimationConstants.REFERENCE_OBJECT_COLOR, true, false ) );
+    } );
+    this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
+    this.numVisibleDiscreteCylinders = 0;
 
-  // Maintain a short history of reference object sizes so unique ones can be chosen.
-  this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
-}
+    // Complete initialization by hooking up visibility updates in the parent class.
+    this.hookUpVisibilityUpdates();
 
-estimation.register( 'CylinderExplorationMode', CylinderExplorationMode );
+    // Maintain a short history of reference object sizes so unique ones can be chosen.
+    this.previousReferenceObjectSize = INITIAL_REFERENCE_OBJECT_SIZE;
+  }
 
-inherit( AbstractExplorationMode, CylinderExplorationMode, {
+  // TODO: Visibility annotations should be checked and updated, see https://github.com/phetsims/estimation/issues/9
 
-  setReferenceObjectSize: function( size ) {
+  // @public
+  setReferenceObjectSize( size ) {
     this.referenceObject.sizeProperty.value = size;
 
     // Size and position the discrete cylinder slices based on the sizes of
@@ -78,9 +74,10 @@ inherit( AbstractExplorationMode, CylinderExplorationMode, {
 
     // Set the initial size of the continuous object.
     this.updateContinuousObjectSize( this.estimateProperty.value );
-  },
+  }
 
-  newReferenceObject: function() {
+  // @public
+  newReferenceObject() {
     // Choose a random size that hasn't been chosen for a while.
     let unique = false;
     let referenceObjectSize = null;
@@ -90,13 +87,15 @@ inherit( AbstractExplorationMode, CylinderExplorationMode, {
     }
     this.previousReferenceObjectSize = referenceObjectSize;
     this.setReferenceObjectSize( referenceObjectSize );
-  },
+  }
 
-  setInitialReferenceObject: function() {
+  // @public
+  setInitialReferenceObject() {
     this.setReferenceObjectSize( INITIAL_REFERENCE_OBJECT_SIZE );
-  },
+  }
 
-  updateDiscreteObjectVisibility: function( selectedMode, estimateValue ) {
+  // @public
+  updateDiscreteObjectVisibility( selectedMode, estimateValue ) {
     const targetNumVisibleDiscreteCylinders = selectedMode === 'cylinders' && this.continuousOrDiscreteProperty.value === 'discrete' ? this.estimateProperty.value : 0;
     const startIndex = Math.min( this.numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
     const endIndex = Math.max( this.numVisibleDiscreteCylinders, targetNumVisibleDiscreteCylinders );
@@ -105,12 +104,15 @@ inherit( AbstractExplorationMode, CylinderExplorationMode, {
       this.discreteObjectList[ i ].visibleProperty.value = visibility;
     }
     this.numVisibleDiscreteCylinders = targetNumVisibleDiscreteCylinders;
-  },
+  }
 
-  updateContinuousObjectSize: function( estimateValue ) {
+  // @public
+  updateContinuousObjectSize( estimateValue ) {
     this.continuousSizableObject.sizeProperty.value = new Dimension2( this.referenceObject.sizeProperty.value.width,
       this.referenceObject.sizeProperty.value.height * estimateValue );
   }
-} );
+}
+
+estimation.register( 'CylinderExplorationMode', CylinderExplorationMode );
 
 export default CylinderExplorationMode;

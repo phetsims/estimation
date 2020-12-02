@@ -7,7 +7,6 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Color from '../../../../scenery/js/util/Color.js';
@@ -15,52 +14,52 @@ import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import estimation from '../../estimation.js';
 import CylinderModel from '../model/CylinderModel.js';
 
-/**
- * @param {ModelShape} cylinderModel
- * @param {ModelViewTransform2} modelViewTransform
- * @constructor
- */
-function CylinderView( cylinderModel, modelViewTransform ) {
-  Node.call( this );
-  const self = this;
-  const side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
-  this.addChild( side );
-  const top = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
-  this.addChild( top );
+class CylinderView extends Node {
 
-  function updatePosition() {
-    const transformedPosition = modelViewTransform.modelToViewPosition( cylinderModel.positionProperty.value );
-    // Position is defined as the bottom left in this sim.
-    self.left = transformedPosition.x;
-    self.bottom = transformedPosition.y;
+  /**
+   * @param {ModelShape} cylinderModel
+   * @param {ModelViewTransform2} modelViewTransform
+   */
+  constructor( cylinderModel, modelViewTransform ) {
+    super();
+    const side = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
+    this.addChild( side );
+    const top = new Path( null, { fill: cylinderModel.color, stroke: ( cylinderModel.showOutline ? 'white' : null ) } );
+    this.addChild( top );
+
+    const updatePosition = () => {
+      const transformedPosition = modelViewTransform.modelToViewPosition( cylinderModel.positionProperty.value );
+      // Position is defined as the bottom left in this sim.
+      this.left = transformedPosition.x;
+      this.bottom = transformedPosition.y;
+    };
+
+    const baseColor = cylinderModel.color instanceof Color ? cylinderModel.color : new Color( cylinderModel.color );
+
+    // Hook up the update functions
+    cylinderModel.sizeProperty.link( () => {
+      const ellipseWidth = modelViewTransform.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
+      const ellipseHeight = -modelViewTransform.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
+      const cylinderHeight = -modelViewTransform.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
+      top.setShape( Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
+      const shape = new Shape();
+      shape.moveTo( -ellipseWidth / 2, 0 )
+        .lineTo( -ellipseWidth / 2, cylinderHeight )
+        .ellipticalArc( 0, 0, ellipseWidth / 2, ellipseHeight / 2, 0, Math.PI, 0, true )
+        .lineTo( ellipseWidth / 2, 0 )
+        .ellipticalArc( 0, cylinderHeight, ellipseWidth / 2, ellipseHeight / 2, 0, 0, Math.PI, false )
+        .close();
+      side.setShape( shape );
+      side.fill = new LinearGradient( -ellipseWidth / 2, 0, ellipseWidth / 2, 0 ).addColorStop( 0, baseColor.colorUtilsDarker( 0.5 ) ).addColorStop( 0.5, baseColor.colorUtilsBrighter( 0.5 ) ).addColorStop( 1, baseColor.colorUtilsDarker( 0.5 ) );
+      updatePosition();
+    } );
+    cylinderModel.positionProperty.link( updatePosition );
+    cylinderModel.visibleProperty.link( visible => {
+      this.visible = visible;
+    } );
   }
-
-  const baseColor = cylinderModel.color instanceof Color ? cylinderModel.color : new Color( cylinderModel.color );
-
-  // Hook up the update functions
-  cylinderModel.sizeProperty.link( function() {
-    const ellipseWidth = modelViewTransform.modelToViewDeltaX( cylinderModel.sizeProperty.value.width );
-    const ellipseHeight = -modelViewTransform.modelToViewDeltaY( cylinderModel.sizeProperty.value.width ) * Math.sin( CylinderModel.PERSPECTIVE_TILT );
-    const cylinderHeight = -modelViewTransform.modelToViewDeltaY( cylinderModel.sizeProperty.value.height );
-    top.setShape( Shape.ellipse( 0, 0, ellipseWidth / 2, ellipseHeight / 2 ) );
-    const shape = new Shape();
-    shape.moveTo( -ellipseWidth / 2, 0 )
-      .lineTo( -ellipseWidth / 2, cylinderHeight )
-      .ellipticalArc( 0, 0, ellipseWidth / 2, ellipseHeight / 2, 0, Math.PI, 0, true )
-      .lineTo( ellipseWidth / 2, 0 )
-      .ellipticalArc( 0, cylinderHeight, ellipseWidth / 2, ellipseHeight / 2, 0, 0, Math.PI, false )
-      .close();
-    side.setShape( shape );
-    side.fill = new LinearGradient( -ellipseWidth / 2, 0, ellipseWidth / 2, 0 ).addColorStop( 0, baseColor.colorUtilsDarker( 0.5 ) ).addColorStop( 0.5, baseColor.colorUtilsBrighter( 0.5 ) ).addColorStop( 1, baseColor.colorUtilsDarker( 0.5 ) );
-    updatePosition();
-  } );
-  cylinderModel.positionProperty.link( updatePosition );
-  cylinderModel.visibleProperty.link( function( visible ) {
-    self.visible = visible;
-  } );
 }
 
 estimation.register( 'CylinderView', CylinderView );
 
-inherit( Node, CylinderView );
 export default CylinderView;
