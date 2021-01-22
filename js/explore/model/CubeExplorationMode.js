@@ -4,6 +4,7 @@
  * Definition of the 'cube exploration mode' for the exploration model.
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
@@ -93,7 +94,7 @@ class CubeExplorationMode extends AbstractExplorationMode {
     let unique = false;
     let referenceObjectSize = null;
     while ( !unique ) {
-      referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( phet.joist.random.nextDouble() * VALID_REF_OBJECT_SIZES.length ) ];
+      referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( dotRandom.nextDouble() * VALID_REF_OBJECT_SIZES.length ) ];
       unique = ( referenceObjectSize !== this.previousReferenceObjectSize && referenceObjectSize !== this.referenceObject.size );
     }
     this.previousReferenceObjectSize = referenceObjectSize;

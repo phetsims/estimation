@@ -4,6 +4,7 @@
  * Definition of the 'line exploration mode' for the exploration model.
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import LineModel from '../../common/model/LineModel.js';
@@ -59,7 +60,7 @@ class LineExplorationMode extends AbstractExplorationMode {
     let unique = false;
     let referenceObjectSize = null;
     while ( !unique ) {
-      referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( phet.joist.random.nextDouble() * VALID_REF_OBJECT_SIZES.length ) ];
+      referenceObjectSize = VALID_REF_OBJECT_SIZES[ Math.floor( dotRandom.nextDouble() * VALID_REF_OBJECT_SIZES.length ) ];
       unique = ( referenceObjectSize !== this.previousReferenceObjectSize && referenceObjectSize !== this.referenceObject.size );
     }
     this.previousReferenceObjectSize = referenceObjectSize;
