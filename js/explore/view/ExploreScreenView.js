@@ -223,7 +223,7 @@ class ExploreScreenView extends ScreenView {
  * @returns {Node}
  */
 function createRangeLabel( range ) {
-  return new Text( range.min + ' - ' + range.max, { font: new PhetFont( 20 ) } );
+  return new Text( `${range.min} - ${range.max}`, { font: new PhetFont( 20 ) } );
 }
 
 estimation.register( 'ExploreScreenView', ExploreScreenView );
