@@ -16,7 +16,7 @@ import EstimationConstants from '../EstimationConstants.js';
 class CubeBackView extends Node {
 
   /**
-   * @param {ModelShape} cubeModel
+   * @param {CubeModel} cubeModel
    * @param {ModelViewTransform2} modelViewTransform
    */
   constructor( cubeModel, modelViewTransform ) {

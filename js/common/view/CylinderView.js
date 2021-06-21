@@ -17,7 +17,7 @@ import CylinderModel from '../model/CylinderModel.js';
 class CylinderView extends Node {
 
   /**
-   * @param {ModelShape} cylinderModel
+   * @param {CylinderModel} cylinderModel
    * @param {ModelViewTransform2} modelViewTransform
    */
   constructor( cylinderModel, modelViewTransform ) {

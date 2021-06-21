@@ -14,7 +14,7 @@ import estimation from '../../estimation.js';
 class RectangleView extends Node {
 
   /**
-   * @param {ModelShape} rectangleModel
+   * @param {RectangleModel} rectangleModel
    * @param {ModelViewTransform2} modelViewTransform
    */
   constructor( rectangleModel, modelViewTransform ) {
