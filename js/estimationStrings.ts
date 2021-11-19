@@ -3,11 +3,20 @@
 /**
  * Auto-generated from modulify, DO NOT manually modify.
  */
-
+/* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
 import estimation from './estimation.js';
 
-const estimationStrings = getStringModule( 'ESTIMATION' );
+type StringsType = {
+  'estimation': {
+    'title': string
+  },
+  'explore': string,
+  'game': string,
+  'newObject': string
+};
+
+const estimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
 
 estimation.register( 'estimationStrings', estimationStrings );
 
