@@ -6,7 +6,7 @@
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import Color from '../../../../scenery/js/util/Color.js';
+import { Color } from '../../../../scenery/js/imports.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CubeModel from '../../common/model/CubeModel.js';
 import Dimension3 from '../../common/model/Dimension3.js';

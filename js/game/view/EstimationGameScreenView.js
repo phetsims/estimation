@@ -1,7 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
+import { Image } from '../../../../scenery/js/imports.js';
 import screenshot1Image from '../../../images/screenshot-01-temp_jpg.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import estimation from '../../estimation.js';
