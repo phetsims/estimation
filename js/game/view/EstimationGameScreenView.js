@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+// Copyright 2014-2021, University of Colorado Boulder
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import { Image } from '../../../../scenery/js/imports.js';
