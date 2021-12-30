@@ -12,8 +12,8 @@ import ScreenIcon from '../../joist/js/ScreenIcon.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import { Image } from '../../scenery/js/imports.js';
-import exploreScreenIcon from '../images/explore-screen-icon_png.js';
-import gameScreenIcon from '../images/game-screen-icon_png.js';
+import exploreScreenIcon_png from '../images/exploreScreenIcon_png.js';
+import gameScreenIcon_png from '../images/gameScreenIcon_png.js';
 import estimationStrings from './estimationStrings.js';
 import ExploreModel from './explore/model/ExploreModel.js';
 import ExploreScreenView from './explore/view/ExploreScreenView.js';
@@ -45,7 +45,7 @@ simLauncher.launch( () => {
       {
         name: exploreString,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
-        homeScreenIcon: new ScreenIcon( new Image( exploreScreenIcon ), {
+        homeScreenIcon: new ScreenIcon( new Image( exploreScreenIcon_png ), {
           maxIconWidthProportion: 1,
           maxIconHeightProportion: 1
         } )
@@ -59,7 +59,7 @@ simLauncher.launch( () => {
       {
         name: gameString,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
-        homeScreenIcon: new ScreenIcon( new Image( gameScreenIcon ), {
+        homeScreenIcon: new ScreenIcon( new Image( gameScreenIcon_png ), {
           maxIconWidthProportion: 1,
           maxIconHeightProportion: 1
         } )

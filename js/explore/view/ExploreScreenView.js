@@ -18,12 +18,12 @@ import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularR
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
-import continuousIconImage from '../../../images/continuous-icon_png.js';
-import cubesIconImage from '../../../images/cubes-icon_png.js';
-import cylindersIconImage from '../../../images/cylinders-icon_png.js';
-import discreteIconImage from '../../../images/discrete-icon_png.js';
-import linesIconImage from '../../../images/lines-icon_png.js';
-import squaresIconImage from '../../../images/squares-icon_png.js';
+import continuousIcon_png from '../../../images/continuousIcon_png.js';
+import cubesIcon_png from '../../../images/cubesIcon_png.js';
+import cylindersIcon_png from '../../../images/cylindersIcon_png.js';
+import discreteIcon_png from '../../../images/discreteIcon_png.js';
+import linesIcon_png from '../../../images/linesIcon_png.js';
+import squaresIcon_png from '../../../images/squaresIcon_png.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CubeBackView from '../../common/view/CubeBackView.js';
 import CubeView from '../../common/view/CubeView.js';
@@ -73,10 +73,10 @@ class ExploreScreenView extends ScreenView {
 
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
     const modeRadioButtonGroup = new RectangularRadioButtonGroup( model.estimationModeProperty, [
-      { value: 'lines', node: new Image( linesIconImage, { scale: MODE_ICON_SCALE } ) },
-      { value: 'rectangles', node: new Image( squaresIconImage, { scale: MODE_ICON_SCALE } ) },
-      { value: 'cubes', node: new Image( cubesIconImage, { scale: MODE_ICON_SCALE } ) },
-      { value: 'cylinders', node: new Image( cylindersIconImage, { scale: MODE_ICON_SCALE } ) }
+      { value: 'lines', node: new Image( linesIcon_png, { scale: MODE_ICON_SCALE } ) },
+      { value: 'rectangles', node: new Image( squaresIcon_png, { scale: MODE_ICON_SCALE } ) },
+      { value: 'cubes', node: new Image( cubesIcon_png, { scale: MODE_ICON_SCALE } ) },
+      { value: 'cylinders', node: new Image( cylindersIcon_png, { scale: MODE_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
       baseColor: 'white',
@@ -94,8 +94,8 @@ class ExploreScreenView extends ScreenView {
 
     // Create and add the panel for controlling discrete vs. continuous mode.
     const discreteOrContinuousButtons = new RectangularRadioButtonGroup( model.comparisonTypeProperty, [
-      { value: 'continuous', node: new Image( continuousIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
-      { value: 'discrete', node: new Image( discreteIconImage, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
+      { value: 'continuous', node: new Image( continuousIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
+      { value: 'discrete', node: new Image( discreteIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
       baseColor: 'white',
