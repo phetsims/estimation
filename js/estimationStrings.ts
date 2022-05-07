@@ -9,11 +9,11 @@ import estimation from './estimation.js';
 
 type StringsType = {
   'estimation': {
-    'title': string
-  },
-  'explore': string,
-  'game': string,
-  'newObject': string
+    'title': string;
+  };
+  'explore': string;
+  'game': string;
+  'newObject': string;
 };
 
 const estimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
