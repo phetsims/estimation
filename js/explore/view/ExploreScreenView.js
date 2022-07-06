@@ -79,11 +79,13 @@ class ExploreScreenView extends ScreenView {
       { value: 'cylinders', node: new Image( cylindersIcon_png, { scale: MODE_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
-      baseColor: 'white',
-      cornerRadius: 10,
       spacing: 10,
-      buttonContentXMargin: 6,
-      buttonContentYMargin: 14
+      radioButtonOptions: {
+        baseColor: 'white',
+        cornerRadius: 10,
+        xMargin: 6,
+        yMargin: 14
+      }
     } );
     const modeControlPanel = new Panel( modeRadioButtonGroup, {
       fill: 'rgb( 0, 171, 51 )',
@@ -98,10 +100,12 @@ class ExploreScreenView extends ScreenView {
       { value: 'discrete', node: new Image( discreteIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
-      baseColor: 'white',
-      cornerRadius: 10,
       spacing: 10,
-      buttonContentYMargin: 20
+      radioButtonOptions: {
+        baseColor: 'white',
+        cornerRadius: 10,
+        yMargin: 20
+      }
     } );
     const discreteOrContinuousControlPanel = new Panel( discreteOrContinuousButtons, {
       fill: 'rgb( 252, 2, 47 )',
@@ -123,9 +127,11 @@ class ExploreScreenView extends ScreenView {
       { value: EstimationConstants.RANGE_100_TO_1000, node: createRangeLabel( EstimationConstants.RANGE_100_TO_1000 ) }
     ], {
       orientation: 'horizontal',
-      baseColor: 'white',
-      buttonContentXMargin: 10,
-      buttonContentYMargin: 12
+      radioButtonOptions: {
+        baseColor: 'white',
+        xMargin: 10,
+        yMargin: 12
+      }
     } );
     const rangeSelectionPanel = new Panel( rangeButtons, { stroke: null, fill: null } );
 
