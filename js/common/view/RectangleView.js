@@ -7,8 +7,7 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import { Node, Path } from '../../../../scenery/js/imports.js';
 import estimation from '../../estimation.js';
 
 class RectangleView extends Node {

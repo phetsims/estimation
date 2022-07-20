@@ -8,10 +8,7 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import { Color, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import estimation from '../../estimation.js';
 import EstimationConstants from '../EstimationConstants.js';
 
