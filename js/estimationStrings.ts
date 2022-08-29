@@ -11,14 +11,14 @@ import estimation from './estimation.js';
 type StringsType = {
   'estimation': {
     'title': string;
-    'titleProperty': TReadOnlyProperty<string>;
+    'titleStringProperty': TReadOnlyProperty<string>;
   };
   'explore': string;
-  'exploreProperty': TReadOnlyProperty<string>;
+  'exploreStringProperty': TReadOnlyProperty<string>;
   'game': string;
-  'gameProperty': TReadOnlyProperty<string>;
+  'gameStringProperty': TReadOnlyProperty<string>;
   'newObject': string;
-  'newObjectProperty': TReadOnlyProperty<string>;
+  'newObjectStringProperty': TReadOnlyProperty<string>;
 };
 
 const estimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
