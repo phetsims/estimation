@@ -21,7 +21,7 @@ import EstimationGameModel from './game/model/EstimationGameModel.js';
 import EstimationGameScreenView from './game/view/EstimationGameScreenView.js';
 
 // strings and images
-const estimationTitleString = estimationStrings.estimation.title;
+const estimationTitleStringProperty = estimationStrings.estimation.titleStringProperty;
 const exploreString = estimationStrings.explore;
 const gameString = estimationStrings.game;
 
@@ -36,7 +36,7 @@ const simOptions = {
 simLauncher.launch( () => {
 
   //Create and start the sim
-  new Sim( estimationTitleString, [
+  new Sim( estimationTitleStringProperty, [
 
     // Explore screen
     new Screen(
