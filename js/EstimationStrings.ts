@@ -21,8 +21,8 @@ type StringsType = {
   'newObjectStringProperty': TReadOnlyProperty<string>;
 };
 
-const estimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
+const EstimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
 
-estimation.register( 'estimationStrings', estimationStrings );
+estimation.register( 'EstimationStrings', EstimationStrings );
 
-export default estimationStrings;
+export default EstimationStrings;

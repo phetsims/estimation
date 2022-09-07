@@ -14,16 +14,16 @@ import simLauncher from '../../joist/js/simLauncher.js';
 import { Image } from '../../scenery/js/imports.js';
 import exploreScreenIcon_png from '../images/exploreScreenIcon_png.js';
 import gameScreenIcon_png from '../images/gameScreenIcon_png.js';
-import estimationStrings from './estimationStrings.js';
+import EstimationStrings from './EstimationStrings.js';
 import ExploreModel from './explore/model/ExploreModel.js';
 import ExploreScreenView from './explore/view/ExploreScreenView.js';
 import EstimationGameModel from './game/model/EstimationGameModel.js';
 import EstimationGameScreenView from './game/view/EstimationGameScreenView.js';
 
 // strings and images
-const estimationTitleStringProperty = estimationStrings.estimation.titleStringProperty;
-const exploreString = estimationStrings.explore;
-const gameString = estimationStrings.game;
+const estimationTitleStringProperty = EstimationStrings.estimation.titleStringProperty;
+const exploreString = EstimationStrings.explore;
+const gameString = EstimationStrings.game;
 
 const simOptions = {
   credits: {

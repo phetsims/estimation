@@ -29,9 +29,9 @@ import CylinderView from '../../common/view/CylinderView.js';
 import LineView from '../../common/view/LineView.js';
 import RectangleView from '../../common/view/RectangleView.js';
 import estimation from '../../estimation.js';
-import estimationStrings from '../../estimationStrings.js';
+import EstimationStrings from '../../EstimationStrings.js';
 
-const newObjectString = estimationStrings.newObject;
+const newObjectString = EstimationStrings.newObject;
 
 // constants
 const EDGE_INSET = 10;
