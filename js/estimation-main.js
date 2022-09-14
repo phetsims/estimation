@@ -22,8 +22,6 @@ import EstimationGameScreenView from './game/view/EstimationGameScreenView.js';
 
 // strings and images
 const estimationTitleStringProperty = EstimationStrings.estimation.titleStringProperty;
-const exploreString = EstimationStrings.explore;
-const gameString = EstimationStrings.game;
 
 const simOptions = {
   credits: {
@@ -43,7 +41,7 @@ simLauncher.launch( () => {
       () => new ExploreModel(),
       model => new ExploreScreenView( model ),
       {
-        name: exploreString,
+        name: EstimationStrings.exploreStringProperty,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
         homeScreenIcon: new ScreenIcon( new Image( exploreScreenIcon_png ), {
           maxIconWidthProportion: 1,
@@ -57,7 +55,7 @@ simLauncher.launch( () => {
       () => new EstimationGameModel(),
       model => new EstimationGameScreenView( model ),
       {
-        name: gameString,
+        name: EstimationStrings.gameStringProperty,
         backgroundColorProperty: new Property( 'rgb( 255, 248, 186 )' ),
         homeScreenIcon: new ScreenIcon( new Image( gameScreenIcon_png ), {
           maxIconWidthProportion: 1,
