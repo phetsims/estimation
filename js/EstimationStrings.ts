@@ -5,20 +5,20 @@
  */
 /* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
-import TReadOnlyProperty from '../../axon/js/TReadOnlyProperty.js';
+import LinkableProperty from '../../axon/js/LinkableProperty.js';
 import estimation from './estimation.js';
 
 type StringsType = {
   'estimation': {
     'title': string;
-    'titleStringProperty': TReadOnlyProperty<string>;
+    'titleStringProperty': LinkableProperty<string>;
   };
   'explore': string;
-  'exploreStringProperty': TReadOnlyProperty<string>;
+  'exploreStringProperty': LinkableProperty<string>;
   'game': string;
-  'gameStringProperty': TReadOnlyProperty<string>;
+  'gameStringProperty': LinkableProperty<string>;
   'newObject': string;
-  'newObjectStringProperty': TReadOnlyProperty<string>;
+  'newObjectStringProperty': LinkableProperty<string>;
 };
 
 const EstimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
