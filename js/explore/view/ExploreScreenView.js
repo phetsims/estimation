@@ -71,10 +71,10 @@ class ExploreScreenView extends ScreenView {
 
     // Create and add the panel for controlling the estimation type (i.e. cubes, lines, etc).
     const modeRadioButtonGroup = new RectangularRadioButtonGroup( model.estimationModeProperty, [
-      { value: 'lines', node: new Image( linesIcon_png, { scale: MODE_ICON_SCALE } ) },
-      { value: 'rectangles', node: new Image( squaresIcon_png, { scale: MODE_ICON_SCALE } ) },
-      { value: 'cubes', node: new Image( cubesIcon_png, { scale: MODE_ICON_SCALE } ) },
-      { value: 'cylinders', node: new Image( cylindersIcon_png, { scale: MODE_ICON_SCALE } ) }
+      { value: 'lines', createNode: tandem => new Image( linesIcon_png, { scale: MODE_ICON_SCALE } ) },
+      { value: 'rectangles', createNode: tandem => new Image( squaresIcon_png, { scale: MODE_ICON_SCALE } ) },
+      { value: 'cubes', createNode: tandem => new Image( cubesIcon_png, { scale: MODE_ICON_SCALE } ) },
+      { value: 'cylinders', createNode: tandem => new Image( cylindersIcon_png, { scale: MODE_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
       spacing: 10,
@@ -94,8 +94,8 @@ class ExploreScreenView extends ScreenView {
 
     // Create and add the panel for controlling discrete vs. continuous mode.
     const discreteOrContinuousButtons = new RectangularRadioButtonGroup( model.comparisonTypeProperty, [
-      { value: 'continuous', node: new Image( continuousIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
-      { value: 'discrete', node: new Image( discreteIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
+      { value: 'continuous', createNode: tandem => new Image( continuousIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) },
+      { value: 'discrete', createNode: tandem => new Image( discreteIcon_png, { scale: DISCRETE_OR_CONTINUOUS_ICON_SCALE } ) }
     ], {
       orientation: 'vertical',
       spacing: 10,
@@ -120,9 +120,9 @@ class ExploreScreenView extends ScreenView {
 
     // Create and add the panel for selecting the range.
     const rangeButtons = new RectangularRadioButtonGroup( model.estimationRangeProperty, [
-      { value: EstimationConstants.RANGE_1_TO_10, node: createRangeLabel( EstimationConstants.RANGE_1_TO_10 ) },
-      { value: EstimationConstants.RANGE_10_TO_100, node: createRangeLabel( EstimationConstants.RANGE_10_TO_100 ) },
-      { value: EstimationConstants.RANGE_100_TO_1000, node: createRangeLabel( EstimationConstants.RANGE_100_TO_1000 ) }
+      { value: EstimationConstants.RANGE_1_TO_10, createNode: tandem => createRangeLabel( EstimationConstants.RANGE_1_TO_10 ) },
+      { value: EstimationConstants.RANGE_10_TO_100, createNode: tandem => createRangeLabel( EstimationConstants.RANGE_10_TO_100 ) },
+      { value: EstimationConstants.RANGE_100_TO_1000, createNode: tandem => createRangeLabel( EstimationConstants.RANGE_100_TO_1000 ) }
     ], {
       orientation: 'horizontal',
       radioButtonOptions: {
