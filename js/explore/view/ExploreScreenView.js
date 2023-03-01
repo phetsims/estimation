@@ -151,7 +151,7 @@ class ExploreScreenView extends ScreenView {
     this.addChild( readout );
     const readoutText = new Text( 'x', { font: new PhetFont( 20 ), fill: 'white' } );
     model.estimateProperty.link( value => {
-      readoutText.text = value;
+      readoutText.string = value;
       readoutText.centerX = readout.width / 2;
       readoutText.centerY = readout.height / 2;
     } );
