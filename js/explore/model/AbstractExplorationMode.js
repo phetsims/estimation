@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+// Copyright 2014-2023, University of Colorado Boulder
 
 /**
  * Base class for the various modes that the user can select in the "Explore"
