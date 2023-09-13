@@ -4,7 +4,7 @@
  * Base class for the various modes that the user can select in the "Explore"
  * screen.
  *
- * TODO: There are several things in the descendant classes that can be pulled into this class,
+ * TODO: There are several things in the descendant classes that can be pulled into this class, https://github.com/phetsims/tasks/issues/1129
  * such as the function to set the initial and new reference objects.  I just didn't want to
  * take the time when doing early proof of concept to do this.
  */

@@ -11,7 +11,7 @@ class EstimationGameScreenView extends ScreenView {
   constructor() {
     super( { layoutBounds: EstimationConstants.LAYOUT_BOUNDS } );
 
-    // TODO: Temp for quick demo
+    // TODO: Temp for quick demo https://github.com/phetsims/tasks/issues/1129
     this.addChild( new Image( screenshot01Temp_jpg, {
       scale: 0.75,
       centerX: this.layoutBounds.centerX,
