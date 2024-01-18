@@ -4,6 +4,8 @@
  * View representation of a cube used within the Estimation simulation.
  * The cube is defined by a position, size, and color.  Some of these
  * attributes may change.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';

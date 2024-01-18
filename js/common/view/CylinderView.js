@@ -4,6 +4,8 @@
  * View representation of a cylinder used within the Estimation simulation.
  * The cylinder is defined by a position, size, and color.  Some of these
  * attributes may change.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import { Shape } from '../../../../kite/js/imports.js';

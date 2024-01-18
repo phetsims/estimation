@@ -4,6 +4,8 @@
  * View representation of a line used within the Estimation simulation.  The
  * line is defined by a position, width, and color.  Some of these attributes
  * may change.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';

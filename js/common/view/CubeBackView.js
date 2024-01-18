@@ -4,6 +4,8 @@
  * View representation of the back portion of a cube, which is to say the
  * dotted lines that represent the back edges that are obscured by the front
  * surfaces.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';

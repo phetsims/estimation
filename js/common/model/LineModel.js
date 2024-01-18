@@ -2,6 +2,8 @@
 
 /**
  * Model of a horizontal line that can move, change its length, and has a color.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

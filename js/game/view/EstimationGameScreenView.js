@@ -1,5 +1,9 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
+
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import screenshot01Temp_jpg from '../../../images/screenshot01Temp_jpg.js';

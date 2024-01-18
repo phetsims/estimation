@@ -1,5 +1,8 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import Property from '../../../../axon/js/Property.js';
 import EstimationConstants from '../../common/EstimationConstants.js';

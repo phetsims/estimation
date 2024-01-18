@@ -2,6 +2,8 @@
 
 /**
  * Model of a cylinder that can move, change dimensions, and has a color.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

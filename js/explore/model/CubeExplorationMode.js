@@ -2,6 +2,8 @@
 
 /**
  * Definition of the 'cube exploration mode' for the exploration model.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';

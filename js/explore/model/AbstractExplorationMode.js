@@ -7,6 +7,8 @@
  * TODO: There are several things in the descendant classes that can be pulled into this class, https://github.com/phetsims/tasks/issues/1129
  * such as the function to set the initial and new reference objects.  I just didn't want to
  * take the time when doing early proof of concept to do this.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';
