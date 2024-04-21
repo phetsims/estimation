@@ -6,12 +6,12 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Dimension3 from '../../../../dot/js/Dimension3.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CubeModel from '../../common/model/CubeModel.js';
-import Dimension3 from '../../common/model/Dimension3.js';
 import estimation from '../../estimation.js';
 import AbstractExplorationMode from './AbstractExplorationMode.js';
 
