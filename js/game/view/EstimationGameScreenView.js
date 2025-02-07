@@ -5,7 +5,7 @@
  */
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import { Image } from '../../../../scenery/js/imports.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
 import screenshot01Temp_jpg from '../../../images/screenshot01Temp_jpg.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import estimation from '../../estimation.js';

@@ -11,7 +11,7 @@ import Screen from '../../joist/js/Screen.js';
 import ScreenIcon from '../../joist/js/ScreenIcon.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
-import { Image } from '../../scenery/js/imports.js';
+import Image from '../../scenery/js/nodes/Image.js';
 import exploreScreenIcon_png from '../images/exploreScreenIcon_png.js';
 import gameScreenIcon_png from '../images/gameScreenIcon_png.js';
 import EstimationStrings from './EstimationStrings.js';

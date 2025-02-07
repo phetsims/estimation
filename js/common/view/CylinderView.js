@@ -8,8 +8,11 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
-import { Color, LinearGradient, Node, Path } from '../../../../scenery/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import estimation from '../../estimation.js';
 import CylinderModel from '../model/CylinderModel.js';
 
