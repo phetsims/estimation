@@ -12,7 +12,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import estimation from '../../estimation.js';
 
 class LineView extends Node {
 
@@ -34,7 +33,5 @@ class LineView extends Node {
     } );
   }
 }
-
-estimation.register( 'LineView', LineView );
 
 export default LineView;

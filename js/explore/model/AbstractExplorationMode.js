@@ -13,7 +13,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
-import estimation from '../../estimation.js';
 
 class AbstractExplorationMode {
 
@@ -91,7 +90,5 @@ class AbstractExplorationMode {
     this.setInitialReferenceObject();
   }
 }
-
-estimation.register( 'AbstractExplorationMode', AbstractExplorationMode );
 
 export default AbstractExplorationMode;

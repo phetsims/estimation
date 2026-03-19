@@ -12,7 +12,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CubeModel from '../../common/model/CubeModel.js';
-import estimation from '../../estimation.js';
 import AbstractExplorationMode from './AbstractExplorationMode.js';
 
 // constants
@@ -158,7 +157,5 @@ class CubeExplorationMode extends AbstractExplorationMode {
         0 ).rotated( EstimationConstants.CUBE_PROJECTION_ANGLE ) );
   }
 }
-
-estimation.register( 'CubeExplorationMode', CubeExplorationMode );
 
 export default CubeExplorationMode;

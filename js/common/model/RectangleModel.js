@@ -7,7 +7,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import estimation from '../../estimation.js';
 
 /**
  * @param {Dimension2} initialSize
@@ -28,7 +27,5 @@ function RectangleModel( initialSize, initialPosition, color, showOutline, initi
   this.positionProperty = new Property( initialPosition );
   this.visibleProperty = new Property( initiallyVisible );
 }
-
-estimation.register( 'RectangleModel', RectangleModel );
 
 export default RectangleModel;

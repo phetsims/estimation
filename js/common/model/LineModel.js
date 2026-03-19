@@ -7,7 +7,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import estimation from '../../estimation.js';
 
 /**
  * @param {number} initialLength
@@ -26,7 +25,5 @@ function LineModel( initialLength, initialPosition, color, initiallyVisible ) {
   this.positionProperty = new Property( initialPosition );
   this.visibleProperty = new Property( initiallyVisible );
 }
-
-estimation.register( 'LineModel', LineModel );
 
 export default LineModel;

@@ -4,8 +4,6 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import estimation from '../../estimation.js';
-
 class EstimationGameModel {
   constructor() {
   }
@@ -13,7 +11,5 @@ class EstimationGameModel {
   // @public
   step() {}
 }
-
-estimation.register( 'EstimationGameModel', EstimationGameModel );
 
 export default EstimationGameModel;

@@ -11,7 +11,6 @@
 import Shape from '../../../../kite/js/Shape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import estimation from '../../estimation.js';
 
 class RectangleView extends Node {
 
@@ -46,7 +45,5 @@ class RectangleView extends Node {
     } );
   }
 }
-
-estimation.register( 'RectangleView', RectangleView );
 
 export default RectangleView;

@@ -6,7 +6,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
-import estimation from '../../estimation.js';
 import CubeExplorationMode from './CubeExplorationMode.js';
 import CylinderExplorationMode from './CylinderExplorationMode.js';
 import LineExplorationMode from './LineExplorationMode.js';
@@ -94,7 +93,5 @@ class ExploreModel {
     this.modes[ this.estimationModeProperty.value ].newReferenceObject();
   }
 }
-
-estimation.register( 'ExploreModel', ExploreModel );
 
 export default ExploreModel;

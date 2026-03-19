@@ -8,7 +8,6 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import screenshot01Temp_jpg from '../../../images/screenshot01Temp_jpg.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
-import estimation from '../../estimation.js';
 
 class EstimationGameScreenView extends ScreenView {
 
@@ -24,5 +23,4 @@ class EstimationGameScreenView extends ScreenView {
   }
 }
 
-estimation.register( 'EstimationGameScreenView', EstimationGameScreenView );
 export default EstimationGameScreenView;

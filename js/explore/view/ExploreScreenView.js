@@ -32,7 +32,6 @@ import CubeView from '../../common/view/CubeView.js';
 import CylinderView from '../../common/view/CylinderView.js';
 import LineView from '../../common/view/LineView.js';
 import RectangleView from '../../common/view/RectangleView.js';
-import estimation from '../../estimation.js';
 import EstimationStrings from '../../EstimationStrings.js';
 
 const newObjectString = EstimationStrings.newObject;
@@ -234,5 +233,4 @@ function createRangeLabel( range ) {
   return new Text( `${range.min} - ${range.max}`, { font: new PhetFont( 20 ) } );
 }
 
-estimation.register( 'ExploreScreenView', ExploreScreenView );
 export default ExploreScreenView;

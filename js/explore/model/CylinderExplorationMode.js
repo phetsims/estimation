@@ -12,7 +12,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import CylinderModel from '../../common/model/CylinderModel.js';
-import estimation from '../../estimation.js';
 import AbstractExplorationMode from './AbstractExplorationMode.js';
 
 // constants
@@ -115,7 +114,5 @@ class CylinderExplorationMode extends AbstractExplorationMode {
       this.referenceObject.sizeProperty.value.height * estimateValue );
   }
 }
-
-estimation.register( 'CylinderExplorationMode', CylinderExplorationMode );
 
 export default CylinderExplorationMode;

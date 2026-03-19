@@ -11,7 +11,6 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import RectangleModel from '../../common/model/RectangleModel.js';
-import estimation from '../../estimation.js';
 import AbstractExplorationMode from './AbstractExplorationMode.js';
 
 // constants
@@ -125,7 +124,5 @@ class RectangleExplorationMode extends AbstractExplorationMode {
     this.continuousSizableObject.sizeProperty.value = new Dimension2( a * wr, b * hr );
   }
 }
-
-estimation.register( 'RectangleExplorationMode', RectangleExplorationMode );
 
 export default RectangleExplorationMode;

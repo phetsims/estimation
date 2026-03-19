@@ -6,7 +6,6 @@
 
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
-import estimation from '../estimation.js';
 
 const EstimationConstants = {
 
@@ -27,7 +26,5 @@ const EstimationConstants = {
   // Angle of depth projection for cubes, in radians
   CUBE_PROJECTION_ANGLE: Math.PI / 4
 };
-
-estimation.register( 'EstimationConstants', EstimationConstants );
 
 export default EstimationConstants;

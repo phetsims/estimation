@@ -14,7 +14,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import estimation from '../../estimation.js';
 import EstimationConstants from '../EstimationConstants.js';
 
 class CubeView extends Node {
@@ -83,7 +82,5 @@ class CubeView extends Node {
     } );
   }
 }
-
-estimation.register( 'CubeView', CubeView );
 
 export default CubeView;

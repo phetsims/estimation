@@ -7,7 +7,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import estimation from '../../estimation.js';
 
 /**
  * @param {Dimension3} initialSize
@@ -28,7 +27,5 @@ function CubeModel( initialSize, initialPosition, color, showOutline, initiallyV
   this.positionProperty = new Property( initialPosition );
   this.visibleProperty = new Property( initiallyVisible );
 }
-
-estimation.register( 'CubeModel', CubeModel );
 
 export default CubeModel;

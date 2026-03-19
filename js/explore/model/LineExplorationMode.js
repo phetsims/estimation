@@ -10,7 +10,6 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import EstimationConstants from '../../common/EstimationConstants.js';
 import LineModel from '../../common/model/LineModel.js';
-import estimation from '../../estimation.js';
 import AbstractExplorationMode from './AbstractExplorationMode.js';
 
 // constants
@@ -85,7 +84,5 @@ class LineExplorationMode extends AbstractExplorationMode {
     this.continuousSizableObject.lengthProperty.value = this.referenceObject.lengthProperty.value * estimateValue;
   }
 }
-
-estimation.register( 'LineExplorationMode', LineExplorationMode );
 
 export default LineExplorationMode;

@@ -13,7 +13,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import estimation from '../../estimation.js';
 import CylinderModel from '../model/CylinderModel.js';
 
 class CylinderView extends Node {
@@ -61,7 +60,5 @@ class CylinderView extends Node {
     } );
   }
 }
-
-estimation.register( 'CylinderView', CylinderView );
 
 export default CylinderView;

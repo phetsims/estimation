@@ -7,7 +7,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import estimation from '../../estimation.js';
 
 /**
  * @param {Dimension2} initialSize
@@ -30,7 +29,5 @@ function CylinderModel( initialSize, initialPosition, color, showOutline, initia
 }
 
 CylinderModel.PERSPECTIVE_TILT = Math.PI / 10; // Must be between 0 and pi/2
-
-estimation.register( 'CylinderModel', CylinderModel );
 
 export default CylinderModel;

@@ -12,7 +12,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import estimation from '../../estimation.js';
 import EstimationConstants from '../EstimationConstants.js';
 
 class CubeBackView extends Node {
@@ -59,7 +58,5 @@ class CubeBackView extends Node {
     } );
   }
 }
-
-estimation.register( 'CubeBackView', CubeBackView );
 
 export default CubeBackView;
