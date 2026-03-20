@@ -26,4 +26,6 @@ type StringsType = {
 
 const EstimationStrings = getStringModule( 'ESTIMATION' ) as StringsType;
 
+estimation.register( 'EstimationStrings', EstimationStrings );
+
 export default EstimationStrings;
